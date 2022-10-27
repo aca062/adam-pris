@@ -124,12 +124,4 @@ public class ClienteDAO {
 
         return listaCliente;
     }
-
-    public static void main(String[] args) throws SQLException {
-        ClienteDAO.borrar(new Cliente(3,3,"Pedra"));
-        List<Cliente> array = ClienteDAO.listar();
-        for (int i = 0; i < array.size(); i++) {
-            System.out.println(array.get(i).getPrioridad());
-        }
-    }
 }

@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Conexion;
-import model.Requisito;
+import model.Usuario;
 
-public class RequisitoDAO {
-    public static boolean insertar(Requisito requisito) throws SQLException {
-        String query = "INSERT INTO `requisito` (`id`, `esfuerzo`, `nombre`) VALUES (?, ?, ?)";
+public class UsuarioDAO {
+
+    public static boolean insertar(Usuario usuario) throws SQLException {
+        String query = "INSERT INTO `usuario` (`id`, `login`, `password`) VALUES (?, ?, ?)";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
         sentencia.setString(1, null);
-        sentencia.setInt(2, requisito.getEsfuerzo());
-        sentencia.setString(3, requisito.getNombre());
+        sentencia.setString(2, usuario.getLogin());
+        sentencia.setString(3, usuario.getPassword());
         boolean filaAnadida = sentencia.executeUpdate() > 0;
         sentencia.close();
 
@@ -27,15 +28,15 @@ public class RequisitoDAO {
         return filaAnadida;
     }
 
-    public static boolean borrar(Requisito requisito) throws SQLException {
-        String query = "DELETE FROM requisito WHERE `id` = ? AND `esfuerzo` = ? AND `nombre` = ?";
+    public static boolean borrar(Usuario usuario) throws SQLException {
+        String query = "DELETE FROM usuario WHERE `id` = ? AND `login` = ? AND `password` = ?";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
-        sentencia.setInt(1, requisito.getId());
-        sentencia.setInt(2, requisito.getEsfuerzo());
-        sentencia.setString(3, requisito.getNombre());
+        sentencia.setInt(1, usuario.getId());
+        sentencia.setString(2, usuario.getLogin());
+        sentencia.setString(3, usuario.getPassword());
         boolean filaBorrada = sentencia.executeUpdate() > 0;
         sentencia.close();
 
@@ -45,7 +46,7 @@ public class RequisitoDAO {
     }
 
     public static boolean borrar(int id) throws SQLException {
-        String query = "DELETE FROM requisito WHERE `requisito`.`id` = ?";
+        String query = "DELETE FROM usuario WHERE `usuario`.`id` = ?";
 
         Conexion.conectarBD();
 
@@ -59,15 +60,15 @@ public class RequisitoDAO {
         return filaBorrada;
     }
 
-    public static boolean actualizar(Requisito requisito) throws SQLException {
-        String query = "UPDATE `requisito` SET `esfuerzo` = ?, `nombre` = ? WHERE `requisito`.`id` = ?";
+    public static boolean actualizar(Usuario usuario) throws SQLException {
+        String query = "UPDATE `usuario` SET `login` = ?, `password` = ? WHERE `usuario`.`id` = ?";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
-        sentencia.setInt(1, requisito.getEsfuerzo());
-        sentencia.setString(2, requisito.getNombre());
-        sentencia.setInt(3, requisito.getId());
+        sentencia.setString(1, usuario.getLogin());
+        sentencia.setString(2, usuario.getPassword());
+        sentencia.setInt(3, usuario.getId());
         boolean filaActualizada = sentencia.executeUpdate() > 0;
         sentencia.close();
 
@@ -76,9 +77,9 @@ public class RequisitoDAO {
         return filaActualizada;
     }
 
-    public static Requisito obtenerID(int id) throws SQLException {
-        Requisito requisito = null;
-        String query = "SELECT * FROM `requisito` WHERE `id` = ?";
+    public static Usuario obtenerID(int id) throws SQLException {
+        Usuario usuario = null;
+        String query = "SELECT * FROM `usuario` WHERE `id` = ?";
 
         Conexion.conectarBD();
 
@@ -88,19 +89,19 @@ public class RequisitoDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"));
+            usuario = new Usuario(resultado.getInt("id"), resultado.getString("login"), resultado.getString("password"));
         }
 
         sentencia.close();
 
         Conexion.desconectarBD();
 
-        return requisito;
+        return usuario;
     }
 
-    public static List<Requisito> listar() throws SQLException {
-        List<Requisito> listaRequisito = new ArrayList<Requisito>();
-        String query = "SELECT * FROM `requisito`";
+    public static List<Usuario> listar() throws SQLException {
+        List<Usuario> listaUsuario = new ArrayList<Usuario>();
+        String query = "SELECT * FROM `usuario`";
 
         Conexion.conectarBD();
 
@@ -110,17 +111,17 @@ public class RequisitoDAO {
 
         while (resultado.next()) {
             int id = resultado.getInt("id");
-            int esfuerzo = resultado.getInt("esfuerzo");
-            String nombre = resultado.getString("nombre");
+            String login = resultado.getString("login");
+            String password = resultado.getString("password");
 
-            Requisito requisito = new Requisito(id, esfuerzo, nombre);
-            listaRequisito.add(requisito);
+            Usuario usuario = new Usuario(id, login, password);
+            listaUsuario.add(usuario);
         }
 
         sentencia.close();
 
         Conexion.desconectarBD();
 
-        return listaRequisito;
+        return listaUsuario;
     }
 }
