@@ -127,17 +127,4 @@ public class ClienteHasRequisitoDAO {
 
         return listaClienteHasRequisito;
     }
-
-
-    public static void main (String[]args) throws SQLException {
-    	System.out.println(ClienteHasRequisitoDAO.obtenerID(1, 2).getCliente_id() + " " + ClienteHasRequisitoDAO.obtenerID(1, 2).getRequisito_id() + " " + ClienteHasRequisitoDAO.obtenerID(1, 2).getValor());
-    	
-        /*List<ClienteHasRequisito> array = ClienteHasRequisitoDAO.listar();
-        for (int i = 0; i < array.size(); i++) {
-        	System.out.println(array.get(i).getValor());
-            System.out.println(array.get(i).getCliente_id());
-            System.out.println(array.get(i).getRequisito_id());
-        }*/
-    }
-
 }
