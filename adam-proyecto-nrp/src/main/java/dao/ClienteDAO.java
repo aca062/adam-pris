@@ -104,7 +104,7 @@ public class ClienteDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("usuario_id"));
+            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1);
         } else {
             return null;
         }
@@ -128,7 +128,7 @@ public class ClienteDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("usuario_id"));
+            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1);
         } else {
             return null;
         }
@@ -154,7 +154,7 @@ public class ClienteDAO {
             int id = resultado.getInt("id");
             int prioridad = resultado.getInt("prioridad");
             String nombre = resultado.getString("nombre");
-            int usuario_id = resultado.getInt("usuario_id");
+            int usuario_id = resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1;
 
             Cliente cliente = new Cliente(id, prioridad, nombre, usuario_id);
             listaCliente.add(cliente);

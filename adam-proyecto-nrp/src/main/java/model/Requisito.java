@@ -52,4 +52,16 @@ public class Requisito {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if(!(obj instanceof Requisito)) return false;
+        Requisito requisito = (Requisito) obj;
+
+        if (!this.nombre.equals(requisito.getNombre()) || this.esfuerzo != requisito.getEsfuerzo() || this.usuario_id != requisito.getUsuario_id()) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -105,7 +105,7 @@ public class RequisitoDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("usuario_id"));
+            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1);
         } else {
             return null;
         }
@@ -129,7 +129,7 @@ public class RequisitoDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("usuario_id"));
+            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1);
         } else {
             return null;
         }
@@ -155,7 +155,7 @@ public class RequisitoDAO {
             int id = resultado.getInt("id");
             int esfuerzo = resultado.getInt("esfuerzo");
             String nombre = resultado.getString("nombre");
-            int usuario_id = resultado.getInt("usuario_id");
+            int usuario_id = resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1;
 
             Requisito requisito = new Requisito(id, esfuerzo, nombre, usuario_id);
             listaRequisito.add(requisito);

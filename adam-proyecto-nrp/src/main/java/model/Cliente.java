@@ -59,7 +59,7 @@ public class Cliente {
         if(!(obj instanceof Cliente)) return false;
         Cliente cliente = (Cliente) obj;
 
-        if (!this.nombre.equals(cliente.getNombre()) || this.id != cliente.getId() || this.prioridad != cliente.getPrioridad() || this.usuario_id != cliente.getUsuario_id()) {
+        if (!this.nombre.equals(cliente.getNombre()) || this.prioridad != cliente.getPrioridad() || this.usuario_id != cliente.getUsuario_id()) {
             return false;
         }
         return true;

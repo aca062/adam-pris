@@ -122,7 +122,7 @@ public class RequisitoHasRequisitoDAO {
         return relacion;
     }
 
-    private static List<RequisitoHasRequisito> obtenerRelacionesRequisito(int requisito_id) throws SQLException {
+    public static List<RequisitoHasRequisito> obtenerRelacionesRequisito(int requisito_id) throws SQLException {
         List<RequisitoHasRequisito> relaciones = new ArrayList<RequisitoHasRequisito>();
         String query = "SELECT * FROM `requisito_has_requisito` WHERE `requisito_id` = ? OR `requisito_id1` = ?";
 

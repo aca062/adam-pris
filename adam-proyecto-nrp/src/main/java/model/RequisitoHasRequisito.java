@@ -30,4 +30,16 @@ public class RequisitoHasRequisito {
     public int getRequisito_id1() {
         return requisito_id1;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if(!(obj instanceof RequisitoHasRequisito)) return false;
+        RequisitoHasRequisito relacion = (RequisitoHasRequisito) obj;
+
+        if (this.tipo != relacion.getTipo() || this.requisito_id != relacion.getRequisito_id() || this.requisito_id1 != relacion.getRequisito_id1()) {
+            return false;
+        }
+        return true;
+    }
 }

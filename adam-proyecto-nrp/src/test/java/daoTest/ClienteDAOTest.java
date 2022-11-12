@@ -1,6 +1,7 @@
 package daoTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.SQLException;
@@ -15,17 +16,16 @@ class ClienteDAOTest {
     @Test
     void testInsertar() {
         try {
-            int numInicial = ClienteDAO.listar().size();
 
             Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
 
-            int numFinal = ClienteDAO.listar().size();
+            Cliente cliente2 = ClienteDAO.obtenerPorNombre("PruebaTestBBDD");
 
             ClienteDAO.borrar(cliente);
 
-            assertEquals(numInicial, numFinal - 1);
+            assertEquals(cliente, cliente2);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,17 +36,18 @@ class ClienteDAOTest {
     @Test
     void testBorrar() {
         try {
-            int numInicial = ClienteDAO.listar().size();
 
             Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
 
+            if (ClienteDAO.obtenerPorNombre("PruebaTestBBDD") == null) {
+                fail("No se ha insertado el cliente");
+            }
+
             ClienteDAO.borrar(cliente);
 
-            int numFinal = ClienteDAO.listar().size();
-
-            assertEquals(numInicial, numFinal);
+            assertTrue(ClienteDAO.obtenerPorNombre("PruebaTestBBDD") == null);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,17 +58,18 @@ class ClienteDAOTest {
     @Test
     void testBorrarId() {
         try {
-            int numInicial = ClienteDAO.listar().size();
 
             Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
 
+            if (ClienteDAO.obtenerPorNombre("PruebaTestBBDD") == null) {
+                fail("No se ha insertado el cliente");
+            }
+
             ClienteDAO.borrar(ClienteDAO.obtenerPorNombre(cliente.getNombre()));
 
-            int numFinal = ClienteDAO.listar().size();
-
-            assertEquals(numInicial, numFinal);
+            assertTrue(ClienteDAO.obtenerPorNombre("PruebaTestBBDD") == null);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,6 +100,50 @@ class ClienteDAOTest {
             ClienteDAO.borrar(cliente2);
 
             assertEquals(cliente2, cliente3);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail("Excepción SQL");
+        }
+    }
+
+    @Test
+    void testBuscarNombre() {
+        try {
+
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
+
+            ClienteDAO.insertar(cliente);
+
+            Cliente cliente2 = ClienteDAO.obtenerPorNombre("PruebaTestBBDD");
+
+            ClienteDAO.borrar(cliente2);
+
+            assertEquals(cliente2, cliente);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail("Excepción SQL");
+        }
+    }
+
+    @Test
+    void testBuscarId() {
+        try {
+
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
+
+            ClienteDAO.insertar(cliente);
+
+            Cliente cliente2 = ClienteDAO.obtenerPorNombre("PruebaTestBBDD");
+
+            int id = cliente2.getId();
+
+            Cliente cliente3 = ClienteDAO.obtenerPorID(id);
+
+            ClienteDAO.borrar(cliente2);
+
+            assertEquals(cliente, cliente3);
 
         } catch (SQLException e) {
             e.printStackTrace();

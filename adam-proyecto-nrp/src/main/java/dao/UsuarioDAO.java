@@ -39,7 +39,7 @@ public class UsuarioDAO {
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
-        sentencia.setInt(1, usuario.getId());
+        sentencia.setInt(1, obtenerPorLogin(usuario.getLogin()).getId());
         sentencia.setString(2, usuario.getLogin());
         sentencia.setString(3, usuario.getPassword());
         boolean filaBorrada = sentencia.executeUpdate() > 0;
