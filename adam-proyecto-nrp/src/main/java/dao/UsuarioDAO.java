@@ -12,6 +12,11 @@ import model.Usuario;
 public class UsuarioDAO {
 
     public static boolean insertar(Usuario usuario) throws SQLException {
+
+        if (obtenerPorLogin(usuario.getLogin()) != null) {
+            return false;
+        }
+
         String query = "INSERT INTO `usuario` (`id`, `login`, `password`) VALUES (?, ?, ?)";
 
         Conexion.conectarBD();
@@ -77,7 +82,7 @@ public class UsuarioDAO {
         return filaActualizada;
     }
 
-    public static Usuario obtenerID(int id) throws SQLException {
+    public static Usuario obtenerPorID(int id) throws SQLException {
         Usuario usuario = null;
         String query = "SELECT * FROM `usuario` WHERE `id` = ?";
 
@@ -90,6 +95,32 @@ public class UsuarioDAO {
 
         if (resultado.next()) {
             usuario = new Usuario(resultado.getInt("id"), resultado.getString("login"), resultado.getString("password"));
+        } else {
+            return null;
+        }
+
+        sentencia.close();
+
+        Conexion.desconectarBD();
+
+        return usuario;
+    }
+
+    public static Usuario obtenerPorLogin(String login) throws SQLException {
+        Usuario usuario = null;
+        String query = "SELECT * FROM `usuario` WHERE `login` = ?";
+
+        Conexion.conectarBD();
+
+        PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        sentencia.setString(1, login);
+
+        ResultSet resultado = sentencia.executeQuery();
+
+        if (resultado.next()) {
+            usuario = new Usuario(resultado.getInt("id"), resultado.getString("login"), resultado.getString("password"));
+        } else {
+            return null;
         }
 
         sentencia.close();

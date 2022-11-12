@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,12 @@ import model.Conexion;
 public class ClienteDAO {
 
     public static boolean insertar(Cliente cliente) throws SQLException {
-        String query = "INSERT INTO `cliente` (`id`, `prioridad`, `nombre`) VALUES (?, ?, ?)";
+
+        if (obtenerPorNombre(cliente.getNombre()) != null) {
+            return false;
+        }
+
+        String query = "INSERT INTO `cliente` (`id`, `prioridad`, `nombre`, `usuario_id`) VALUES (?, ?, ?, ?)";
 
         Conexion.conectarBD();
 
@@ -20,6 +26,11 @@ public class ClienteDAO {
         sentencia.setString(1, null);
         sentencia.setInt(2, cliente.getPrioridad());
         sentencia.setString(3, cliente.getNombre());
+        if (cliente.getUsuario_id() == -1 ) {
+            sentencia.setNull(4, Types.INTEGER);
+        } else {
+            sentencia.setInt(4, cliente.getUsuario_id());
+        }
         boolean filaAnadida = sentencia.executeUpdate() > 0;
         sentencia.close();
 
@@ -31,10 +42,12 @@ public class ClienteDAO {
     public static boolean borrar(Cliente cliente) throws SQLException {
         String query = "DELETE FROM cliente WHERE `id` = ? AND `prioridad` = ? AND `nombre` = ?";
 
+        ClienteHasRequisitoDAO.borrarRelacionesCliente(cliente.getId());
+
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
-        sentencia.setInt(1, cliente.getId());
+        sentencia.setInt(1, obtenerPorNombre(cliente.getNombre()).getId());
         sentencia.setInt(2, cliente.getPrioridad());
         sentencia.setString(3, cliente.getNombre());
         boolean filaBorrada = sentencia.executeUpdate() > 0;
@@ -47,6 +60,8 @@ public class ClienteDAO {
 
     public static boolean borrar(int id) throws SQLException {
         String query = "DELETE FROM cliente WHERE `cliente`.`id` = ?";
+
+        ClienteHasRequisitoDAO.borrarRelacionesCliente(id);
 
         Conexion.conectarBD();
 
@@ -77,7 +92,7 @@ public class ClienteDAO {
         return filaActualizada;
     }
 
-    public static Cliente obtenerID(int id) throws SQLException {
+    public static Cliente obtenerPorID(int id) throws SQLException {
         Cliente cliente = null;
         String query = "SELECT * FROM `cliente` WHERE `id` = ?";
 
@@ -89,7 +104,33 @@ public class ClienteDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"));
+            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("usuario_id"));
+        } else {
+            return null;
+        }
+
+        sentencia.close();
+
+        Conexion.desconectarBD();
+
+        return cliente;
+    }
+
+    public static Cliente obtenerPorNombre(String nombre) throws SQLException {
+        Cliente cliente = null;
+        String query = "SELECT * FROM `cliente` WHERE `nombre` = ?";
+
+        Conexion.conectarBD();
+
+        PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        sentencia.setString(1, nombre);
+
+        ResultSet resultado = sentencia.executeQuery();
+
+        if (resultado.next()) {
+            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("usuario_id"));
+        } else {
+            return null;
         }
 
         sentencia.close();
@@ -113,8 +154,9 @@ public class ClienteDAO {
             int id = resultado.getInt("id");
             int prioridad = resultado.getInt("prioridad");
             String nombre = resultado.getString("nombre");
+            int usuario_id = resultado.getInt("usuario_id");
 
-            Cliente cliente = new Cliente(id, prioridad, nombre);
+            Cliente cliente = new Cliente(id, prioridad, nombre, usuario_id);
             listaCliente.add(cliente);
         }
 

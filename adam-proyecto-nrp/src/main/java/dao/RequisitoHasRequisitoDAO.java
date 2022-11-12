@@ -61,6 +61,25 @@ public class RequisitoHasRequisitoDAO {
         return filaBorrada;
     }
 
+    public static boolean borrarRelacionesRequisito(int requisito_id) {
+
+        List<RequisitoHasRequisito> relaciones;
+
+        try {
+            relaciones = obtenerRelacionesRequisito(requisito_id);
+
+            for (RequisitoHasRequisito relacion : relaciones) {
+                borrar(relacion);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
     public static boolean actualizar(RequisitoHasRequisito relacion) throws SQLException {
         String query = "UPDATE `requisito_has_requisito` SET `tipo` = ? WHERE `requisito_id` = ? AND `requisito_id1` = ?";
 
@@ -78,7 +97,7 @@ public class RequisitoHasRequisitoDAO {
         return filaActualizada;
     }
 
-    public static RequisitoHasRequisito obtenerID(int id, int id1) throws SQLException {
+    public static RequisitoHasRequisito obtenerPorID(int id, int id1) throws SQLException {
         RequisitoHasRequisito relacion = null;
         String query = "SELECT * FROM `requisito_has_requisito` WHERE `requisito_id` = ? AND `requisito_id1` = ?";
 
@@ -92,6 +111,8 @@ public class RequisitoHasRequisitoDAO {
 
         if (resultado.next()) {
             relacion = new RequisitoHasRequisito(tipo.valueOf(resultado.getString("tipo")), resultado.getInt("requisito_id"), resultado.getInt("requisito_id1"));
+        } else {
+            return null;
         }
 
         sentencia.close();
@@ -99,6 +120,29 @@ public class RequisitoHasRequisitoDAO {
         Conexion.desconectarBD();
 
         return relacion;
+    }
+
+    private static List<RequisitoHasRequisito> obtenerRelacionesRequisito(int requisito_id) throws SQLException {
+        List<RequisitoHasRequisito> relaciones = new ArrayList<RequisitoHasRequisito>();
+        String query = "SELECT * FROM `requisito_has_requisito` WHERE `requisito_id` = ? OR `requisito_id1` = ?";
+
+        Conexion.conectarBD();
+
+        PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        sentencia.setInt(1, requisito_id);
+        sentencia.setInt(2, requisito_id);
+
+        ResultSet resultado = sentencia.executeQuery();
+
+        if (resultado.next()) {
+            relaciones.add(new RequisitoHasRequisito(tipo.valueOf(resultado.getString("tipo")), resultado.getInt("requisito_id"), resultado.getInt("requisito_id1")));
+        }
+
+        sentencia.close();
+
+        Conexion.desconectarBD();
+
+        return relaciones;
     }
 
     public static List<RequisitoHasRequisito> listar() throws SQLException {
