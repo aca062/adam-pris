@@ -16,6 +16,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
+    
 
     <!-- Custom styles for this template -->
     <link href="./css/album.css" rel="stylesheet">
@@ -23,7 +24,7 @@
 
   <body>
 
-    <header>
+    <%--<header>
       <div class="bg-dark collapse" id="navbarHeader" style="">
         <div class="container">
           <div class="row">
@@ -52,35 +53,37 @@
           </button>
         </div>
       </div>
-    </header>
+    </header>--%>
 
     <main role="main">
 
       <section class="jumbotron text-center">
         <div class="container">
-    	<div class="row">
+    	<div class="abs-center">
+    	<h1>PROYECTO: Problema de la siguiente versión</h1>
+    	<%--<h1 style = "margin-bottom: 1em"></h1> --%>
 				<div class="panel panel-login">
-						<div class="row">
+						<div class="abs-center">
 							<div class="col-lg-12">
 								<form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="">
+										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Usuario" value="" style = "border-radius: 2rem">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña" style = "border-radius: 2rem">
 									</div>
-									<div class="form-group text-center">
+									<%--<div class="form-group text-center">
 										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
 										<label for="remember"> Recordarme</label>
-									</div>
+									</div>--%>
 									<div class="form-group">
-										<div class="row">
-											<div class="col-sm-6 col-sm-offset-3">
-												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Iniciar sesión">
+										<div class="abs-center">
+												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="btn btn-dark" value="Iniciar sesión" style = "border-radius: 2rem">
+											</div>
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
+									<%--<div class="form-group">
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
@@ -88,7 +91,7 @@
 												</div>
 											</div>
 										</div>
-									</div>
+									</div>--%>
 								</form>
 								<form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="display: none;">
 									<div class="form-group">
@@ -114,13 +117,11 @@
 							</div>
 						</div>
 					</div>
-					</div>
-					</div>
       </section>
 
     </main>
 
-    <footer class="text-muted">
+    <%--<footer class="text-muted">
       <div class="container">
         <p class="float-right">
           <a href="https://getbootstrap.com/docs/4.0/examples/album/#">Back to top</a>
@@ -128,7 +129,7 @@
         <p>Album example is © Borobwtoynmoitjnoitjyoiotstrapá, but please download and customize it for yourself!</p>
         <p>New to Bootstrap? <a href="https://getbootstrap.com/docs/4.0/">Visit the homepage</a> or read our <a href="https://getbootstrap.com/docs/4.0/getting-started/">getting started guide</a>.</p>
       </div>
-    </footer>
+    </footer>--%>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
