@@ -57,12 +57,12 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
+      <section class="text-center" style="margin-top:120px">
+        <div class="container" style="width:100%">
     	<div class="abs-center">
     	<h1>PROYECTO: Problema de la siguiente versión</h1>
     	<%--<h1 style = "margin-bottom: 1em"></h1> --%>
-				<div class="panel panel-login">
+				<div class="panel panel-login" style="max-width:400px; margin-left:350px; margin-top:50px">
 						<div class="abs-center">
 							<div class="col-lg-12">
 								<form id="login-form" action="http://phpoll.com/login/process" method="post" role="form" style="display: block;">
