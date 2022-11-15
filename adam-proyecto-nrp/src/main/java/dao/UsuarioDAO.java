@@ -11,6 +11,23 @@ import model.Usuario;
 
 public class UsuarioDAO {
 
+    public static boolean inicioSesion(String login, String pass) throws SQLException {
+
+        String query = "SELECT * FROM `usuario` WHERE `login` = ? AND `password` = ?";
+
+        Conexion.conectarBD();
+
+        PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        sentencia.setString(1, login);
+        sentencia.setString(2, pass);
+        boolean filaExiste = sentencia.executeUpdate() > 0;
+        sentencia.close();
+
+        Conexion.desconectarBD();
+
+        return filaExiste;
+    }
+
     public static boolean insertar(Usuario usuario) throws SQLException {
 
         if (obtenerPorLogin(usuario.getLogin()) != null) {
