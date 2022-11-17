@@ -42,8 +42,8 @@
       <div class="row">
       <div style= "margin-bottom:20px" class="col-sm-12 col-xs-12"><h4>Ejecute para obtener una solución</h4></div>
         <div class="col-sm-12 col-xs-12" style="margin-bottom:120px">
-			<button class="btn btn-default btn-dark" type="button" style = "border-radius: 2rem; margin-right:2%"><span class="glyphicon glyphicon-step-backward"></span>&nbsp;Idear solución manual </button>
-			<button class="btn btn-default btn-dark" type="button" style = "border-radius: 2rem">Idear solución automática&nbsp;<span class="glyphicon glyphicon-step-forward"></span></button>
+			<a class= "btn btn-default btn-dark" href="solucionManual.jsp" role="button" style = "border-radius: 2rem; margin-right:2%"">Idear solución manual</a>
+			<a class= "btn btn-default btn-dark" href="solucionAutomatica.jsp" role="button" style = "border-radius: 2rem; margin-right:2%"">Idear solución automática</a>
 		</div>
     </div>
 	<div class="container-xl">
