@@ -52,12 +52,10 @@ public class ServletUsuario extends HttpServlet{
         boolean iniciar = UsuarioDAO.inicioSesion(login, pass);
 
         if (iniciar) {
-            RequestDispatcher dispatcher= request.getRequestDispatcher("/inicio.jsp");
-            dispatcher.forward(request, response);
+            getServletContext().getRequestDispatcher("/inicio.jsp").forward(request, response);
         }else {
             request.setAttribute("error", "El nombre o contraseña son incorrectos");
-            RequestDispatcher dispatcher= request.getRequestDispatcher("/index.jsp");
-            dispatcher.forward(request, response);
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);;
         }
 
 
@@ -69,7 +67,6 @@ public class ServletUsuario extends HttpServlet{
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Hola Servlet..");
         doGet(request, response);
     }
 
