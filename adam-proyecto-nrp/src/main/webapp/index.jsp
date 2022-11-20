@@ -62,8 +62,16 @@
     	<div class="abs-center">
     	<h1>PROYECTO: Problema de la siguiente versión</h1>
     	<%--<h1 style = "margin-bottom: 1em"></h1> --%>
-				<div class="panel panel-login" style="max-width:400px; margin-left:350px; margin-top:50px">
+				<div class="panel panel-login" style="max-width:40%; margin-right:30%; margin-left:30%; margin-top:50px">
 						<div class="abs-center">
+							<%
+							String error = (String) request.getAttribute("error");
+							if (error != null) {
+							 %>
+						<li style="color:red; margin-bottom: 25px;">
+							<%=error%>
+						</li>
+							<%}%>
 							<div class="col-lg-12">
 								<form id="login-form" action="ServletUsuario?action=inicio_sesion" method="post" role="form" style="display: block;">
 									<div class="form-group">

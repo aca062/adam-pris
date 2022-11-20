@@ -1,7 +1,6 @@
 package controladores;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +15,7 @@ import dao.UsuarioDAO;
 @WebServlet("/ServletUsuario")
 public class ServletUsuario extends HttpServlet{
     private static final long serialVersionUID = 1L;
+    UsuarioDAO usuarioDAO;
 
     public ServletUsuario() {
         super();
@@ -29,9 +29,7 @@ public class ServletUsuario extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Hola Servlet..");
         String action = request.getParameter("action");
-        System.out.println(action);
         try {
             switch (action) {
             case "inicio_sesion":
@@ -51,15 +49,15 @@ public class ServletUsuario extends HttpServlet{
 
         String login=request.getParameter("username");
         String pass=request.getParameter("password");
-        PrintWriter out = response.getWriter();
+        boolean iniciar = UsuarioDAO.inicioSesion(login, pass);
 
-        if (UsuarioDAO.inicioSesion(login, pass)) {
-            RequestDispatcher dispatcher= request.getRequestDispatcher("/vistas/index.jsp");
+        if (iniciar) {
+            RequestDispatcher dispatcher= request.getRequestDispatcher("/inicio.jsp");
             dispatcher.forward(request, response);
         }else {
-            out.print("Sorry username or password error");
-            RequestDispatcher rd=request.getRequestDispatcher("index.html");
-            rd.include(request,response);
+            request.setAttribute("error", "El nombre o contraseña son incorrectos");
+            RequestDispatcher dispatcher= request.getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
         }
 
 

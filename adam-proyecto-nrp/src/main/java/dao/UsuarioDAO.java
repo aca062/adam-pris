@@ -20,7 +20,7 @@ public class UsuarioDAO {
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
         sentencia.setString(1, login);
         sentencia.setString(2, pass);
-        boolean filaExiste = sentencia.executeUpdate() > 0;
+        boolean filaExiste = sentencia.executeQuery().next() != false;
         sentencia.close();
 
         Conexion.desconectarBD();
