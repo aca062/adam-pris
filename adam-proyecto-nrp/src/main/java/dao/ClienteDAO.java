@@ -14,7 +14,7 @@ public class ClienteDAO {
 
     public static boolean insertar(Cliente cliente) throws SQLException {
 
-        if (obtenerPorNombre(cliente.getNombre()) != null) {
+        if (obtenerPorNombre(cliente.getNombre().trim()) != null) {
             return false;
         }
 
@@ -25,7 +25,7 @@ public class ClienteDAO {
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
         sentencia.setString(1, null);
         sentencia.setInt(2, cliente.getPrioridad());
-        sentencia.setString(3, cliente.getNombre());
+        sentencia.setString(3, cliente.getNombre().trim());
         if (cliente.getUsuario_id() == -1 ) {
             sentencia.setNull(4, Types.INTEGER);
         } else {
@@ -76,6 +76,14 @@ public class ClienteDAO {
     }
 
     public static boolean actualizar(Cliente cliente) throws SQLException {
+
+        if (obtenerPorNombre(cliente.getNombre()) != null) {
+            if (cliente.getId() != obtenerPorNombre(cliente.getNombre()).getId()) {
+                return false;
+            }
+        }
+
+
         String query = "UPDATE `cliente` SET `prioridad` = ?, `nombre` = ? WHERE `cliente`.`id` = ?";
 
         Conexion.conectarBD();

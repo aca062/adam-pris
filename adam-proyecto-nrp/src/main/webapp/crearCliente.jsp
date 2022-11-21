@@ -42,6 +42,14 @@
      <div class = row style = "text-align: left; margin-left: 8%; margin-bottom: 2%">
      <h2>Crear un Cliente</h2>
      </div>
+	<%
+		String error = (String) request.getAttribute("error");
+		if (error != null) {
+		 %>
+	<li style="color:red; margin-bottom: 25px;">
+		<%=error%>
+	</li>
+		<%}%>
      <div class = row style = "text-align: center">
       <div class = col-sm-4 style = "margin: 0px auto; text-align:left">
      <strong>Nombre</strong>
@@ -50,19 +58,21 @@
      <strong>Peso(Wi)</strong>
      </div>
      </div>
-     <div class = row style = "text-align: center">
-     <div class = col-sm-4 style = "margin: 0px auto">
-     <input type="text" name="nombre" id="nombre" tabindex="1" class="form-control" placeholder="Nombre" value="" style = "border-radius: 2rem">
-     </div>
-     <div class = col-sm-4 style = "margin: 0px auto">
-     <input type="text" name="peso" id="peso" tabindex="2" class="form-control" placeholder="Peso" value="" style = "border-radius: 2rem">
-     </div>
-     </div>
-     <div class = row style = "text-align: center; margin-top: 2%">
-     	<div class = col-sm-4 style = "margin: 0px auto">
-     		<button class="btn btn-default btn-dark" type="button" style = "border-radius: 2rem"><span class="glyphicon glyphicon-step-backward"></span>&nbsp;Crear cliente </button>
-     	</div>
-     </div>
+     <form id="crearCliente-form" action="ServletCliente?action=crear_cliente" method="post" role="form">
+	     <div class = row style = "text-align: center">
+		     <div class = col-sm-4 style = "margin: 0px auto">
+			     <input type="text" name="nombre" id="nombre" tabindex="1" class="form-control" placeholder="Nombre" value="" style = "border-radius: 2rem">
+		     </div>
+		     <div class = col-sm-4 style = "margin: 0px auto">
+			     <input type="text" name="peso" id="peso" tabindex="2" class="form-control" placeholder="Peso" value="" style = "border-radius: 2rem">
+		     </div>
+	     </div>
+	     <div class = row style = "text-align: center; margin-top: 2%">
+	     	<div class = col-sm-4 style = "margin: 0px auto">
+	     		<input type="submit" name="register-client" id="register-client" tabindex="4" class="btn btn-dark" value="Crear cliente" style="border-radius: 2rem">
+	     	</div>
+	     </div>
+     </form>
       </section>
 
     </main>

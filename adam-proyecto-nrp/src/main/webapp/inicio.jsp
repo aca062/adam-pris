@@ -1,10 +1,24 @@
 <!-- IMPORTANTE PARA UTF-8 -->
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 
 <!-- saved from url=(0050)https://getbootstrap.com/docs/4.0/examples/album/# -->
-<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="es">
+<head>
+    <script>
+      // The function below will start the confirmation dialog
+      function confirmAction() {
+        let confirmAction = confirm("Are you sure to execute this action?");
+        if (confirmAction) {
+          alert("Action successfully executed");
+        } else {
+          alert("Action canceled");
+        }
+      }
+    </script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -19,7 +33,8 @@
 
     <!-- Custom styles for this template -->
     <link href="./css/album.css" rel="stylesheet">
-  <style>undefined</style><style type="text/css">@font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }</style><script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script><link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin="true"><link rel="preconnect" href="https://fonts.gstatic.com/"><link rel="stylesheet" href="./css/css2"></head>
+  <style>undefined</style><style type="text/css">@font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }</style><script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script><link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin="true"><link rel="preconnect" href="https://fonts.gstatic.com/"><link rel="stylesheet" href="./css/css2">
+  </head>
 
   <body>
 
@@ -53,14 +68,13 @@
                 <div class="row">
                     <div class="col-sm-4"><h2>Requisitos del problema</h2></div>
                     <div class="col-sm-2" style = "align-items:center; display: flex; justify-content: center">
-                        <a href="crearRequisito.jsp" class="bi bi-plus-circle" data-toggle="modal"></a>
+                        <a href="./crearRequisito.jsp" class="bi bi-plus-circle" data-toggle="modal"></a>
                     </div>
                 </div>
             </div>
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
-                        
                         <th>Ri <i class="fa fa-sort"></i></th>
                         <th>Nombre</th>
                         <th>Esfuerzo <i class="fa fa-sort"></i></th>
@@ -68,52 +82,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="#" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="#" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="#" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="#" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="#" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="#" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>        
+                <c:forEach var="requisito" items="${listaRequisito}">
+					<tr>
+						<td><c:out value="${requisito.id}"/></td>
+						<td><c:out value="${requisito.nombre}"/></td>
+						<td><c:out value="${requisito.esfuerzo}"/></td>
+						<td>
+	                        <a href="ServletRequisito?action=eliminarRequisito&id=<c:out value="${requisito.id}" />" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
+	                        <a href="ServletRequisito?action=editarRequisito&id=<c:out value="${requisito.id}" />" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
+	                    </td>			
+					</tr>
+				</c:forEach>        
                 </tbody>
             </table>
         </div>
@@ -141,52 +120,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="eliminarCliente.jsp" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="editarCliente.jsp" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="eliminarCliente.jsp" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="editarCliente.jsp" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="eliminarCliente.jsp" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="editarCliente.jsp" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="eliminarCliente.jsp" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="editarCliente.jsp" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a href="eliminarCliente.jsp" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-                            <a href="editarCliente.jsp" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
-                        </td>
-                    </tr>        
+	            <c:forEach var="cliente" items="${listaClientes}">
+					<tr>
+						<td><c:out value="${cliente.id}"/></td>
+						<td><c:out value="${cliente.nombre}"/></td>
+						<td><c:out value="${cliente.prioridad}"/></td>
+						<td>
+	                        <a href="ServletCliente?action=eliminar_cliente&id=<c:out value="${cliente.id}" />" onclick="return confirm('¿Estás seguro de que quieres eliminar el cliente <c:out value="${cliente.nombre}" />?')" class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
+	                        <a href="ServletCliente?action=mostrar_editar_cliente&id=<c:out value="${cliente.id}" />&nombre=<c:out value="${cliente.nombre}"/>&prioridad=<c:out value="${cliente.prioridad}"/>" class="bi bi-pencil-square" title="Edit" data-toggle="tooltip"></a>
+	                    </td>			
+					</tr>
+				</c:forEach>
                 </tbody>
             </table>
         </div>

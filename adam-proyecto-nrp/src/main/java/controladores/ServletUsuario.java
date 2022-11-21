@@ -46,16 +46,15 @@ public class ServletUsuario extends HttpServlet{
     }
 
     private void inicio_sesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-
         String login=request.getParameter("username");
         String pass=request.getParameter("password");
         boolean iniciar = UsuarioDAO.inicioSesion(login, pass);
 
         if (iniciar) {
-            getServletContext().getRequestDispatcher("/inicio.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/ServletInicio?action=mostrar_inicio").forward(request, response);
         }else {
             request.setAttribute("error", "El nombre o contraseña son incorrectos");
-            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);;
+            getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
 
 
