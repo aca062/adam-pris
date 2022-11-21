@@ -144,24 +144,24 @@ public class MochilaNRP {
 	 * @param s
 	 * @return
 	 */
-	private boolean cumplimientoRelaciones(int nivel, int[] s) {
+	public boolean cumplimientoRelaciones(int nivel, int[] s) {
 		Requisito req = null;
+		int indiceRel = -1;
 		for(int i = 0; i<=nivel;i++) {
 			if(s[i]==1) {	//Si el requisito se encuentra en la solucion exploramos sus dependencias
 				req = this.requisitos.get(i);
 				if(req.requisitoRelacion == null) continue;//Si no tiene relaciones continuamos iterando
-				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {//Si tiene relaciones comprobamos
-																								//que se cumplan
+				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {//Si tiene relaciones comprobamos que se cumplan
+					indiceRel= reqRelacion.getKey().isCombinado==true? this.requisitos.indexOf(reqRelacion.getKey().padre)
+							: this.requisitos.indexOf(reqRelacion.getKey());														
 					if(reqRelacion.getValue()=="Dependencia") {	//RELACIONES DE DEPENDENCIA
-						if(reqRelacion.getKey().isCombinado==true? s[this.requisitos.indexOf(reqRelacion.getKey().padre)]!=1 :
-							s[this.requisitos.indexOf(reqRelacion.getKey())] != 1) {//El requisito del que depende o su 
-							return false;											//padre en caso de ser combinado deben de estar en la sol
+						if(s[indiceRel]!=1) {//El requisito del que depende o su 
+							return false;						//padre en caso de ser combinado deben de estar en la sol
 						}
 					}
 					else if(reqRelacion.getValue()=="Exclusion") {//RELACIONES DE EXCLUSION
-						if(reqRelacion.getKey().isCombinado==true? s[this.requisitos.indexOf(reqRelacion.getKey().padre)]==1 :
-							s[this.requisitos.indexOf(reqRelacion.getKey())] == 1) {//El requisito que excluye o su 
-							return false;											//padre en caso de ser combinado NO deben de estar en la sol
+						if(s[indiceRel]==1 && indiceRel<=nivel) {//El requisito que excluye o su 
+							return false;						//padre en caso de ser combinado NO deben de estar en la sol
 						}
 					}
 					else //RELACIONES DE COMBINACION YA ESTAN COMPROBADAS
