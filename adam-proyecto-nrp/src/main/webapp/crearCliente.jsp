@@ -61,10 +61,10 @@
      <form id="crearCliente-form" action="ServletCliente?action=crear_cliente" method="post" role="form">
 	     <div class = row style = "text-align: center">
 		     <div class = col-sm-4 style = "margin: 0px auto">
-			     <input type="text" name="nombre" id="nombre" tabindex="1" class="form-control" placeholder="Nombre" value="" style = "border-radius: 2rem">
+			     <input type="text" name="nombre" id="nombre" tabindex="1" class="form-control" placeholder="Nombre" value="" style = "border-radius: 2rem" required>
 		     </div>
 		     <div class = col-sm-4 style = "margin: 0px auto">
-			     <input type="text" name="peso" id="peso" tabindex="2" class="form-control" placeholder="Peso" value="" style = "border-radius: 2rem">
+			     <input type="number" min="0" step="1" pattern="\d*" name="peso" id="peso" tabindex="2" class="form-control" placeholder="Peso" value="" style = "border-radius: 2rem" required>
 		     </div>
 	     </div>
 	     <div class = row style = "text-align: center; margin-top: 2%">

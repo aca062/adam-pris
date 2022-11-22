@@ -11,6 +11,7 @@ import model.Conexion;
 import model.Requisito;
 
 public class RequisitoDAO {
+	
     public static boolean insertar(Requisito requisito) throws SQLException {
 
         if (obtenerPorNombre(requisito.getNombre()) != null) {
