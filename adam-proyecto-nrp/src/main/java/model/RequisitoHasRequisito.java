@@ -2,7 +2,7 @@ package model;
 
 public class RequisitoHasRequisito {
     public enum tipo {
-        exclusion, implicacion, combinacion
+        exclusion, implicacion, combinacion, norelacion,
     }
 
     private tipo tipo;

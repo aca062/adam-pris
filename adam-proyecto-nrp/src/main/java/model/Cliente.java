@@ -1,6 +1,6 @@
 package model;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
     private int id;
     private int prioridad;
     private String nombre;
@@ -64,4 +64,13 @@ public class Cliente {
         }
         return true;
     }
+
+	@Override
+	public int compareTo(Cliente o) {
+	    if(this.getId() > o.getId())
+	        return 1;
+	    else if(this.getId() < o.getId())
+	        return -1;
+	    return this.getNombre().compareTo(o.getNombre());
+	}
 }

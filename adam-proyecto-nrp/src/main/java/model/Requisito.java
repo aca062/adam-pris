@@ -1,6 +1,6 @@
 package model;
 
-public class Requisito {
+public class Requisito implements Comparable<Requisito>{
     private int id;
     private int esfuerzo;
     private String nombre;
@@ -22,6 +22,13 @@ public class Requisito {
     public Requisito(int esfuerzo, String nombre) {
         this.esfuerzo = esfuerzo;
         this.nombre = nombre;
+        this.usuario_id = -1;
+    }
+    
+    public Requisito(int id, int esfuerzo, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+        this.esfuerzo = esfuerzo;
         this.usuario_id = -1;
     }
 
@@ -64,4 +71,13 @@ public class Requisito {
         }
         return true;
     }
+    
+	@Override
+	public int compareTo(Requisito o) {
+	    if(this.getId() > o.getId())
+	        return 1;
+	    else if(this.getId() < o.getId())
+	        return -1;
+	    return this.getNombre().compareTo(o.getNombre());
+	}
 }

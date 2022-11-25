@@ -107,10 +107,11 @@ undefined
 										<td><c:out value="${requisito.nombre}" /></td>
 										<td><c:out value="${requisito.esfuerzo}" /></td>
 										<td><a
-											href="ServletRequisito?action=eliminarRequisito&id=<c:out value="${requisito.id}" />"
+											href="ServletRequisito?action=eliminar_requisito&id=<c:out value="${requisito.id}" />"
+											onclick="return confirm('¿Estás seguro de que quieres eliminar el cliente <c:out value="${requisito.nombre}" />?')"
 											class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
 											<a
-											href="ServletRequisito?action=editarRequisito&id=<c:out value="${requisito.id}" />"
+											href="ServletRequisito?action=mostrar_editar_requisito&id=<c:out value="${requisito.id}"/>&nombre=<c:out value="${requisito.nombre}"/>&esfuerzo=<c:out value="${requisito.esfuerzo}"/>"
 											class="bi bi-pencil-square" title="Edit"
 											data-toggle="tooltip"></a></td>
 									</tr>

@@ -79,7 +79,7 @@ undefined
 			}
 			%>
 			<form id="crearRequisito-form"
-				action="ServletRequisito?action=crear_requisito" method="post"
+				action="ServletRequisito?action=editar_requisito" method="post"
 				role="form" style="margin-bottom: 5%;">
 				<div class=row style="text-align: center">
 					<div class=col-sm-4 style="margin: 0px auto; text-align: left">
@@ -92,12 +92,12 @@ undefined
 				<div class=row style="text-align: center">
 					<div class=col-sm-4 style="margin: 0px auto">
 						<input type="text" name="nombre" id="nombre" tabindex="1"
-							class="form-control" placeholder="Nombre" value=""
+							class="form-control" placeholder="Nombre" value="${nombre}"
 							style="border-radius: 2rem" required>
 					</div>
 					<div class=col-sm-4 style="margin: 0px auto">
 						<input type="text" name="esfuerzo" id="esfuerzo" tabindex="2"
-							class="form-control" placeholder="Esfuerzo" value=""
+							class="form-control" placeholder="Esfuerzo" value="${esfuerzo}"
 							style="border-radius: 2rem" required>
 					</div>
 				</div>
@@ -130,16 +130,16 @@ undefined
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="cliente" items="${listaClientes}">
+									<c:forEach items="${treeClientes}" var="entry">
 										<tr>
 											<td style="vertical-align: middle"><c:out
-													value="${cliente.nombre}" /></td>
+													value="${entry.key.nombre}" /></td>
 											<td style="vertical-align: middle"><c:out
-													value="${cliente.prioridad}" /></td>
+													value="${entry.key.prioridad}" /></td>
 											<td><input type="number" min="0" step="1" pattern="\d*"
-												name="valor${cliente.id}" id="valor${cliente.id}"
+												name="valor${entry.key.id}" id="valor${entry.key.id}"
 												tabindex="2" class="form-control" placeholder="Valor"
-												value="0" style="border-radius: 2rem" required></td>
+												value="${entry.value}" style="border-radius: 2rem" required></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -153,16 +153,16 @@ undefined
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="requisito" items="${listaRequisitos}">
+									<c:forEach items="${treeRequisitos}" var="entry">
 										<tr>
 											<td style="vertical-align: middle"><c:out
-													value="${requisito.nombre}" /></td>
+													value="${entry.key.nombre}" /></td>
 											<td>
-												<select id="tipoRelacion${requisito.id}" name="tipoRelacion${requisito.id}" required>
-												  <option value="no-relacion">Sin relación</option>
-												  <option value="exclusion">Exclusión</option>
-												  <option value="implicacion">Implicación</option>
-												  <option value="combinacion">Combinación</option>
+												<select id="tipoRelacion${entry.key.id}" name="tipoRelacion${entry.key.id}" required>
+												  <option <c:if test = "${entry.value == ''}"> selected </c:if> value="norelacion">Sin relación</option>
+												  <option <c:if test = "${entry.value == 'exclusion'}"> selected </c:if> value="exclusion">Exclusión</option>
+												  <option <c:if test = "${entry.value == 'implicacion'}"> selected </c:if> value="implicacion">Implicación</option>
+												  <option <c:if test = "${entry.value == 'combinacion'}"> selected </c:if> value="combinacion">Combinación</option>
 												</select>
 											</td>
 										</tr>
@@ -172,6 +172,7 @@ undefined
 						</div>
 					</div>
 				</div>
+				<input type="hidden" name="id" id="id" value="${id}">
 				<div class=row style="text-align: center; margin-top: 2%">
 					<div class=col-sm-4 style="margin: 0px auto">
 						<input type="submit" name="register-requirement"

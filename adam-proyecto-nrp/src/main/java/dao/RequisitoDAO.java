@@ -62,7 +62,7 @@ public class RequisitoDAO {
     public static boolean borrar(int id) throws SQLException {
         String query = "DELETE FROM requisito WHERE `requisito`.`id` = ?";
 
-        ClienteHasRequisitoDAO.borrarRelacionesCliente(id);
+        ClienteHasRequisitoDAO.borrarRelacionesRequisito(id);
         RequisitoHasRequisitoDAO.borrarRelacionesRequisito(id);
 
         Conexion.conectarBD();

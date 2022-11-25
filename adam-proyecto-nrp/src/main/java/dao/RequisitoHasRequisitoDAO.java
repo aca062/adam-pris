@@ -46,13 +46,15 @@ public class RequisitoHasRequisitoDAO {
     }
 
     public static boolean borrar(int id, int id1) throws SQLException {
-        String query = "DELETE FROM requisito_has_requisito WHERE `requisito_id` = ? AND `requisito_id1` = ?";
+        String query = "DELETE FROM requisito_has_requisito WHERE (`requisito_id` = ? AND `requisito_id1` = ?) OR (`requisito_id1` = ? AND `requisito_id` = ?)";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
         sentencia.setInt(1, id);
         sentencia.setInt(2, id1);
+        sentencia.setInt(3, id);
+        sentencia.setInt(4, id1);
         boolean filaBorrada = sentencia.executeUpdate() > 0;
         sentencia.close();
 
@@ -81,7 +83,7 @@ public class RequisitoHasRequisitoDAO {
     }
 
     public static boolean actualizar(RequisitoHasRequisito relacion) throws SQLException {
-        String query = "UPDATE `requisito_has_requisito` SET `tipo` = ? WHERE `requisito_id` = ? AND `requisito_id1` = ?";
+        String query = "UPDATE `requisito_has_requisito` SET `tipo` = ? WHERE (`requisito_id` = ? AND `requisito_id1` = ?) OR (`requisito_id1` = ? AND `requisito_id` = ?)";
 
         Conexion.conectarBD();
 
@@ -89,6 +91,8 @@ public class RequisitoHasRequisitoDAO {
         sentencia.setString(1, relacion.getTipo().toString());
         sentencia.setInt(2, relacion.getRequisito_id());
         sentencia.setInt(3, relacion.getRequisito_id1());
+        sentencia.setInt(4, relacion.getRequisito_id());
+        sentencia.setInt(5, relacion.getRequisito_id1());
         boolean filaActualizada = sentencia.executeUpdate() > 0;
         sentencia.close();
 
@@ -99,13 +103,15 @@ public class RequisitoHasRequisitoDAO {
 
     public static RequisitoHasRequisito obtenerPorID(int id, int id1) throws SQLException {
         RequisitoHasRequisito relacion = null;
-        String query = "SELECT * FROM `requisito_has_requisito` WHERE `requisito_id` = ? AND `requisito_id1` = ?";
+        String query = "SELECT * FROM `requisito_has_requisito` WHERE (`requisito_id` = ? AND `requisito_id1` = ?) OR (`requisito_id1` = ? AND `requisito_id` = ?)";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
         sentencia.setInt(1, id);
         sentencia.setInt(2, id1);
+        sentencia.setInt(3, id);
+        sentencia.setInt(4, id1);
 
         ResultSet resultado = sentencia.executeQuery();
 
@@ -134,7 +140,7 @@ public class RequisitoHasRequisitoDAO {
 
         ResultSet resultado = sentencia.executeQuery();
 
-        if (resultado.next()) {
+        while (resultado.next()) {
             relaciones.add(new RequisitoHasRequisito(tipo.valueOf(resultado.getString("tipo")), resultado.getInt("requisito_id"), resultado.getInt("requisito_id1")));
         }
 

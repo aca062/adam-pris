@@ -153,7 +153,7 @@ public class ClienteHasRequisitoDAO {
 
         ResultSet resultado = sentencia.executeQuery();
 
-        if (resultado.next()) {
+        while (resultado.next()) {
             relaciones.add(new ClienteHasRequisito(resultado.getInt("valor"), resultado.getInt("cliente_id"), resultado.getInt("requisito_id")));
         }
 
@@ -175,7 +175,7 @@ public class ClienteHasRequisitoDAO {
 
         ResultSet resultado = sentencia.executeQuery();
 
-        if (resultado.next()) {
+        while (resultado.next()) {
             relaciones.add(new ClienteHasRequisito(resultado.getInt("valor"), resultado.getInt("cliente_id"), resultado.getInt("requisito_id")));
         }
 
