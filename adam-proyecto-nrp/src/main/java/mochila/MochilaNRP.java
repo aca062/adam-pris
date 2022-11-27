@@ -24,7 +24,8 @@ public class MochilaNRP {
  */
 	public String obtenerRequisitosAIntroducir() {
 		this.introducirRequisitos();
-		return listadoResult.toString();
+		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
 	}
 	
 /**
@@ -134,7 +135,7 @@ public class MochilaNRP {
 		if ((nivel < this.requisitos.size()) 	/*Si aun quedan requisitos por explorar*/ 
 				&& (pact <= this.esfuerzoMax)		/*Si no sobrepasamos el peso*/ 
 				&& bact >= voa) {					/*Si la solucion es mejor que la anterior*/ 
-							return cumplimientoRelaciones(nivel,s);						/*Evaluar que se cumplen requisitos de dependencias y exclusi�n*/
+							return true;					/*Evaluar que se cumplen requisitos de dependencias y exclusi�n*/
 		}
 		return false;
 	}
@@ -147,7 +148,7 @@ public class MochilaNRP {
 	public boolean cumplimientoRelaciones(int nivel, int[] s) {
 		Requisito req = null;
 		int indiceRel = -1;
-		for(int i = 0; i<=nivel;i++) {
+		for(int i = 0; i<nivel;i++) {
 			if(s[i]==1) {	//Si el requisito se encuentra en la solucion exploramos sus dependencias
 				req = this.requisitos.get(i);
 				if(req.requisitoRelacion == null) continue;//Si no tiene relaciones continuamos iterando
@@ -182,8 +183,10 @@ public class MochilaNRP {
 	 * @return boolean true si es una solucion valida
 	 */
 	private boolean solucion(int nivel, int[] s, double pact) {
-		return ((nivel == requisitos.size()) && (pact <= this.esfuerzoMax)); // comprobamos si cumple los requisitos
-																				// para ser una solucion
+		if ((nivel == requisitos.size()) && (pact <= this.esfuerzoMax))
+			return true;//cumplimientoRelaciones(nivel,s);// comprobamos si cumple los requisitos para ser una solucion
+		return false;
+																				
 	}
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -207,6 +210,8 @@ public class MochilaNRP {
 				i--;
 			}
 		}
+		Collections.sort(this.requisitos);
+		Collections.reverse(this.requisitos);
 	}
 
 	public ArrayList<Requisito> getRequisitos() {
