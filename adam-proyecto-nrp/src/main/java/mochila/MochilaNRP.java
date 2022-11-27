@@ -148,7 +148,7 @@ public class MochilaNRP {
 	public boolean cumplimientoRelaciones(int nivel, int[] s) {
 		Requisito req = null;
 		int indiceRel = -1;
-		for(int i = 0; i<nivel;i++) {
+		for(int i = 0; i<=nivel;i++) {
 			if(s[i]==1) {	//Si el requisito se encuentra en la solucion exploramos sus dependencias
 				req = this.requisitos.get(i);
 				if(req.requisitoRelacion == null) continue;//Si no tiene relaciones continuamos iterando

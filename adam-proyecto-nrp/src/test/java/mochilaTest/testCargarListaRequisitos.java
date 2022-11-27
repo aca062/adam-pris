@@ -142,7 +142,7 @@ class testCargarListaRequisitos {
 		// Assert
 		System.out.println("NoCombinado y combinado --> " + mochila.getRequisitos());
 		assertEquals(2, mochila.getRequisitos().size()); //Un req combinado?
-		assertEquals(5, mochila.getRequisitos().get(1).esfuerzo);//El esfuerzo es la suma de los esfuerzos de la lista?
+		assertEquals(5, mochila.getRequisitos().get(0).esfuerzo);//El esfuerzo es la suma de los esfuerzos de la lista?
 
 	}
 	
@@ -203,13 +203,13 @@ class testCargarListaRequisitos {
 		System.out.println(mochila.getRequisitos().toString());
 		// Assert
 		assertEquals(3, mochila.getRequisitos().size()); //Un req combinado?
-		assertEquals(3, mochila.getRequisitos().get(0).esfuerzo);//El esfuerzo es la suma de los esfuerzos de la lista?
-		assertEquals(9, mochila.getRequisitos().get(2).esfuerzo);//El esfuerzo es la suma de los esfuerzos de la lista?
+		assertEquals(9, mochila.getRequisitos().get(0).esfuerzo);//El esfuerzo es la suma de los esfuerzos de la lista?
+		assertEquals(3, mochila.getRequisitos().get(2).esfuerzo);//El esfuerzo es la suma de los esfuerzos de la lista?
 
 		RequisitoCombinado rc = (RequisitoCombinado) mochila.getRequisitos().get(0);
 		assertEquals(2, rc.combinados.size());//El req combinado contiene 2 req?
 		
-		RequisitoCombinado rc1 = (RequisitoCombinado) mochila.getRequisitos().get(2);
+		RequisitoCombinado rc1 = (RequisitoCombinado) mochila.getRequisitos().get(1);
 		assertEquals(2, rc1.combinados.size());//El req combinado contiene 2 req?
 
 
