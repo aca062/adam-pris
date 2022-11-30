@@ -72,6 +72,7 @@
 	     		<input type="submit" name="register-client" id="register-client" tabindex="4" class="btn btn-dark" value="Crear cliente" style="border-radius: 2rem">
 	     	</div>
 	     </div>
+	     <input type="hidden" name="proyecto_id" id="proyecto_id" value="${proyecto_id}">
      </form>
       </section>
 

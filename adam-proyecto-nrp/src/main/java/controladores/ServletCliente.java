@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ClienteDAO;
+import dao.ClienteHasRequisitoDAO;
+import dao.RequisitoDAO;
 import model.Cliente;
+import model.ClienteHasRequisito;
+import model.Requisito;
 
 @WebServlet("/ServletCliente")
 public class ServletCliente extends HttpServlet{
@@ -58,18 +62,8 @@ public class ServletCliente extends HttpServlet{
         boolean borrar = ClienteDAO.borrar(Integer.parseInt(id));
 
         if (borrar) {
-            /*response.setContentType("text/html");
-            PrintWriter pw=response.getWriter();
-            pw.println("<script type=\"text/javascript\">");
-            pw.println("alert('El cliente se ha borrado correctamente');");
-            pw.println("</script>");*/
             getServletContext().getRequestDispatcher("/ServletInicio?action=mostrar_inicio").forward(request, response);
         }else {
-            /*response.setContentType("text/html");
-            PrintWriter pw=response.getWriter();
-            pw.println("<script type=\"text/javascript\">");
-            pw.println("alert('Se ha producido un error al borrar el cliente');");
-            pw.println("</script>");*/
             getServletContext().getRequestDispatcher("/ServletInicio?action=mostrar_inicio").forward(request, response);
         }
     }
@@ -151,15 +145,20 @@ public class ServletCliente extends HttpServlet{
                 request.setAttribute("error", "Solo se pueden introducir números enteros en el peso");
                 getServletContext().getRequestDispatcher("/crearCliente.jsp").forward(request, response);
             } else {
-                Cliente cliente = new Cliente(Integer.parseInt(peso), nombre.trim());
+                Cliente cliente = new Cliente(Integer.parseInt(peso), nombre.trim(), ServletProyecto.proyecto);
                 boolean insertar = ClienteDAO.insertar(cliente);
 
                 if (insertar) {
+                	int id = ClienteDAO.obtenerPorNombre(nombre).getId();
                     response.setContentType("text/html");
                     PrintWriter pw=response.getWriter();
                     pw.println("<script type=\"text/javascript\">");
                     pw.println("alert('El cliente se ha creado correctamente');");
                     pw.println("</script>");
+                    for (Requisito req : RequisitoDAO.listar()) {
+                    	ClienteHasRequisito chr = new ClienteHasRequisito(0, id, req.getId());
+                    	ClienteHasRequisitoDAO.insertar(chr);
+                    }
                     RequestDispatcher rd=request.getRequestDispatcher("/ServletInicio?action=mostrar_inicio");
                     rd.include(request, response);
                 }else {

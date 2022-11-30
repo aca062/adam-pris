@@ -7,6 +7,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import controladores.ServletProyecto;
 import model.Conexion;
 import model.Requisito;
 
@@ -26,11 +27,7 @@ public class RequisitoDAO {
         sentencia.setString(1, null);
         sentencia.setInt(2, requisito.getEsfuerzo());
         sentencia.setString(3, requisito.getNombre());
-        if (requisito.getProyecto_id() == -1 ) {
-            sentencia.setNull(4, Types.INTEGER);
-        } else {
-            sentencia.setInt(4, requisito.getProyecto_id());
-        }
+        sentencia.setInt(4, ServletProyecto.proyecto);
         boolean filaAnadida = sentencia.executeUpdate() > 0;
         sentencia.close();
 
@@ -144,11 +141,13 @@ public class RequisitoDAO {
 
     public static List<Requisito> listar() throws SQLException {
         List<Requisito> listaRequisito = new ArrayList<Requisito>();
-        String query = "SELECT * FROM `requisito`";
+        String query = "SELECT * FROM `requisito` WHERE `proyecto_id` = ?";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+
+		sentencia.setInt(1, ServletProyecto.proyecto);
 
         ResultSet resultado = sentencia.executeQuery();
 

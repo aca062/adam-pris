@@ -100,6 +100,7 @@ undefined
 					</div>
 				</div>
 				<input type="hidden" name="id" id="id" value="${id}">
+				<input type="hidden" name="proyecto_id" id="proyecto_id" value="${proyecto_id}">
 				<div class=row style="text-align: center; margin-top: 2%">
 					<div class=col-sm-4 style="margin: 0px auto">
 						<input type="submit" name="register-client" id="register-client"

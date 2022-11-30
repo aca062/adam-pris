@@ -115,7 +115,7 @@ public class ServletRequisito extends HttpServlet {
 					getServletContext().getRequestDispatcher("/ServletRequisito?action=mostrar_crear_requisito")
 							.forward(request, response);
 				} else {
-					Requisito requisito = new Requisito(id, Integer.parseInt(esfuerzo), nombre.trim());
+					Requisito requisito = new Requisito(id, Integer.parseInt(esfuerzo), nombre.trim(), ServletProyecto.proyecto);
 					boolean actualizar = RequisitoDAO.actualizar(requisito);
 
 					if (actualizar) {
@@ -279,7 +279,7 @@ public class ServletRequisito extends HttpServlet {
 					getServletContext().getRequestDispatcher("/ServletRequisito?action=mostrar_crear_requisito")
 							.forward(request, response);
 				} else {
-					Requisito requisito = new Requisito(Integer.parseInt(esfuerzo), nombre.trim());
+					Requisito requisito = new Requisito(Integer.parseInt(esfuerzo), nombre.trim(), ServletProyecto.proyecto);
 					boolean insertar = RequisitoDAO.insertar(requisito);
 
 					if (insertar) {

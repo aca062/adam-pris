@@ -15,6 +15,7 @@ import dao.RequisitoDAO;
 @WebServlet("/ServletProyecto")
 public class ServletProyecto  extends HttpServlet{
     private static final long serialVersionUID = 1L;
+    public static int proyecto = 1;
 
     public ServletProyecto() {
         super();

@@ -144,6 +144,7 @@ undefined
 									</c:forEach>
 								</tbody>
 							</table>
+							<input type="hidden" name="proyecto_id" id="proyecto_id" value="${proyecto_id}">
 							<table class="table table-striped table-hover table-bordered">
 								<thead>
 									<tr>

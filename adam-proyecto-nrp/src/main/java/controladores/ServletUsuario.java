@@ -50,7 +50,7 @@ public class ServletUsuario extends HttpServlet{
         boolean iniciar = UsuarioDAO.inicioSesion(login, pass);
 
         if (iniciar) {
-            getServletContext().getRequestDispatcher("/ServletInicio?action=elegir_proyecto").forward(request, response);
+            getServletContext().getRequestDispatcher("/ServletInicio?action=mostrar_inicio").forward(request, response);
         }else {
             request.setAttribute("error", "El nombre o contraseña son incorrectos");
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);

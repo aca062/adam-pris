@@ -16,7 +16,7 @@
 <link rel="icon"
 	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
 
-<title>Crear requisito</title>
+<title>Editar requisito</title>
 
 <!-- Bootstrap core CSS -->
 <link href="./css/bootstrap.min.css" rel="stylesheet">
@@ -68,7 +68,7 @@ undefined
 		<section class="text-center" style="margin-top: 30px">
 			<div class=row
 				style="text-align: left; margin-left: 8%; margin-bottom: 2%">
-				<h2>Crear un requisito</h2>
+				<h2>Editar un requisito</h2>
 			</div>
 			<%
 			String error = (String) request.getAttribute("error");
@@ -78,7 +78,7 @@ undefined
 			<%
 			}
 			%>
-			<form id="crearRequisito-form"
+			<form id="editarRequisito-form"
 				action="ServletRequisito?action=editar_requisito" method="post"
 				role="form" style="margin-bottom: 5%;">
 				<div class=row style="text-align: center">
@@ -177,7 +177,7 @@ undefined
 					<div class=col-sm-4 style="margin: 0px auto">
 						<input type="submit" name="register-requirement"
 							id="register-requirement" tabindex="4" class="btn btn-dark"
-							value="Crear requisito" style="border-radius: 2rem">
+							value="Editar requisito" style="border-radius: 2rem">
 					</div>
 				</div>
 			</form>
