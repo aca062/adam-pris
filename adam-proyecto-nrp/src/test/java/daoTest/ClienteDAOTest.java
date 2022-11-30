@@ -9,21 +9,26 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.Test;
 
 import dao.ClienteDAO;
+import dao.ProyectoDAO;
 import model.Cliente;
+import model.Proyecto;
 
 class ClienteDAOTest {
 
     @Test
     void testInsertar() {
         try {
-
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
 
             ClienteDAO.insertar(cliente);
 
             Cliente cliente2 = ClienteDAO.obtenerPorNombre("PruebaTestBBDD");
 
             ClienteDAO.borrar(cliente);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(cliente, cliente2);
 
@@ -36,8 +41,10 @@ class ClienteDAOTest {
     @Test
     void testBorrar() {
         try {
-
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
 
             ClienteDAO.insertar(cliente);
 
@@ -46,6 +53,7 @@ class ClienteDAOTest {
             }
 
             ClienteDAO.borrar(cliente);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertTrue(ClienteDAO.obtenerPorNombre("PruebaTestBBDD") == null);
 
@@ -58,8 +66,10 @@ class ClienteDAOTest {
     @Test
     void testBorrarId() {
         try {
-
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
 
             ClienteDAO.insertar(cliente);
 
@@ -68,6 +78,7 @@ class ClienteDAOTest {
             }
 
             ClienteDAO.borrar(ClienteDAO.obtenerPorNombre(cliente.getNombre()));
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertTrue(ClienteDAO.obtenerPorNombre("PruebaTestBBDD") == null);
 
@@ -80,11 +91,13 @@ class ClienteDAOTest {
     @Test
     void testActualizar() {
         try {
-
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
 
             ClienteDAO.insertar(cliente);
-
+            
             Cliente cliente2 = ClienteDAO.obtenerPorNombre("PruebaTestBBDD");
 
             int id = cliente2.getId();
@@ -98,6 +111,7 @@ class ClienteDAOTest {
             Cliente cliente3 = ClienteDAO.obtenerPorID(id);
 
             ClienteDAO.borrar(cliente2);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(cliente2, cliente3);
 
@@ -110,14 +124,17 @@ class ClienteDAOTest {
     @Test
     void testBuscarNombre() {
         try {
-
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
 
             ClienteDAO.insertar(cliente);
 
             Cliente cliente2 = ClienteDAO.obtenerPorNombre("PruebaTestBBDD");
 
             ClienteDAO.borrar(cliente2);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(cliente2, cliente);
 
@@ -130,8 +147,10 @@ class ClienteDAOTest {
     @Test
     void testBuscarId() {
         try {
-
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
 
             ClienteDAO.insertar(cliente);
 
@@ -142,6 +161,7 @@ class ClienteDAOTest {
             Cliente cliente3 = ClienteDAO.obtenerPorID(id);
 
             ClienteDAO.borrar(cliente2);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(cliente, cliente3);
 

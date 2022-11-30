@@ -8,7 +8,11 @@ import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
 
+import dao.ClienteDAO;
+import dao.ProyectoDAO;
 import dao.RequisitoDAO;
+import model.Cliente;
+import model.Proyecto;
 import model.Requisito;
 
 class RequisitoDAOTest {
@@ -16,14 +20,17 @@ class RequisitoDAOTest {
     @Test
     void testInsertar() {
         try {
-
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
 
             RequisitoDAO.insertar(requisito);
 
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");
 
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(requisito, requisito2);
 

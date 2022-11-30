@@ -18,7 +18,7 @@ public class ClienteDAO {
             return false;
         }
 
-        String query = "INSERT INTO `cliente` (`id`, `prioridad`, `nombre`, `usuario_id`) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO `cliente` (`id`, `prioridad`, `nombre`, `proyecto_id`) VALUES (?, ?, ?, ?)";
 
         Conexion.conectarBD();
 
@@ -26,10 +26,10 @@ public class ClienteDAO {
         sentencia.setString(1, null);
         sentencia.setInt(2, cliente.getPrioridad());
         sentencia.setString(3, cliente.getNombre().trim());
-        if (cliente.getUsuario_id() == -1 ) {
+        if (cliente.getProyecto_id() == -1 ) {
             sentencia.setNull(4, Types.INTEGER);
         } else {
-            sentencia.setInt(4, cliente.getUsuario_id());
+            sentencia.setInt(4, cliente.getProyecto_id());
         }
         boolean filaAnadida = sentencia.executeUpdate() > 0;
         sentencia.close();
@@ -112,7 +112,7 @@ public class ClienteDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1);
+            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1);
         } else {
             return null;
         }
@@ -136,7 +136,7 @@ public class ClienteDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1);
+            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1);
         } else {
             return null;
         }
@@ -162,9 +162,9 @@ public class ClienteDAO {
             int id = resultado.getInt("id");
             int prioridad = resultado.getInt("prioridad");
             String nombre = resultado.getString("nombre");
-            int usuario_id = resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1;
+            int proyecto_id = resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1;
 
-            Cliente cliente = new Cliente(id, prioridad, nombre, usuario_id);
+            Cliente cliente = new Cliente(id, prioridad, nombre, proyecto_id);
             listaCliente.add(cliente);
         }
 

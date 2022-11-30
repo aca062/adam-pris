@@ -4,33 +4,27 @@ public class Cliente implements Comparable<Cliente>{
     private int id;
     private int prioridad;
     private String nombre;
-    private int usuario_id;
+    private int proyecto_id;
 
-    public Cliente(int id, int prioridad, String nombre, int usuario_id) {
+    public Cliente(int id, int prioridad, String nombre, int proyecto_id) {
         this.id = id;
         this.prioridad = prioridad;
         this.nombre = nombre;
-        this.usuario_id = usuario_id;
+        this.proyecto_id = proyecto_id;
     }
 
-    public Cliente(int prioridad, String nombre, int usuario_id) {
+    public Cliente(int prioridad, String nombre, int proyecto_id) {
         this.prioridad = prioridad;
         this.nombre = nombre;
-        this.usuario_id = usuario_id;
+        this.proyecto_id = proyecto_id;
     }
 
-    public Cliente(int prioridad, String nombre) {
-        this.prioridad = prioridad;
-        this.nombre = nombre;
-        this.usuario_id = -1;
+    public int getProyecto_id() {
+        return proyecto_id;
     }
 
-    public int getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setProyecto_id(int proyecto_id) {
+        this.proyecto_id = proyecto_id;
     }
 
     public int getId() {
@@ -59,7 +53,7 @@ public class Cliente implements Comparable<Cliente>{
         if(!(obj instanceof Cliente)) return false;
         Cliente cliente = (Cliente) obj;
 
-        if (!this.nombre.equals(cliente.getNombre()) || this.prioridad != cliente.getPrioridad() || this.usuario_id != cliente.getUsuario_id()) {
+        if (!this.nombre.equals(cliente.getNombre()) || this.prioridad != cliente.getPrioridad() || this.proyecto_id != cliente.getProyecto_id()) {
             return false;
         }
         return true;

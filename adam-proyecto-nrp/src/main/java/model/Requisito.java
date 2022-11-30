@@ -4,40 +4,27 @@ public class Requisito implements Comparable<Requisito>{
     private int id;
     private int esfuerzo;
     private String nombre;
-    private int usuario_id;
+    private int proyecto_id;
 
-    public Requisito(int id, int esfuerzo, String nombre, int usuario_id) {
+    public Requisito(int id, int esfuerzo, String nombre, int proyecto_id) {
         this.id = id;
         this.esfuerzo = esfuerzo;
         this.nombre = nombre;
-        this.usuario_id = usuario_id;
+        this.proyecto_id = proyecto_id;
     }
 
-    public Requisito(int esfuerzo, String nombre, int usuario_id) {
+    public Requisito(int esfuerzo, String nombre, int proyecto_id) {
         this.esfuerzo = esfuerzo;
         this.nombre = nombre;
-        this.usuario_id = usuario_id;
+        this.proyecto_id = proyecto_id;
     }
 
-    public Requisito(int esfuerzo, String nombre) {
-        this.esfuerzo = esfuerzo;
-        this.nombre = nombre;
-        this.usuario_id = -1;
-    }
-    
-    public Requisito(int id, int esfuerzo, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-        this.esfuerzo = esfuerzo;
-        this.usuario_id = -1;
+    public int getProyecto_id() {
+        return proyecto_id;
     }
 
-    public int getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(int usuario_id) {
-        this.usuario_id = usuario_id;
+    public void setProyecto_id(int proyecto_id) {
+        this.proyecto_id = proyecto_id;
     }
 
     public int getId() {
@@ -66,7 +53,7 @@ public class Requisito implements Comparable<Requisito>{
         if(!(obj instanceof Requisito)) return false;
         Requisito requisito = (Requisito) obj;
 
-        if (!this.nombre.equals(requisito.getNombre()) || this.esfuerzo != requisito.getEsfuerzo() || this.usuario_id != requisito.getUsuario_id()) {
+        if (!this.nombre.equals(requisito.getNombre()) || this.esfuerzo != requisito.getEsfuerzo() || this.proyecto_id != requisito.getProyecto_id()) {
             return false;
         }
         return true;
