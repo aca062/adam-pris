@@ -12,11 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ClienteDAO;
 import dao.RequisitoDAO;
 
-@WebServlet("/ServletInicio")
-public class ServletInicio extends HttpServlet{
+@WebServlet("/ServletProyecto")
+public class ServletProyecto  extends HttpServlet{
     private static final long serialVersionUID = 1L;
 
-    public ServletInicio() {
+    public ServletProyecto() {
         super();
     }
 
@@ -29,8 +29,6 @@ public class ServletInicio extends HttpServlet{
             case "mostrar_inicio":
                 mostrar_inicio(request, response);
                 break;
-            case "elegir_proyecto":
-            	elegir_proyecto(request, response);
             default:
                 break;
             }
@@ -41,12 +39,7 @@ public class ServletInicio extends HttpServlet{
 
     }
 
-    private void elegir_proyecto(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("admin", 1);
-		request.setAttribute("listaProyectos", response);
-	}
-
-	private void mostrar_inicio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    private void mostrar_inicio(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         request.setAttribute("listaClientes", ClienteDAO.listar());
         request.setAttribute("listaRequisitos", RequisitoDAO.listar());
         getServletContext().getRequestDispatcher("/inicio.jsp").forward(request, response);

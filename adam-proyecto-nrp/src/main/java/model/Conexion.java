@@ -13,7 +13,7 @@ public class Conexion {
     static java.sql.Connection conexion;
     static private Statement sentencia;
     static String host = "localhost";
-    static String bd = "nrpdb";
+    static String bd = "nrp_db";
     static String user = "root";
     static String password = "";
 

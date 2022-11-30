@@ -32,9 +32,8 @@ public class ServletUsuario extends HttpServlet{
         String action = request.getParameter("action");
         try {
             switch (action) {
-            case "inicio_sesion":
-                inicio_sesion(request, response);
-                break;
+            case "iniciar_sesion":
+            	iniciar_sesion(request, response);
             default:
                 break;
             }
@@ -45,20 +44,18 @@ public class ServletUsuario extends HttpServlet{
 
     }
 
-    private void inicio_sesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    private void iniciar_sesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String login=request.getParameter("username");
         String pass=request.getParameter("password");
         boolean iniciar = UsuarioDAO.inicioSesion(login, pass);
 
         if (iniciar) {
-            getServletContext().getRequestDispatcher("/ServletInicio?action=mostrar_inicio").forward(request, response);
+            getServletContext().getRequestDispatcher("/ServletInicio?action=elegir_proyecto").forward(request, response);
         }else {
             request.setAttribute("error", "El nombre o contraseña son incorrectos");
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
-
-
-    }
+	}
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
