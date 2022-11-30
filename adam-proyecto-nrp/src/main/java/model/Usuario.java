@@ -4,16 +4,19 @@ public class Usuario {
     private int id;
     private String login;
     private String password;
+    private Boolean admin;
 
-    public Usuario(int id, String login, String password) {
+    public Usuario(int id, String login, String password, Boolean admin) {
         this.id = id;
         this.login = login;
         this.password = password;
+        this.admin = admin;
     }
 
-    public Usuario(String login, String password) {
+    public Usuario(String login, String password, Boolean admin) {
         this.login = login;
         this.password = password;
+        this.admin = admin;
     }
 
     public int getId() {
@@ -34,6 +37,14 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 
     @Override

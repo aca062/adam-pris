@@ -17,7 +17,7 @@ class UsuarioDAOTest {
     void testInsertar() {
         try {
 
-            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD");
+            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD", false);
 
             UsuarioDAO.insertar(usuario);
 
@@ -37,7 +37,7 @@ class UsuarioDAOTest {
     void testBorrar() {
         try {
 
-            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD");
+            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD", true);
 
             UsuarioDAO.insertar(usuario);
 
@@ -59,7 +59,7 @@ class UsuarioDAOTest {
     void testBorrarId() {
         try {
 
-            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD");
+            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD", true);
 
             UsuarioDAO.insertar(usuario);
 
@@ -81,7 +81,7 @@ class UsuarioDAOTest {
     void testActualizar() {
         try {
 
-            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD");
+            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD", true);
 
             UsuarioDAO.insertar(usuario);
 
@@ -92,6 +92,8 @@ class UsuarioDAOTest {
             usuario2.setLogin("LoginActualizadoTestBBDD");
 
             usuario2.setPassword("PassActualizadoTestBBDD");
+            
+            usuario2.setAdmin(false);
 
             UsuarioDAO.actualizar(usuario2);
 
@@ -111,7 +113,7 @@ class UsuarioDAOTest {
     void testBuscarNombre() {
         try {
 
-            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD");
+            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD", true);
 
             UsuarioDAO.insertar(usuario);
 
@@ -131,7 +133,7 @@ class UsuarioDAOTest {
     void testBuscarId() {
         try {
 
-            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD");
+            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD", true);
 
             UsuarioDAO.insertar(usuario);
 
@@ -144,6 +146,26 @@ class UsuarioDAOTest {
             UsuarioDAO.borrar(usuario2);
 
             assertEquals(usuario, usuario3);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail("Excepción SQL");
+        }
+    }
+    
+    @Test
+    void testVerificarAdmin() {
+        try {
+
+            Usuario usuario = new Usuario("PruebaLoginBBDD", "PruebaContBBDD", false);
+            
+            UsuarioDAO.insertar(usuario);
+            
+            Boolean admin = UsuarioDAO.verificarAdminPorLogin("PruebaLoginBBDD");
+
+            UsuarioDAO.borrar(usuario);
+
+            assertEquals(admin, false);
 
         } catch (SQLException e) {
             e.printStackTrace();
