@@ -11,9 +11,11 @@ import org.junit.jupiter.api.Test;
 
 import dao.ClienteDAO;
 import dao.ClienteHasRequisitoDAO;
+import dao.ProyectoDAO;
 import dao.RequisitoDAO;
 import model.Cliente;
 import model.ClienteHasRequisito;
+import model.Proyecto;
 import model.Requisito;
 
 class ClienteHasRequisitoDAOTest {
@@ -21,11 +23,13 @@ class ClienteHasRequisitoDAOTest {
     @Test
     void testInsertar() {
         try {
-
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -36,6 +40,7 @@ class ClienteHasRequisitoDAOTest {
             ClienteHasRequisitoDAO.borrar(relacion);
             ClienteDAO.borrar(cliente);
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(relacion, relacion2);
 
@@ -48,11 +53,13 @@ class ClienteHasRequisitoDAOTest {
     @Test
     void testBorrar() {
         try {
-
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -69,6 +76,7 @@ class ClienteHasRequisitoDAOTest {
 
             ClienteDAO.borrar(cliente);
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertTrue(ClienteHasRequisitoDAO.obtenerPorID(idCliente, idRequisito) == null);
 
@@ -81,11 +89,13 @@ class ClienteHasRequisitoDAOTest {
     @Test
     void testBorrarRelacionesCliente() {
         try {
-
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -102,6 +112,7 @@ class ClienteHasRequisitoDAOTest {
 
             ClienteDAO.borrar(cliente);
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertTrue(ClienteHasRequisitoDAO.obtenerPorID(idCliente, idRequisito) == null);
 
@@ -114,11 +125,13 @@ class ClienteHasRequisitoDAOTest {
     @Test
     void testBorrarRelacionesRequisito() {
         try {
-
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -135,6 +148,7 @@ class ClienteHasRequisitoDAOTest {
 
             ClienteDAO.borrar(cliente);
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertTrue(ClienteHasRequisitoDAO.obtenerPorID(idCliente, idRequisito) == null);
 
@@ -147,11 +161,13 @@ class ClienteHasRequisitoDAOTest {
     @Test
     void testObtenerRelacionesCliente() {
         try {
-
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -169,6 +185,7 @@ class ClienteHasRequisitoDAOTest {
 
             ClienteDAO.borrar(cliente);
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(relacion, relacion2);
 
@@ -181,11 +198,13 @@ class ClienteHasRequisitoDAOTest {
     @Test
     void testObtenerRelacionesRequisito() {
         try {
-
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -203,6 +222,7 @@ class ClienteHasRequisitoDAOTest {
 
             ClienteDAO.borrar(cliente);
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(relacion, relacion2);
 
@@ -215,11 +235,13 @@ class ClienteHasRequisitoDAOTest {
     @Test
     void obtenerPorId() {
         try {
-
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -235,6 +257,7 @@ class ClienteHasRequisitoDAOTest {
 
             ClienteDAO.borrar(cliente);
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(relacion, relacion2);
 
