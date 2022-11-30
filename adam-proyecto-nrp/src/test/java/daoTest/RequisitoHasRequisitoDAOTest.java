@@ -153,7 +153,6 @@ class RequisitoHasRequisitoDAOTest {
 
             RequisitoDAO.borrar(requisito);
             RequisitoDAO.borrar(requisito2);
-            
             ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(lista.size(), lista2.size() + 1);
