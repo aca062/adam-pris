@@ -24,7 +24,6 @@ class RequisitoDAOTest {
         	ProyectoDAO.insertar(proyecto);
         	
             Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
-
             RequisitoDAO.insertar(requisito);
 
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");
@@ -43,9 +42,10 @@ class RequisitoDAOTest {
     @Test
     void testBorrar() {
         try {
-
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
-
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             if (RequisitoDAO.obtenerPorNombre("PruebaTestBBDD") == null) {
@@ -53,6 +53,7 @@ class RequisitoDAOTest {
             }
 
             RequisitoDAO.borrar(requisito);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertTrue(RequisitoDAO.obtenerPorNombre("PruebaTestBBDD") == null);
 
@@ -65,9 +66,10 @@ class RequisitoDAOTest {
     @Test
     void testBorrarId() {
         try {
-
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
-
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             if (RequisitoDAO.obtenerPorNombre("PruebaTestBBDD") == null) {
@@ -75,6 +77,7 @@ class RequisitoDAOTest {
             }
 
             RequisitoDAO.borrar(RequisitoDAO.obtenerPorNombre(requisito.getNombre()));
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertTrue(RequisitoDAO.obtenerPorNombre("PruebaTestBBDD") == null);
 
@@ -87,9 +90,10 @@ class RequisitoDAOTest {
     @Test
     void testActualizar() {
         try {
-
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
-
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");
@@ -105,6 +109,7 @@ class RequisitoDAOTest {
             Requisito requisito3 = RequisitoDAO.obtenerPorID(id);
 
             RequisitoDAO.borrar(requisito2);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(requisito2, requisito3);
 
@@ -117,14 +122,16 @@ class RequisitoDAOTest {
     @Test
     void testBuscarNombre() {
         try {
-
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
-
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
 
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");
 
             RequisitoDAO.borrar(requisito2);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(requisito2, requisito);
 
@@ -137,11 +144,12 @@ class RequisitoDAOTest {
     @Test
     void testBuscarId() {
         try {
-
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
-
+        	Proyecto proyecto = new Proyecto("Pr1");
+        	ProyectoDAO.insertar(proyecto);
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
             RequisitoDAO.insertar(requisito);
-
+            
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");
 
             int id = requisito2.getId();
@@ -149,6 +157,7 @@ class RequisitoDAOTest {
             Requisito requisito3 = RequisitoDAO.obtenerPorID(id);
 
             RequisitoDAO.borrar(requisito2);
+            ProyectoDAO.borrar(ProyectoDAO.obtenerPorNombre("Pr1"));
 
             assertEquals(requisito, requisito3);
 

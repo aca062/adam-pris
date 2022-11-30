@@ -18,7 +18,7 @@ public class RequisitoDAO {
             return false;
         }
 
-        String query = "INSERT INTO `requisito` (`id`, `esfuerzo`, `nombre`, `usuario_id`) VALUES (?, ?, ?,?)";
+        String query = "INSERT INTO `requisito` (`id`, `esfuerzo`, `nombre`, `proyecto_id`) VALUES (?, ?, ?,?)";
 
         Conexion.conectarBD();
 
@@ -26,10 +26,10 @@ public class RequisitoDAO {
         sentencia.setString(1, null);
         sentencia.setInt(2, requisito.getEsfuerzo());
         sentencia.setString(3, requisito.getNombre());
-        if (requisito.getUsuario_id() == -1 ) {
+        if (requisito.getProyecto_id() == -1 ) {
             sentencia.setNull(4, Types.INTEGER);
         } else {
-            sentencia.setInt(4, requisito.getUsuario_id());
+            sentencia.setInt(4, requisito.getProyecto_id());
         }
         boolean filaAnadida = sentencia.executeUpdate() > 0;
         sentencia.close();
@@ -106,7 +106,7 @@ public class RequisitoDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1);
+            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1);
         } else {
             return null;
         }
@@ -130,7 +130,7 @@ public class RequisitoDAO {
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1);
+            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1);
         } else {
             return null;
         }
@@ -156,7 +156,7 @@ public class RequisitoDAO {
             int id = resultado.getInt("id");
             int esfuerzo = resultado.getInt("esfuerzo");
             String nombre = resultado.getString("nombre");
-            int usuario_id = resultado.getInt("usuario_id") != 0 ? resultado.getInt("usuario_id") : -1;
+            int usuario_id = resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1;
 
             Requisito requisito = new Requisito(id, esfuerzo, nombre, usuario_id);
             listaRequisito.add(requisito);
