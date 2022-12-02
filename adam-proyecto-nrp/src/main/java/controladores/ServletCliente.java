@@ -76,17 +76,17 @@ public class ServletCliente extends HttpServlet{
         if (nombre == null || nombre.isEmpty()) {
             if (peso == null || peso.isEmpty()) {
                 request.setAttribute("error", "No se ha introducido el nombre ni el peso del cliente");
-                getServletContext().getRequestDispatcher("/crearCliente.jsp").forward(request, response);
+                mostrar_editar_cliente(request, response);
             }
             request.setAttribute("error", "No se ha introducido el nombre del cliente");
-            getServletContext().getRequestDispatcher("/crearCliente.jsp").forward(request, response);
+            mostrar_editar_cliente(request, response);
         }else if (peso == null || peso.isEmpty()) {
             request.setAttribute("error", "No se ha introducido el peso del cliente");
-            getServletContext().getRequestDispatcher("/crearCliente.jsp").forward(request, response);
+            mostrar_editar_cliente(request, response);
         }else {
             if (!peso.matches("-?(0|[1-9]\\d*)")) {
                 request.setAttribute("error", "Solo se pueden introducir números enteros en el peso");
-                getServletContext().getRequestDispatcher("/crearCliente.jsp").forward(request, response);
+                mostrar_editar_cliente(request, response);
             } else {
                 Cliente cliente = ClienteDAO.obtenerPorID(Integer.parseInt(id));
 
@@ -111,8 +111,7 @@ public class ServletCliente extends HttpServlet{
                     request.setAttribute("id", cliente.getId());
                     request.setAttribute("nombre", nombreAnterior);
                     request.setAttribute("prioridad", prioridadAnterior);
-                    RequestDispatcher dispatcher= request.getRequestDispatcher("/editarCliente.jsp");
-                    dispatcher.forward(request, response);
+                    mostrar_editar_cliente(request, response);
                 }
             }
         }
@@ -145,7 +144,7 @@ public class ServletCliente extends HttpServlet{
                 request.setAttribute("error", "Solo se pueden introducir números enteros en el peso");
                 getServletContext().getRequestDispatcher("/crearCliente.jsp").forward(request, response);
             } else {
-                Cliente cliente = new Cliente(Integer.parseInt(peso), nombre.trim(), ServletProyecto.proyecto);
+                Cliente cliente = new Cliente(Integer.parseInt(peso), nombre.trim());
                 boolean insertar = ClienteDAO.insertar(cliente);
 
                 if (insertar) {
@@ -176,12 +175,6 @@ public class ServletCliente extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
-    }
-
-    private void index (HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
-        //mostrar(request, response);
-        RequestDispatcher dispatcher= request.getRequestDispatcher("index.jsp");
-        dispatcher.forward(request, response);
     }
 
     public String path() {

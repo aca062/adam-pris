@@ -63,7 +63,7 @@ undefined
 		</div>
 	</header>
 
-	<main role="main">
+	<main role="main" style="min-height: 67vh;">
 
 		<section class="text-center" style="margin-top: 30px">
 			<div class="container-xl">
@@ -72,74 +72,39 @@ undefined
 						<div class="table-title">
 							<div class="row">
 								<div class="col-sm-12" style="display:inline-flex; justify-content: center">
-									<h2 style="margin-right: 20px">Proyectos asignados</h2>
-									<a href="./ServletRequisito?action=inicio" class="bi bi-plus-circle"
+									<h2 style="margin-right: 20px">Proyectos<c:if test="${not admin}"> asignados</c:if></h2>
+									<c:if test="${admin}">
+										<a href="./ServletProyecto?action=mostrar_crear_proyecto" class="bi bi-plus-circle"
 										data-toggle="modal" style="align-items: center; display: flex; justify-content: center"></a>
+									</c:if>
 								</div>
 							</div>
 						</div>
 						<table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-									<th>Proyecto<i class="fa fa-sort"></i></th>
+									<th>ID<i class="fa fa-sort"></i></th>
+									<th>Nombre Proyecto<i class="fa fa-sort"></i></th>
+									<c:if test="${admin}">
+										<th>Opciones<i class="fa fa-sort"></i></th>
+									</c:if>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="proyecto" items="${listaProyectos}">
 									<tr>
 										<td><c:out value="${proyecto.id}" /></td>
-										<td><a href="ServletInicio?action=mostrar_inicio&id=<c:out value="${proyecto.id}"/>"><c:out value="${proyecto.nombre}" /></a></td>
+										<td><a href="ServletProyecto?action=mostrar_inicio&id=<c:out value="${proyecto.id}"/>"><c:out value="${proyecto.nombre}" /></a></td>
+										<c:if test="${admin}">
 										<td><a
-											href="ServletRequisito?action=eliminar_requisito&id=<c:out value="${requisito.id}" />"
-											onclick="return confirm('¿Estás seguro de que quieres eliminar el cliente <c:out value="${requisito.nombre}" />?')"
+											href="ServletProyecto?action=eliminar_proyecto&id=<c:out value="${proyecto.id}"/>&nombre=<c:out value="${proyecto.nombre}"/>"
+											onclick="return confirm('¿Estás seguro de que quieres eliminar el cliente <c:out value="${proyecto.nombre}" />?')"
 											class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
 											<a
-											href="ServletRequisito?action=mostrar_editar_requisito&id=<c:out value="${requisito.id}"/>&nombre=<c:out value="${requisito.nombre}"/>&esfuerzo=<c:out value="${requisito.esfuerzo}"/>"
+											href="ServletProyecto?action=mostrar_editar_proyecto&id=<c:out value="${proyecto.id}"/>&nombre=<c:out value="${proyecto.nombre}"/>"
 											class="bi bi-pencil-square" title="Edit"
 											data-toggle="tooltip"></a></td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="container-xl">
-				<div class="table" style="max-width: 65%; margin-left: 17.5%">
-					<div class="table-wrapper">
-						<div class="table-title">
-							<div class="row">
-								<div class="col-sm-12" style="display:inline-flex; justify-content: center">
-									<h2 style="margin-right: 20px">Clientes del problema</h2>
-									<a href="crearCliente.jsp" class="bi bi-plus-circle"
-										data-toggle="modal" style="align-items: center; display: flex; justify-content: center"></a>
-								</div>
-							</div>
-						</div>
-						<table class="table table-striped table-hover table-bordered">
-							<thead>
-								<tr>
-
-									<th>Ci <i class="fa fa-sort"></i></th>
-									<th>Nombre</th>
-									<th>Wi <i class="fa fa-sort"></i></th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="cliente" items="${listaClientes}">
-									<tr>
-										<td><c:out value="${cliente.id}" /></td>
-										<td><c:out value="${cliente.nombre}" /></td>
-										<td><c:out value="${cliente.prioridad}" /></td>
-										<td><a
-											href="ServletCliente?action=eliminar_cliente&id=<c:out value="${cliente.id}" />"
-											onclick="return confirm('¿Estás seguro de que quieres eliminar el cliente <c:out value="${cliente.nombre}" />?')"
-											class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-											<a
-											href="ServletCliente?action=mostrar_editar_cliente&id=<c:out value="${cliente.id}" />&nombre=<c:out value="${cliente.nombre}"/>&prioridad=<c:out value="${cliente.prioridad}"/>"
-											class="bi bi-pencil-square" title="Edit"
-											data-toggle="tooltip"></a></td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</tbody>

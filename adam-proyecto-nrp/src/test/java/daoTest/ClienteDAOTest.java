@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
 
+import controladores.ServletProyecto;
 import dao.ClienteDAO;
 import dao.ProyectoDAO;
 import model.Cliente;
@@ -21,7 +22,9 @@ class ClienteDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
 
@@ -44,7 +47,9 @@ class ClienteDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
 
@@ -69,7 +74,9 @@ class ClienteDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
 
@@ -94,7 +101,9 @@ class ClienteDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
             
@@ -127,7 +136,9 @@ class ClienteDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
 
@@ -150,7 +161,9 @@ class ClienteDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "PruebaTestBBDD");
 
             ClienteDAO.insertar(cliente);
 

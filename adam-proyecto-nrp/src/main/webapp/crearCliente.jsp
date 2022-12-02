@@ -36,7 +36,7 @@
       </div>
     </header>
 
-    <main role="main">
+    <main role="main" style="min-height: 67vh;">
     
       <section class="text-center" style="margin-top:30px; text-align: left">
      <div class = row style = "text-align: left; margin-left: 8%; margin-bottom: 2%">

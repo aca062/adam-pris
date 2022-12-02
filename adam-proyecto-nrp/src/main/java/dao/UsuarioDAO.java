@@ -198,4 +198,31 @@ public class UsuarioDAO {
 			return false;
 		}
 	}
+	
+	public static List<Usuario> listarAdmins() throws SQLException {
+		List<Usuario> listaUsuario = new ArrayList<Usuario>();
+		String query = "SELECT * FROM `usuario` WHERE `admin` = 1";
+
+		Conexion.conectarBD();
+
+		PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+
+		ResultSet resultado = sentencia.executeQuery();
+
+		while (resultado.next()) {
+			int id = resultado.getInt("id");
+			String login = resultado.getString("login");
+			String password = resultado.getString("password");
+			Boolean admin = resultado.getBoolean("admin");
+
+			Usuario usuario = new Usuario(id, login, password, admin);
+			listaUsuario.add(usuario);
+		}
+
+		sentencia.close();
+
+		Conexion.desconectarBD();
+
+		return listaUsuario;
+	}
 }

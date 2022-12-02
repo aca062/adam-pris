@@ -8,10 +8,9 @@ import java.sql.SQLException;
 
 import org.junit.jupiter.api.Test;
 
-import dao.ClienteDAO;
+import controladores.ServletProyecto;
 import dao.ProyectoDAO;
 import dao.RequisitoDAO;
-import model.Cliente;
 import model.Proyecto;
 import model.Requisito;
 
@@ -23,7 +22,9 @@ class RequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");
@@ -45,7 +46,9 @@ class RequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             if (RequisitoDAO.obtenerPorNombre("PruebaTestBBDD") == null) {
@@ -69,7 +72,9 @@ class RequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             if (RequisitoDAO.obtenerPorNombre("PruebaTestBBDD") == null) {
@@ -93,7 +98,9 @@ class RequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");
@@ -125,7 +132,9 @@ class RequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");
@@ -147,7 +156,9 @@ class RequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Requisito requisito = new Requisito(1, "PruebaTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Requisito requisito = new Requisito(1, "PruebaTestBBDD");
             RequisitoDAO.insertar(requisito);
             
             Requisito requisito2 = RequisitoDAO.obtenerPorNombre("PruebaTestBBDD");

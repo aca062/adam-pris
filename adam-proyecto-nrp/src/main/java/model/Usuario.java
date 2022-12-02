@@ -1,6 +1,6 @@
 package model;
 
-public class Usuario {
+public class Usuario implements Comparable<Usuario>{
     private int id;
     private String login;
     private String password;
@@ -58,4 +58,13 @@ public class Usuario {
         }
         return true;
     }
+    
+	@Override
+	public int compareTo(Usuario o) {
+	    if(this.getId() > o.getId())
+	        return 1;
+	    else if(this.getId() < o.getId())
+	        return -1;
+	    return this.getLogin().compareTo(o.getLogin());
+	}
 }

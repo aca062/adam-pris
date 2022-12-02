@@ -36,7 +36,7 @@
       </div>
     </header>
 
-    <main role="main">
+    <main role="main" style="min-height: 67vh;">
     
       <section class="text-center" style="margin-top:30px"">
      <h2><b>Solución manual</b></h2>

@@ -3,7 +3,6 @@ package controladores;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,11 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAO;
+import model.Usuario;
 
 @WebServlet("/ServletUsuario")
 public class ServletUsuario extends HttpServlet{
     private static final long serialVersionUID = 1L;
     UsuarioDAO usuarioDAO;
+    public static boolean admin;
+    public static int id;
 
     public ServletUsuario() {
         super();
@@ -50,7 +52,11 @@ public class ServletUsuario extends HttpServlet{
         boolean iniciar = UsuarioDAO.inicioSesion(login, pass);
 
         if (iniciar) {
-            getServletContext().getRequestDispatcher("/ServletInicio?action=mostrar_inicio").forward(request, response);
+        	Usuario usuario = UsuarioDAO.obtenerPorLogin(login);
+        	admin = usuario.getAdmin();
+        	id = usuario.getId();
+        	
+            getServletContext().getRequestDispatcher("/ServletProyecto?action=elegir_proyecto").forward(request, response);
         }else {
             request.setAttribute("error", "El nombre o contraseña son incorrectos");
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
@@ -64,10 +70,5 @@ public class ServletUsuario extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
-    }
-
-    private void index (HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
-        RequestDispatcher dispatcher= request.getRequestDispatcher("index.jsp");
-        dispatcher.forward(request, response);
     }
 }

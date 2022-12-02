@@ -1,30 +1,26 @@
 package model;
 
+import controladores.ServletProyecto;
+
 public class Requisito implements Comparable<Requisito>{
     private int id;
     private int esfuerzo;
     private String nombre;
-    private int proyecto_id;
+    private int proyecto_id = ServletProyecto.proyecto;
 
-    public Requisito(int id, int esfuerzo, String nombre, int proyecto_id) {
+    public Requisito(int id, int esfuerzo, String nombre) {
         this.id = id;
         this.esfuerzo = esfuerzo;
         this.nombre = nombre;
-        this.proyecto_id = proyecto_id;
     }
 
-    public Requisito(int esfuerzo, String nombre, int proyecto_id) {
+    public Requisito(int esfuerzo, String nombre) {
         this.esfuerzo = esfuerzo;
         this.nombre = nombre;
-        this.proyecto_id = proyecto_id;
     }
 
     public int getProyecto_id() {
         return proyecto_id;
-    }
-
-    public void setProyecto_id(int proyecto_id) {
-        this.proyecto_id = proyecto_id;
     }
 
     public int getId() {

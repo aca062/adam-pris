@@ -63,7 +63,7 @@ undefined
 		</div>
 	</header>
 
-	<main role="main">
+	<main role="main" style="min-height: 67vh;">
 
 		<section class="text-center" style="margin-top: 30px">
 			<div class=row
@@ -177,7 +177,7 @@ undefined
 					<div class=col-sm-4 style="margin: 0px auto">
 						<input type="submit" name="register-requirement"
 							id="register-requirement" tabindex="4" class="btn btn-dark"
-							value="Editar requisito" style="border-radius: 2rem">
+							value="Guardar cambios" style="border-radius: 2rem">
 					</div>
 				</div>
 			</form>

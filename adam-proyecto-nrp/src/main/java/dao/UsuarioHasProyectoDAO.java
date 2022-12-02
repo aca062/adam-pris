@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Conexion;
+import model.Proyecto;
+import model.Usuario;
 import model.UsuarioHasProyecto;
 
 public class UsuarioHasProyectoDAO {
@@ -121,7 +123,51 @@ public class UsuarioHasProyectoDAO {
         return relacion;
     }
 
-    public static List<UsuarioHasProyecto> obtenerRelacionesUsuario(int usuario_id) throws SQLException {
+    public static List<Proyecto> obtenerProyectosUsuario(int usuario_id) throws SQLException {
+        List<Proyecto> relaciones = new ArrayList<Proyecto>();
+        String query = "SELECT * FROM `usuario_has_proyecto` WHERE `usuario_id` = ?";
+
+        Conexion.conectarBD();
+
+        PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        sentencia.setInt(1, usuario_id);
+
+        ResultSet resultado = sentencia.executeQuery();
+
+        while (resultado.next()) {
+            relaciones.add(ProyectoDAO.obtenerPorID(resultado.getInt("proyecto_id")));
+        }
+
+        sentencia.close();
+
+        Conexion.desconectarBD();
+
+        return relaciones;
+    }
+
+    public static List<Usuario> obtenerUsuariosProyecto(int proyecto_id) throws SQLException {
+        List<Usuario> relaciones = new ArrayList<Usuario>();
+        String query = "SELECT * FROM `usuario_has_proyecto` WHERE `proyecto_id` = ?";
+
+        Conexion.conectarBD();
+
+        PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        sentencia.setInt(1, proyecto_id);
+
+        ResultSet resultado = sentencia.executeQuery();
+
+        while (resultado.next()) {
+            relaciones.add(UsuarioDAO.obtenerPorID(resultado.getInt("usuario_id")));
+        }
+
+        sentencia.close();
+
+        Conexion.desconectarBD();
+
+        return relaciones;
+    }
+    
+    private static List<UsuarioHasProyecto> obtenerRelacionesUsuario(int usuario_id) throws SQLException {
         List<UsuarioHasProyecto> relaciones = new ArrayList<UsuarioHasProyecto>();
         String query = "SELECT * FROM `usuario_has_proyecto` WHERE `usuario_id` = ?";
 
@@ -143,7 +189,7 @@ public class UsuarioHasProyectoDAO {
         return relaciones;
     }
 
-    public static List<UsuarioHasProyecto> obtenerRelacionesProyecto(int proyecto_id) throws SQLException {
+    private static List<UsuarioHasProyecto> obtenerRelacionesProyecto(int proyecto_id) throws SQLException {
         List<UsuarioHasProyecto> relaciones = new ArrayList<UsuarioHasProyecto>();
         String query = "SELECT * FROM `usuario_has_proyecto` WHERE `proyecto_id` = ?";
 

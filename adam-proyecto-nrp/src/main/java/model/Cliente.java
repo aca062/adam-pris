@@ -1,30 +1,26 @@
 package model;
 
+import controladores.ServletProyecto;
+
 public class Cliente implements Comparable<Cliente>{
     private int id;
     private int prioridad;
     private String nombre;
-    private int proyecto_id;
+    private int proyecto_id = ServletProyecto.proyecto;
 
-    public Cliente(int id, int prioridad, String nombre, int proyecto_id) {
+    public Cliente(int id, int prioridad, String nombre) {
         this.id = id;
         this.prioridad = prioridad;
         this.nombre = nombre;
-        this.proyecto_id = proyecto_id;
     }
 
-    public Cliente(int prioridad, String nombre, int proyecto_id) {
+    public Cliente(int prioridad, String nombre) {
         this.prioridad = prioridad;
         this.nombre = nombre;
-        this.proyecto_id = proyecto_id;
     }
 
     public int getProyecto_id() {
         return proyecto_id;
-    }
-
-    public void setProyecto_id(int proyecto_id) {
-        this.proyecto_id = proyecto_id;
     }
 
     public int getId() {

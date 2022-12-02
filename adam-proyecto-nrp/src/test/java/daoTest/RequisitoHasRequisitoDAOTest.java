@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import controladores.ServletProyecto;
 import dao.ProyectoDAO;
 import dao.RequisitoDAO;
 import dao.RequisitoHasRequisitoDAO;
@@ -25,11 +26,13 @@ class RequisitoHasRequisitoDAOTest {
         	
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
+        	
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
-            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD");
             RequisitoDAO.insertar(requisito2);
 
             RequisitoHasRequisito relacion = new RequisitoHasRequisito(tipo.combinacion, RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("Requisito2TestBBDD").getId());
@@ -58,11 +61,13 @@ class RequisitoHasRequisitoDAOTest {
 
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
+        	
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
-            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD");
             RequisitoDAO.insertar(requisito2);
 
             RequisitoHasRequisito relacion = new RequisitoHasRequisito(tipo.combinacion, RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("Requisito2TestBBDD").getId());
@@ -96,11 +101,13 @@ class RequisitoHasRequisitoDAOTest {
 
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
+        	
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
-            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD");
             RequisitoDAO.insertar(requisito2);
 
             RequisitoHasRequisito relacion = new RequisitoHasRequisito(tipo.combinacion, RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("Requisito2TestBBDD").getId());
@@ -135,11 +142,13 @@ class RequisitoHasRequisitoDAOTest {
 
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
+        	
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
-            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD");
             RequisitoDAO.insertar(requisito2);
 
             RequisitoHasRequisito relacion = new RequisitoHasRequisito(tipo.combinacion, RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("Requisito2TestBBDD").getId());
@@ -170,11 +179,13 @@ class RequisitoHasRequisitoDAOTest {
 
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
+        	
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
-            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD");
             RequisitoDAO.insertar(requisito2);
 
             RequisitoHasRequisito relacion = new RequisitoHasRequisito(tipo.combinacion, RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("Requisito2TestBBDD").getId());
@@ -209,11 +220,13 @@ class RequisitoHasRequisitoDAOTest {
 
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
+        	
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
-            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito2 = new Requisito(2, "Requisito2TestBBDD");
             RequisitoDAO.insertar(requisito2);
 
             RequisitoHasRequisito relacion = new RequisitoHasRequisito(tipo.combinacion, RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("Requisito2TestBBDD").getId());

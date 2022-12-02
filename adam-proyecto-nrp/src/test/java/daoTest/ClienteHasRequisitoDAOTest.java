@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import controladores.ServletProyecto;
 import dao.ClienteDAO;
 import dao.ClienteHasRequisitoDAO;
 import dao.ProyectoDAO;
@@ -26,10 +27,12 @@ class ClienteHasRequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -56,10 +59,12 @@ class ClienteHasRequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -92,10 +97,12 @@ class ClienteHasRequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -128,10 +135,12 @@ class ClienteHasRequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -164,10 +173,12 @@ class ClienteHasRequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -201,10 +212,12 @@ class ClienteHasRequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());
@@ -238,10 +251,12 @@ class ClienteHasRequisitoDAOTest {
         	Proyecto proyecto = new Proyecto("Pr1");
         	ProyectoDAO.insertar(proyecto);
         	
-            Cliente cliente = new Cliente(1, "ClienteTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+        	ServletProyecto.proyecto = ProyectoDAO.obtenerPorNombre("Pr1").getId();
+        	
+            Cliente cliente = new Cliente(1, "ClienteTestBBDD");
             ClienteDAO.insertar(cliente);
 
-            Requisito requisito = new Requisito(1, "RequisitoTestBBDD", ProyectoDAO.obtenerPorNombre("Pr1").getId());
+            Requisito requisito = new Requisito(1, "RequisitoTestBBDD");
             RequisitoDAO.insertar(requisito);
 
             ClienteHasRequisito relacion = new ClienteHasRequisito(2, ClienteDAO.obtenerPorNombre("ClienteTestBBDD").getId(), RequisitoDAO.obtenerPorNombre("RequisitoTestBBDD").getId());

@@ -3,7 +3,6 @@ package controladores;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -99,23 +98,20 @@ public class ServletRequisito extends HttpServlet {
 			if (nombre == null || nombre.isEmpty()) {
 				if (esfuerzo == null || esfuerzo.isEmpty()) {
 					request.setAttribute("error", "No se ha introducido el nombre ni el esfuerzo del requisito");
-					getServletContext().getRequestDispatcher("/ServletRequisito?action=mostrar_crear_requisito")
-							.forward(request, response);
+					mostrar_editar_requisito(request, response);
 				}
 				request.setAttribute("error", "No se ha introducido el nombre del requisito");
-				getServletContext().getRequestDispatcher("/ServletRequisito?action=mostrar_crear_requisito")
-						.forward(request, response);
+				mostrar_editar_requisito(request, response);
 			} else if (esfuerzo == null || esfuerzo.isEmpty()) {
 				request.setAttribute("error", "No se ha introducido el esfuerzo del requisito");
-				getServletContext().getRequestDispatcher("/ServletRequisito?action=mostrar_crear_requisito")
-						.forward(request, response);
+				mostrar_editar_requisito(request, response);
 			} else {
 				if (!esfuerzo.matches("-?(0|[1-9]\\d*)")) {
 					request.setAttribute("error", "Solo se pueden introducir números enteros en el esfuerzo");
-					getServletContext().getRequestDispatcher("/ServletRequisito?action=mostrar_crear_requisito")
-							.forward(request, response);
+					mostrar_editar_requisito(request, response);
 				} else {
-					Requisito requisito = new Requisito(id, Integer.parseInt(esfuerzo), nombre.trim(), ServletProyecto.proyecto);
+					
+					Requisito requisito = new Requisito(id, Integer.parseInt(esfuerzo), nombre.trim());
 					boolean actualizar = RequisitoDAO.actualizar(requisito);
 
 					if (actualizar) {
@@ -149,30 +145,7 @@ public class ServletRequisito extends HttpServlet {
 						rd.include(request, response);
 					} else {
 						request.setAttribute("error", "El nombre del requisito ya existe");
-						request.setAttribute("id", request.getParameter("id"));
-						request.setAttribute("nombre", request.getParameter("nombre"));
-						request.setAttribute("esfuerzo", request.getParameter("esfuerzo"));
-						TreeMap<Cliente, Integer> treeClientes = new TreeMap<Cliente, Integer>();
-						TreeMap<Requisito, String> treeRequisitos = new TreeMap<Requisito, String>();
-						for (ClienteHasRequisito chr : ClienteHasRequisitoDAO
-								.obtenerRelacionesRequisito(Integer.parseInt(request.getParameter("id")))) {
-							treeClientes.put(ClienteDAO.obtenerPorID(chr.getCliente_id()), chr.getValor());
-						}
-						for (Requisito req : RequisitoDAO.listar()) {
-							if (req.getId() != Integer.parseInt(request.getParameter("id"))) {
-								String tipo = "";
-								RequisitoHasRequisito rhr = RequisitoHasRequisitoDAO.obtenerPorID(req.getId(),
-										Integer.parseInt(request.getParameter("id")));
-								if (rhr != null) {
-									tipo = rhr.getTipo().toString();
-								}
-								treeRequisitos.put(req, tipo);
-							}
-						}
-						request.setAttribute("treeClientes", treeClientes);
-						request.setAttribute("treeRequisitos", treeRequisitos);
-						RequestDispatcher dispatcher = request.getRequestDispatcher("/editarRequisito.jsp");
-						dispatcher.forward(request, response);
+						mostrar_editar_requisito(request, response);
 					}
 				}
 			}
@@ -279,7 +252,7 @@ public class ServletRequisito extends HttpServlet {
 					getServletContext().getRequestDispatcher("/ServletRequisito?action=mostrar_crear_requisito")
 							.forward(request, response);
 				} else {
-					Requisito requisito = new Requisito(Integer.parseInt(esfuerzo), nombre.trim(), ServletProyecto.proyecto);
+					Requisito requisito = new Requisito(Integer.parseInt(esfuerzo), nombre.trim());
 					boolean insertar = RequisitoDAO.insertar(requisito);
 
 					if (insertar) {

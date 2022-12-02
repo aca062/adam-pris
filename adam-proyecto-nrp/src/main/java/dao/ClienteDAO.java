@@ -3,7 +3,6 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +79,6 @@ public class ClienteDAO {
             }
         }
 
-
         String query = "UPDATE `cliente` SET `prioridad` = ?, `nombre` = ? WHERE `cliente`.`id` = ?";
 
         Conexion.conectarBD();
@@ -99,17 +97,20 @@ public class ClienteDAO {
 
     public static Cliente obtenerPorID(int id) throws SQLException {
         Cliente cliente = null;
-        String query = "SELECT * FROM `cliente` WHERE `id` = ?";
+        String query = "SELECT * FROM `cliente` WHERE `id` = ? AND `proyecto_id` = ?";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        
         sentencia.setInt(1, id);
+        
+        sentencia.setInt(2, ServletProyecto.proyecto);
 
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1);
+            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"));
         } else {
             return null;
         }
@@ -123,17 +124,20 @@ public class ClienteDAO {
 
     public static Cliente obtenerPorNombre(String nombre) throws SQLException {
         Cliente cliente = null;
-        String query = "SELECT * FROM `cliente` WHERE `nombre` = ?";
+        String query = "SELECT * FROM `cliente` WHERE `nombre` = ? AND `proyecto_id` = ?";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        
         sentencia.setString(1, nombre);
 
+        sentencia.setInt(2, ServletProyecto.proyecto);
+        
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"), resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1);
+            cliente = new Cliente(resultado.getInt("id"), resultado.getInt("prioridad"), resultado.getString("nombre"));
         } else {
             return null;
         }
@@ -161,9 +165,8 @@ public class ClienteDAO {
             int id = resultado.getInt("id");
             int prioridad = resultado.getInt("prioridad");
             String nombre = resultado.getString("nombre");
-            int proyecto_id = resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1;
 
-            Cliente cliente = new Cliente(id, prioridad, nombre, proyecto_id);
+            Cliente cliente = new Cliente(id, prioridad, nombre);
             listaCliente.add(cliente);
         }
 

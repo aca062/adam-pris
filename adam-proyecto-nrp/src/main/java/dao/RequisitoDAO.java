@@ -3,7 +3,6 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +74,14 @@ public class RequisitoDAO {
     }
 
     public static boolean actualizar(Requisito requisito) throws SQLException {
-        String query = "UPDATE `requisito` SET `esfuerzo` = ?, `nombre` = ? WHERE `requisito`.`id` = ?";
+    	
+        if (obtenerPorNombre(requisito.getNombre()) != null) {
+            if (requisito.getId() != obtenerPorNombre(requisito.getNombre()).getId()) {
+            	return false;
+            }
+        }
+    	
+    	String query = "UPDATE `requisito` SET `esfuerzo` = ?, `nombre` = ? WHERE `requisito`.`id` = ?";
 
         Conexion.conectarBD();
 
@@ -93,17 +99,20 @@ public class RequisitoDAO {
 
     public static Requisito obtenerPorID(int id) throws SQLException {
         Requisito requisito = null;
-        String query = "SELECT * FROM `requisito` WHERE `id` = ?";
+        String query = "SELECT * FROM `requisito` WHERE `id` = ? AND `proyecto_id` = ?";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        
         sentencia.setInt(1, id);
 
+        sentencia.setInt(2, ServletProyecto.proyecto);
+        
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1);
+            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"));
         } else {
             return null;
         }
@@ -117,17 +126,20 @@ public class RequisitoDAO {
 
     public static Requisito obtenerPorNombre(String nombre) throws SQLException {
         Requisito requisito = null;
-        String query = "SELECT * FROM `requisito` WHERE `nombre` = ?";
+        String query = "SELECT * FROM `requisito` WHERE `nombre` = ? AND `proyecto_id` = ?";
 
         Conexion.conectarBD();
 
         PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+                
         sentencia.setString(1, nombre);
+        
+        sentencia.setInt(2, ServletProyecto.proyecto);
 
         ResultSet resultado = sentencia.executeQuery();
 
         if (resultado.next()) {
-            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"), resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1);
+            requisito = new Requisito(resultado.getInt("id"), resultado.getInt("esfuerzo"), resultado.getString("nombre"));
         } else {
             return null;
         }
@@ -155,9 +167,8 @@ public class RequisitoDAO {
             int id = resultado.getInt("id");
             int esfuerzo = resultado.getInt("esfuerzo");
             String nombre = resultado.getString("nombre");
-            int usuario_id = resultado.getInt("proyecto_id") != 0 ? resultado.getInt("proyecto_id") : -1;
 
-            Requisito requisito = new Requisito(id, esfuerzo, nombre, usuario_id);
+            Requisito requisito = new Requisito(id, esfuerzo, nombre);
             listaRequisito.add(requisito);
         }
 

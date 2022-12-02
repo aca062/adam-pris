@@ -6,10 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cliente;
 import model.Conexion;
 import model.Proyecto;
-import model.Usuario;
 
 public class ProyectoDAO {
     public static boolean insertar(Proyecto proyecto) throws SQLException {
@@ -48,6 +46,20 @@ public class ProyectoDAO {
         return filaBorrada;
     }
     
+    public static boolean borrar(int proyecto_id) throws SQLException {
+        String query = "DELETE FROM proyecto WHERE `id` = ?";
+
+        Conexion.conectarBD();
+
+        PreparedStatement sentencia = Conexion.getConexion().prepareStatement(query);
+        sentencia.setInt(1, proyecto_id);
+        boolean filaBorrada = sentencia.executeUpdate() > 0;
+        sentencia.close();
+
+        Conexion.desconectarBD();
+
+        return filaBorrada;
+    }
 
     public static boolean borrar(String nombre) throws SQLException {
     	 String query = "DELETE FROM proyecto WHERE `nombre` = ?";

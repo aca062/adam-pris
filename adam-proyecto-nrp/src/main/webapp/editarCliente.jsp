@@ -62,7 +62,7 @@ undefined
 		</div>
 	</header>
 
-	<main role="main">
+	<main role="main" style="min-height: 67vh;">
 
 		<section class="text-center"
 			style="margin-top: 30px; text-align: left">
@@ -104,7 +104,7 @@ undefined
 				<div class=row style="text-align: center; margin-top: 2%">
 					<div class=col-sm-4 style="margin: 0px auto">
 						<input type="submit" name="register-client" id="register-client"
-							tabindex="4" class="btn btn-dark" value="Editar cliente"
+							tabindex="4" class="btn btn-dark" value="Guardar cambios"
 							style="border-radius: 2rem">
 					</div>
 				</div>

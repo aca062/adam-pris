@@ -23,7 +23,7 @@
   <style>undefined</style><style type="text/css">@font-face { font-family: Roboto; src: url("chrome-extension://mcgbeeipkmelnpldkobichboakdfaeon/css/Roboto-Regular.ttf"); }</style><script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script><link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin="true"><link rel="preconnect" href="https://fonts.gstatic.com/"><link rel="stylesheet" href="./css/css2"></head>
 
   <body>
-    <main role="main">
+    <main role="main" style="min-height: 67vh;">
 
       <section class="text-center" style="margin-top:120px">
         <div class="container" style="width:100%">
