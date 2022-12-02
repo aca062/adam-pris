@@ -167,7 +167,7 @@ public class UsuarioHasProyectoDAO {
         return relaciones;
     }
     
-    private static List<UsuarioHasProyecto> obtenerRelacionesUsuario(int usuario_id) throws SQLException {
+    public static List<UsuarioHasProyecto> obtenerRelacionesUsuario(int usuario_id) throws SQLException {
         List<UsuarioHasProyecto> relaciones = new ArrayList<UsuarioHasProyecto>();
         String query = "SELECT * FROM `usuario_has_proyecto` WHERE `usuario_id` = ?";
 
@@ -189,7 +189,7 @@ public class UsuarioHasProyectoDAO {
         return relaciones;
     }
 
-    private static List<UsuarioHasProyecto> obtenerRelacionesProyecto(int proyecto_id) throws SQLException {
+    public static List<UsuarioHasProyecto> obtenerRelacionesProyecto(int proyecto_id) throws SQLException {
         List<UsuarioHasProyecto> relaciones = new ArrayList<UsuarioHasProyecto>();
         String query = "SELECT * FROM `usuario_has_proyecto` WHERE `proyecto_id` = ?";
 
