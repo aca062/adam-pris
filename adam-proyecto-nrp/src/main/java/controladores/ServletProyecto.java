@@ -207,7 +207,10 @@ public class ServletProyecto extends HttpServlet {
 	private void elegir_proyecto(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 		List<Proyecto> listaProyectos = UsuarioHasProyectoDAO.obtenerProyectosUsuario(ServletUsuario.id);
+		List<Usuario> listaUsuarios = UsuarioDAO.listar();
+		listaUsuarios.removeAll(UsuarioDAO.listarAdmins());
 		request.setAttribute("listaProyectos", listaProyectos);
+		request.setAttribute("listaUsuarios", listaUsuarios);
 		request.setAttribute("admin", ServletUsuario.admin);
 		getServletContext().getRequestDispatcher("/elegirProyecto.jsp").forward(request, response);
 	}

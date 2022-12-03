@@ -31,7 +31,7 @@ public class UsuarioDAO {
 	public static boolean insertar(Usuario usuario) throws SQLException {
 
 		if (obtenerPorLogin(usuario.getLogin()) != null) {
-			return false;
+            return false;
 		}
 
 		String query = "INSERT INTO `usuario` (`id`, `login`, `password`, `admin`) VALUES (?, ?, ?, ?)";
@@ -84,6 +84,13 @@ public class UsuarioDAO {
 	}
 
 	public static boolean actualizar(Usuario usuario) throws SQLException {
+		
+		if (obtenerPorLogin(usuario.getLogin()) != null) {
+            if (usuario.getId() != obtenerPorLogin(usuario.getLogin()).getId()) {
+            	return false;
+            }
+		}
+		
 		String query = "UPDATE `usuario` SET `login` = ?, `password` = ?, `admin` = ? WHERE `usuario`.`id` = ?";
 
 		Conexion.conectarBD();

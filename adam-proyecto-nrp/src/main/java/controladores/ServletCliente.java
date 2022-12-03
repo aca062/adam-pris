@@ -35,9 +35,6 @@ public class ServletCliente extends HttpServlet{
             case "crear_cliente":
                 crear_cliente(request, response);
                 break;
-            case "mostrar_clientes":
-                crear_cliente(request, response);
-                break;
             case "mostrar_editar_cliente":
                 mostrar_editar_cliente(request, response);
                 break;

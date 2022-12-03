@@ -71,11 +71,16 @@ undefined
 					<div class="table-wrapper">
 						<div class="table-title">
 							<div class="row">
-								<div class="col-sm-12" style="display:inline-flex; justify-content: center">
-									<h2 style="margin-right: 20px">Proyectos<c:if test="${not admin}"> asignados</c:if></h2>
+								<div class="col-sm-12"
+									style="display: inline-flex; justify-content: center">
+									<h2 style="margin-right: 20px">
+										Proyectos
+										<c:if test="${not admin}"> asignados</c:if>
+									</h2>
 									<c:if test="${admin}">
-										<a href="./ServletProyecto?action=mostrar_crear_proyecto" class="bi bi-plus-circle"
-										data-toggle="modal" style="align-items: center; display: flex; justify-content: center"></a>
+										<a href="./ServletProyecto?action=mostrar_crear_proyecto"
+											class="bi bi-plus-circle" data-toggle="modal"
+											style="align-items: center; display: flex; justify-content: center"></a>
 									</c:if>
 								</div>
 							</div>
@@ -94,16 +99,18 @@ undefined
 								<c:forEach var="proyecto" items="${listaProyectos}">
 									<tr>
 										<td><c:out value="${proyecto.id}" /></td>
-										<td><a href="ServletProyecto?action=mostrar_inicio&id=<c:out value="${proyecto.id}"/>"><c:out value="${proyecto.nombre}" /></a></td>
-										<c:if test="${admin}">
 										<td><a
-											href="ServletProyecto?action=eliminar_proyecto&id=<c:out value="${proyecto.id}"/>&nombre=<c:out value="${proyecto.nombre}"/>"
-											onclick="return confirm('¿Estás seguro de que quieres eliminar el cliente <c:out value="${proyecto.nombre}" />?')"
-											class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
-											<a
-											href="ServletProyecto?action=mostrar_editar_proyecto&id=<c:out value="${proyecto.id}"/>&nombre=<c:out value="${proyecto.nombre}"/>"
-											class="bi bi-pencil-square" title="Edit"
-											data-toggle="tooltip"></a></td>
+											href="ServletProyecto?action=mostrar_inicio&id=<c:out value="${proyecto.id}"/>"><c:out
+													value="${proyecto.nombre}" /></a></td>
+										<c:if test="${admin}">
+											<td><a
+												href="ServletProyecto?action=eliminar_proyecto&id=<c:out value="${proyecto.id}"/>&nombre=<c:out value="${proyecto.nombre}"/>"
+												onclick="return confirm('¿Estás seguro de que quieres eliminar el proyecto <c:out value="${proyecto.nombre}" />?')"
+												class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
+												<a
+												href="ServletProyecto?action=mostrar_editar_proyecto&id=<c:out value="${proyecto.id}"/>&nombre=<c:out value="${proyecto.nombre}"/>"
+												class="bi bi-pencil-square" title="Edit"
+												data-toggle="tooltip"></a></td>
 										</c:if>
 									</tr>
 								</c:forEach>
@@ -111,6 +118,49 @@ undefined
 						</table>
 					</div>
 				</div>
+				<c:if test="${admin}">
+					<div class="table" style="max-width: 65%; margin-left: 17.5%">
+						<div class="table-wrapper">
+							<div class="table-title">
+								<div class="row">
+									<div class="col-sm-12"
+										style="display: inline-flex; justify-content: center">
+										<h2 style="margin-right: 20px">Usuarios</h2>
+										<a href="crearUsuario.jsp"
+											class="bi bi-plus-circle" data-toggle="modal"
+											style="align-items: center; display: flex; justify-content: center"></a>
+									</div>
+								</div>
+							</div>
+							<table class="table table-striped table-hover table-bordered">
+								<thead>
+									<tr>
+										<th>ID<i class="fa fa-sort"></i></th>
+										<th>Login Usuario<i class="fa fa-sort"></i></th>
+										<th>Opciones<i class="fa fa-sort"></i></th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="usuario" items="${listaUsuarios}">
+										<tr>
+											<td><c:out value="${usuario.id}" /></td>
+											<td><c:out value="${usuario.login}" /></td>
+											<td><a
+												href="ServletUsuario?action=eliminar_usuario&id=<c:out value="${usuario.id}"/>&login=<c:out value="${usuario.login}"/>"
+												onclick="return confirm('¿Estás seguro de que quieres eliminar el usuario <c:out value="${usuario.login}" />?')"
+												class="bi bi-x-circle" title="Delete" data-toggle="tooltip"></a>
+												<a
+												href="ServletUsuario?action=mostrar_editar_usuario&id=<c:out value="${usuario.id}"/>&login=<c:out value="${usuario.login}"/>"
+												class="bi bi-pencil-square" title="Edit"
+												data-toggle="tooltip"></a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</c:if>
 			</div>
 		</section>
 	</main>
