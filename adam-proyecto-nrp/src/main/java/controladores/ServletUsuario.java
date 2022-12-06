@@ -53,6 +53,9 @@ public class ServletUsuario extends HttpServlet {
 			case "crear_usuario":
 				crear_usuario(request, response);
 				break;
+			case "cerrar_sesion":
+				cerrar_sesion(request, response);
+				break;
 			default:
 				break;
 			}
@@ -60,6 +63,13 @@ public class ServletUsuario extends HttpServlet {
 			e.getStackTrace();
 		}
 
+	}
+
+	private void cerrar_sesion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		id = -1;
+		ServletProyecto.proyecto = -1;
+        RequestDispatcher dispatcher= request.getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
 	}
 
 	private void mostrar_editar_usuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

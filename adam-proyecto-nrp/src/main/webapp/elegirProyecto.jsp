@@ -15,6 +15,8 @@
 <meta name="author" content="">
 <link rel="icon"
 	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <title>Inicio</title>
 
@@ -25,9 +27,6 @@
 
 <!-- Custom styles for this template -->
 <link href="./css/album.css" rel="stylesheet">
-<style>
-undefined
-</style>
 <style type="text/css">
 @font-face {
 	font-family: Roboto;
@@ -53,12 +52,10 @@ undefined
 					style="margin: 0px auto">
 					<strong>PROYECTO: Problema de la siguiente versión</strong>
 				</div>
-				<button class="navbar-toggler collapsed" type="button"
-					data-toggle="collapse" data-target="#navbarHeader"
-					aria-controls="navbarHeader" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+				<a href="./ServletUsuario?action=cerrar_sesion"
+					style="justify-content: center"> <i
+					class="fa-solid fa-right-from-bracket" style="color: white;"></i>
+				</a>
 			</div>
 		</div>
 	</header>
@@ -88,10 +85,10 @@ undefined
 						<table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-									<th>ID<i class="fa fa-sort"></i></th>
-									<th>Nombre Proyecto<i class="fa fa-sort"></i></th>
+									<th>ID<i ></i></th>
+									<th>Nombre Proyecto<i ></i></th>
 									<c:if test="${admin}">
-										<th>Opciones<i class="fa fa-sort"></i></th>
+										<th>Opciones</th>
 									</c:if>
 								</tr>
 							</thead>
@@ -126,8 +123,8 @@ undefined
 									<div class="col-sm-12"
 										style="display: inline-flex; justify-content: center">
 										<h2 style="margin-right: 20px">Usuarios</h2>
-										<a href="crearUsuario.jsp"
-											class="bi bi-plus-circle" data-toggle="modal"
+										<a href="crearUsuario.jsp" class="bi bi-plus-circle"
+											data-toggle="modal"
 											style="align-items: center; display: flex; justify-content: center"></a>
 									</div>
 								</div>
@@ -135,9 +132,9 @@ undefined
 							<table class="table table-striped table-hover table-bordered">
 								<thead>
 									<tr>
-										<th>ID<i class="fa fa-sort"></i></th>
-										<th>Login Usuario<i class="fa fa-sort"></i></th>
-										<th>Opciones<i class="fa fa-sort"></i></th>
+										<th>ID<i ></i></th>
+										<th>Login Usuario<i ></i></th>
+										<th>Opciones<i ></i></th>
 
 									</tr>
 								</thead>

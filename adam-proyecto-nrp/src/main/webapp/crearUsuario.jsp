@@ -14,6 +14,8 @@
 <meta name="author" content="">
 <link rel="icon"
 	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <title>Crear cliente</title>
 
@@ -52,12 +54,13 @@ undefined
 					style="margin: 0px auto">
 					<strong>PROYECTO: Problema de la siguiente versión</strong>
 				</div>
-				<button class="navbar-toggler collapsed" type="button"
-					data-toggle="collapse" data-target="#navbarHeader"
-					aria-controls="navbarHeader" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+				<a href="./ServletUsuario?action=cerrar_sesion"
+					style="justify-content: center; margin: 0px 25px;"> <i
+					class="fa-solid fa-right-from-bracket" style="color: white;"></i>
+				</a> <a href="./ServletProyecto?action=elegir_proyecto"
+					style="justify-content: center"> <i class="fa-solid fa-bars"
+					style="color: white;"></i>
+				</a>
 			</div>
 		</div>
 	</header>
@@ -67,7 +70,7 @@ undefined
 		<section class="text-center"
 			style="margin-top: 30px; text-align: left">
 			<div class=row
-				style="text-align: left; margin-left: 8%; margin-bottom: 2%">
+				style="text-align: left; padding-left: 8%; margin-bottom: 2%">
 				<h2>Crear un Usuario</h2>
 			</div>
 			<%
@@ -88,12 +91,12 @@ undefined
 				role="form" autocomplete="off">
 				<div class=row style="text-align: center">
 					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="text" name="register-login" id="register-login" tabindex="1"
-							class="form-control" placeholder="Login" value=""
+						<input type="text" name="register-login" id="register-login"
+							tabindex="1" class="form-control" placeholder="Login" value=""
 							style="border-radius: 2rem" required>
 					</div>
 				</div>
-				<div class=row style="margin-top: 25px;text-align: center">
+				<div class=row style="margin-top: 25px; text-align: center">
 					<div class=col-sm-4 style="margin: 0px auto; text-align: left">
 						<strong>Contraseña</strong>
 					</div>
@@ -104,13 +107,14 @@ undefined
 				<div class=row style="text-align: center">
 
 					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="password" name="register-passwd" id="register-passwd" tabindex="1"
-							class="form-control" placeholder="Contraseña" value=""
-							style="border-radius: 2rem" required>
+						<input type="password" name="register-passwd" id="register-passwd"
+							tabindex="1" class="form-control" placeholder="Contraseña"
+							value="" style="border-radius: 2rem" required>
 					</div>
 					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="password" name="register-rpt-passwd" id="register-rpt-passwd" tabindex="1"
-							class="form-control" placeholder="Repita la contraseña" value=""
+						<input type="password" name="register-rpt-passwd"
+							id="register-rpt-passwd" tabindex="1" class="form-control"
+							placeholder="Repita la contraseña" value=""
 							style="border-radius: 2rem" required>
 					</div>
 				</div>
@@ -119,6 +123,12 @@ undefined
 						<input type="submit" name="register-client" id="register-client"
 							tabindex="4" class="btn btn-dark" value="Crear usuario"
 							style="border-radius: 2rem">
+					</div>
+				</div>
+				<div class=row style="text-align: center; margin-top: 2%">
+					<div class=col-sm-4 style="margin: 0px auto">
+						<button class="btn btn-light" onclick="history.back()"
+							style="border-radius: 2rem">Volver</button>
 					</div>
 				</div>
 			</form>

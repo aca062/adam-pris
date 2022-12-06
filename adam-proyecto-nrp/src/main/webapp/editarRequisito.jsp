@@ -15,6 +15,8 @@
 <meta name="author" content="">
 <link rel="icon"
 	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <title>Editar requisito</title>
 
@@ -25,9 +27,6 @@
 
 <!-- Custom styles for this template -->
 <link href="./css/album.css" rel="stylesheet">
-<style>
-undefined
-</style>
 <style type="text/css">
 @font-face {
 	font-family: Roboto;
@@ -67,7 +66,7 @@ undefined
 
 		<section class="text-center" style="margin-top: 30px">
 			<div class=row
-				style="text-align: left; margin-left: 8%; margin-bottom: 2%">
+				style="text-align: left; padding-left: 8%; margin-bottom: 2%">
 				<h2>Editar un requisito</h2>
 			</div>
 			<%
@@ -157,14 +156,21 @@ undefined
 										<tr>
 											<td style="vertical-align: middle"><c:out
 													value="${entry.key.nombre}" /></td>
-											<td>
-												<select id="tipoRelacion${entry.key.id}" name="tipoRelacion${entry.key.id}" required>
-												  <option <c:if test = "${entry.value == ''}"> selected </c:if> value="norelacion">Sin relación</option>
-												  <option <c:if test = "${entry.value == 'exclusion'}"> selected </c:if> value="exclusion">Exclusión</option>
-												  <option <c:if test = "${entry.value == 'implicacion'}"> selected </c:if> value="implicacion">Implicación</option>
-												  <option <c:if test = "${entry.value == 'combinacion'}"> selected </c:if> value="combinacion">Combinación</option>
-												</select>
-											</td>
+											<td><select id="tipoRelacion${entry.key.id}"
+												name="tipoRelacion${entry.key.id}" required>
+													<option
+														<c:if test = "${entry.value == ''}"> selected </c:if>
+														value="norelacion">Sin relación</option>
+													<option
+														<c:if test = "${entry.value == 'exclusion'}"> selected </c:if>
+														value="exclusion">Exclusión</option>
+													<option
+														<c:if test = "${entry.value == 'implicacion'}"> selected </c:if>
+														value="implicacion">Implicación</option>
+													<option
+														<c:if test = "${entry.value == 'combinacion'}"> selected </c:if>
+														value="combinacion">Combinación</option>
+											</select></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -178,6 +184,12 @@ undefined
 						<input type="submit" name="register-requirement"
 							id="register-requirement" tabindex="4" class="btn btn-dark"
 							value="Guardar cambios" style="border-radius: 2rem">
+					</div>
+				</div>
+				<div class=row style="text-align: center; margin-top: 2%">
+					<div class=col-sm-4 style="margin: 0px auto">
+						<button class="btn btn-light" onclick="history.back()"
+							style="border-radius: 2rem">Volver</button>
 					</div>
 				</div>
 			</form>

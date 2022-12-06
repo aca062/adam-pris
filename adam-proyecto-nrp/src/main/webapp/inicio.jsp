@@ -15,6 +15,8 @@
 <meta name="author" content="">
 <link rel="icon"
 	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <title>Inicio</title>
 
@@ -25,9 +27,6 @@
 
 <!-- Custom styles for this template -->
 <link href="./css/album.css" rel="stylesheet">
-<style>
-undefined
-</style>
 <style type="text/css">
 @font-face {
 	font-family: Roboto;
@@ -53,12 +52,13 @@ undefined
 					style="margin: 0px auto">
 					<strong>PROYECTO: Problema de la siguiente versión</strong>
 				</div>
-				<button class="navbar-toggler collapsed" type="button"
-					data-toggle="collapse" data-target="#navbarHeader"
-					aria-controls="navbarHeader" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+				<a href="./ServletUsuario?action=cerrar_sesion"
+					style="justify-content: center; margin: 0px 25px;"> <i
+					class="fa-solid fa-right-from-bracket" style="color: white;"></i>
+				</a> <a href="./ServletProyecto?action=elegir_proyecto"
+					style="justify-content: center"> <i class="fa-solid fa-bars"
+					style="color: white;"></i>
+				</a>
 			</div>
 		</div>
 	</header>
@@ -70,7 +70,7 @@ undefined
 				<div style="margin-bottom: 20px" class="col-sm-12 col-xs-12">
 					<h4>Ejecute para obtener una solución</h4>
 				</div>
-				<div class="col-sm-12 col-xs-12" style="margin-bottom: 120px">
+				<div class="col-sm-12 col-xs-12" style="margin-bottom: 50px">
 					<a class="btn btn-default btn-dark" href="solucionManual.jsp"
 						role="button" style="border-radius: 2rem; margin-right: 2%"">Idear
 						solución manual</a> <a class="btn btn-default btn-dark"
@@ -84,20 +84,22 @@ undefined
 					<div class="table-wrapper">
 						<div class="table-title">
 							<div class="row">
-								<div class="col-sm-12" style="display:inline-flex; justify-content: center">
+								<div class="col-sm-12"
+									style="display: inline-flex; justify-content: center">
 									<h2 style="margin-right: 20px">Requisitos del problema</h2>
-									<a href="./ServletRequisito?action=mostrar_crear_requisito" class="bi bi-plus-circle"
-										data-toggle="modal" style="align-items: center; display: flex; justify-content: center"></a>
+									<a href="./ServletRequisito?action=mostrar_crear_requisito"
+										class="bi bi-plus-circle" data-toggle="modal"
+										style="align-items: center; display: flex; justify-content: center"></a>
 								</div>
 							</div>
 						</div>
 						<table class="table table-striped table-hover table-bordered">
 							<thead>
 								<tr>
-									<th>Ri <i class="fa fa-sort"></i></th>
+									<th>ID</th>
 									<th>Nombre</th>
-									<th>Esfuerzo <i class="fa fa-sort"></i></th>
-									<th>Actions</th>
+									<th>Esfuerzo</th>
+									<th>Opciones</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -121,15 +123,17 @@ undefined
 					</div>
 				</div>
 			</div>
-			<div class="container-xl">
+			<div class="container-xl" style="padding-bottom: 30px;">
 				<div class="table" style="max-width: 65%; margin-left: 17.5%">
 					<div class="table-wrapper">
 						<div class="table-title">
 							<div class="row">
-								<div class="col-sm-12" style="display:inline-flex; justify-content: center">
+								<div class="col-sm-12"
+									style="display: inline-flex; justify-content: center">
 									<h2 style="margin-right: 20px">Clientes del problema</h2>
 									<a href="crearCliente.jsp" class="bi bi-plus-circle"
-										data-toggle="modal" style="align-items: center; display: flex; justify-content: center"></a>
+										data-toggle="modal"
+										style="align-items: center; display: flex; justify-content: center"></a>
 								</div>
 							</div>
 						</div>
@@ -137,10 +141,10 @@ undefined
 							<thead>
 								<tr>
 
-									<th>Ci <i class="fa fa-sort"></i></th>
+									<th>ID</th>
 									<th>Nombre</th>
-									<th>Wi <i class="fa fa-sort"></i></th>
-									<th>Actions</th>
+									<th>Prioridad</th>
+									<th>Opciones</th>
 								</tr>
 							</thead>
 							<tbody>

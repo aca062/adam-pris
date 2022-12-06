@@ -15,6 +15,8 @@
 <meta name="author" content="">
 <link rel="icon"
 	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <title>Editar requisito</title>
 
@@ -25,9 +27,6 @@
 
 <!-- Custom styles for this template -->
 <link href="./css/album.css" rel="stylesheet">
-<style>
-undefined
-</style>
 <style type="text/css">
 @font-face {
 	font-family: Roboto;
@@ -53,12 +52,10 @@ undefined
 					style="margin: 0px auto">
 					<strong>PROYECTO: Problema de la siguiente versión</strong>
 				</div>
-				<button class="navbar-toggler collapsed" type="button"
-					data-toggle="collapse" data-target="#navbarHeader"
-					aria-controls="navbarHeader" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+				<a href="./ServletUsuario?action=cerrar_sesion"
+					style="justify-content: center; margin: 0px 25px;"> <i
+					class="fa-solid fa-right-from-bracket" style="color: white;"></i>
+				</a>
 			</div>
 		</div>
 	</header>
@@ -67,8 +64,11 @@ undefined
 
 		<section class="text-center" style="margin-top: 30px">
 			<div class=row
-				style="text-align: left; margin-left: 8%; margin-bottom: 2%">
-				<h2>Editar el proyecto <c:out value="${nombre}"/></h2>
+				style="text-align: left; padding-left: 8%; margin-bottom: 2%">
+				<h2>
+					Editar el proyecto
+					<c:out value="${nombre}" />
+				</h2>
 			</div>
 			<%
 			String error = (String) request.getAttribute("error");
@@ -125,12 +125,15 @@ undefined
 										<tr>
 											<td style="vertical-align: middle"><c:out
 													value="${entry.key.login}" /></td>
-											<td>
-												<select id="asignado${entry.key.id}" name="asignado${entry.key.id}" required>
-												  <option <c:if test = "${entry.value == true}"> selected </c:if> value="true">Sí</option>
-												  <option <c:if test = "${entry.value == false}"> selected </c:if> value="false">No</option>
-												</select>
-											</td>
+											<td><select id="asignado${entry.key.id}"
+												name="asignado${entry.key.id}" required>
+													<option
+														<c:if test = "${entry.value == true}"> selected </c:if>
+														value="true">Sí</option>
+													<option
+														<c:if test = "${entry.value == false}"> selected </c:if>
+														value="false">No</option>
+											</select></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -144,6 +147,12 @@ undefined
 						<input type="submit" name="register-requirement"
 							id="register-requirement" tabindex="4" class="btn btn-dark"
 							value="Guardar cambios" style="border-radius: 2rem">
+					</div>
+				</div>
+				<div class=row style="text-align: center; margin-top: 2%">
+					<div class=col-sm-4 style="margin: 0px auto">
+						<button class="btn btn-light" onclick="history.back()"
+							style="border-radius: 2rem">Volver</button>
 					</div>
 				</div>
 			</form>

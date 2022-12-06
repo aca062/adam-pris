@@ -14,6 +14,8 @@
 <meta name="author" content="">
 <link rel="icon"
 	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <title>Crear cliente</title>
 
@@ -24,9 +26,6 @@
 
 <!-- Custom styles for this template -->
 <link href="./css/album.css" rel="stylesheet">
-<style>
-undefined
-</style>
 <style type="text/css">
 @font-face {
 	font-family: Roboto;
@@ -67,7 +66,7 @@ undefined
 		<section class="text-center"
 			style="margin-top: 30px; text-align: left">
 			<div class=row
-				style="text-align: left; margin-left: 8%; margin-bottom: 2%">
+				style="text-align: left; padding-left: 8%; margin-bottom: 2%">
 				<h2>Editar un Usuario</h2>
 			</div>
 			<%
@@ -88,12 +87,12 @@ undefined
 				role="form" autocomplete="off">
 				<div class=row style="text-align: center">
 					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="text" name="register-login" id="register-login" tabindex="1"
-							class="form-control" placeholder="Login" value="${login}"
-							style="border-radius: 2rem" required>
+						<input type="text" name="register-login" id="register-login"
+							tabindex="1" class="form-control" placeholder="Login"
+							value="${login}" style="border-radius: 2rem" required>
 					</div>
 				</div>
-				<div class=row style="margin-top: 25px;text-align: center">
+				<div class=row style="margin-top: 25px; text-align: center">
 					<div class=col-sm-4 style="margin: 0px auto; text-align: left">
 						<strong>Contraseña</strong>
 					</div>
@@ -104,13 +103,14 @@ undefined
 				<div class=row style="text-align: center">
 
 					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="password" name="register-passwd" id="register-passwd" tabindex="1"
-							class="form-control" placeholder="Contraseña" value=""
-							style="border-radius: 2rem" required>
+						<input type="password" name="register-passwd" id="register-passwd"
+							tabindex="1" class="form-control" placeholder="Contraseña"
+							value="" style="border-radius: 2rem" required>
 					</div>
 					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="password" name="register-rpt-passwd" id="register-rpt-passwd" tabindex="1"
-							class="form-control" placeholder="Repita la contraseña" value=""
+						<input type="password" name="register-rpt-passwd"
+							id="register-rpt-passwd" tabindex="1" class="form-control"
+							placeholder="Repita la contraseña" value=""
 							style="border-radius: 2rem" required>
 					</div>
 				</div>
@@ -120,6 +120,12 @@ undefined
 						<input type="submit" name="register-client" id="register-client"
 							tabindex="4" class="btn btn-dark" value="Guardar cambios"
 							style="border-radius: 2rem">
+					</div>
+				</div>
+				<div class=row style="text-align: center; margin-top: 2%">
+					<div class=col-sm-4 style="margin: 0px auto">
+						<button class="btn btn-light" onclick="history.back()"
+							style="border-radius: 2rem">Volver</button>
 					</div>
 				</div>
 			</form>

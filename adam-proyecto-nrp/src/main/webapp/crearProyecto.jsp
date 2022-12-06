@@ -15,6 +15,8 @@
 <meta name="author" content="">
 <link rel="icon"
 	href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
 <title>Editar requisito</title>
 
@@ -53,12 +55,10 @@ undefined
 					style="margin: 0px auto">
 					<strong>PROYECTO: Problema de la siguiente versión</strong>
 				</div>
-				<button class="navbar-toggler collapsed" type="button"
-					data-toggle="collapse" data-target="#navbarHeader"
-					aria-controls="navbarHeader" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+				<a href="./ServletUsuario?action=cerrar_sesion"
+					style="justify-content: center; margin: 0px 25px;"> <i
+					class="fa-solid fa-right-from-bracket" style="color: white;"></i>
+				</a>
 			</div>
 		</div>
 	</header>
@@ -67,7 +67,7 @@ undefined
 
 		<section class="text-center" style="margin-top: 30px">
 			<div class=row
-				style="text-align: left; margin-left: 8%; margin-bottom: 2%">
+				style="text-align: left; padding-left: 8%; margin-bottom: 2%">
 				<h2>Crear un proyecto</h2>
 			</div>
 			<%
@@ -98,7 +98,7 @@ undefined
 						style="max-width: 65%; margin-left: 17.5%; margin-top: 5%; justify-content: center">
 						<div class="table-wrapper">
 							<div class="table-title">
-								<div class="row" style="justify-content: center">
+								<div class="row" style="justify-content: center; margin-left: 0px; margin-right: 0px">
 									<div class="col-sm-6">
 										<h3>Usuarios asignados al proyecto</h3>
 									</div>
@@ -125,12 +125,11 @@ undefined
 										<tr>
 											<td style="vertical-align: middle"><c:out
 													value="${usuario.login}" /></td>
-											<td>
-												<select id="asignado${usuario.id}" name="asignado${usuario.id}" required>
-												  <option value="true">Sí</option>
-												  <option selected value="false">No</option>
-												</select>
-											</td>
+											<td><select id="asignado${usuario.id}"
+												name="asignado${usuario.id}" required>
+													<option value="true">Sí</option>
+													<option selected value="false">No</option>
+											</select></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -144,6 +143,12 @@ undefined
 						<input type="submit" name="register-requirement"
 							id="register-requirement" tabindex="4" class="btn btn-dark"
 							value="Crear proyecto" style="border-radius: 2rem">
+					</div>
+				</div>
+				<div class=row style="text-align: center; margin-top: 2%">
+					<div class=col-sm-4 style="margin: 0px auto">
+						<button class="btn btn-light" onclick="history.back()"
+							style="border-radius: 2rem">Volver</button>
 					</div>
 				</div>
 			</form>

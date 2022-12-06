@@ -23,6 +23,11 @@
   font-weight: 300;
 }
 
+.row {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+
 .jumbotron .container {
   max-width: 40rem;
 }
