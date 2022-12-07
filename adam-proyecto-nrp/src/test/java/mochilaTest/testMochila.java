@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import mochila.Cliente;
+import model.Cliente;
 import mochila.MochilaNRP;
 import mochila.Requisito;
 

@@ -7,11 +7,10 @@ import java.util.TreeMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import mochila.Cliente;
 import mochila.MochilaNRP;
 import mochila.Requisito;
 import mochila.RequisitoCombinado;
-
+import model.Cliente;
 class testCargarListaRequisitos {
 	private Cliente cli1;
 	private Cliente cli2;

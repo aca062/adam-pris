@@ -18,6 +18,11 @@ public class Cliente implements Comparable<Cliente>{
         this.prioridad = prioridad;
         this.nombre = nombre;
     }
+    
+    public Cliente(String nombre, int prioridad) {
+        this.prioridad = prioridad;
+        this.nombre = nombre;
+    }
 
     public int getProyecto_id() {
         return proyecto_id;
@@ -57,10 +62,22 @@ public class Cliente implements Comparable<Cliente>{
 
 	@Override
 	public int compareTo(Cliente o) {
-	    if(this.getId() > o.getId())
-	        return 1;
-	    else if(this.getId() < o.getId())
-	        return -1;
-	    return this.getNombre().compareTo(o.getNombre());
+		Cliente cli = (Cliente)o;
+		
+		if(cli.prioridad>this.prioridad)
+			return -1;
+		else if(cli.prioridad<this.prioridad)
+			return 1;
+		else
+			return 0;
 	}
+    
+//	@Override
+//	public int compareTo(Cliente o) {
+//	    if(this.getId() > o.getId())
+//	        return 1;
+//	    else if(this.getId() < o.getId())
+//	        return -1;
+//	    return this.getNombre().compareTo(o.getNombre());
+//	}
 }
