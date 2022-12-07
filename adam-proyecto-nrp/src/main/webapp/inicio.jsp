@@ -74,7 +74,7 @@
 					<a class="btn btn-default btn-dark" href="./ServletMochila?action=mostrar_solucion_manual"
 						role="button" style="border-radius: 2rem; margin-right: 2%"">Idear
 						solución manual</a> <a class="btn btn-default btn-dark"
-						href="./ServletMochila?action=solucion_optima" role="button"
+						href="./ServletMochila?action=mostrar_solucion_optima" role="button"
 						style="border-radius: 2rem; margin-right: 2%"">Idear solución
 						automática</a>
 				</div>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ClienteDAO;
 import dao.RequisitoDAO;
+import mochila.MochilaNRP;
 
 @WebServlet("/ServletMochila")
 public class ServletMochila extends HttpServlet{
@@ -26,11 +27,14 @@ public class ServletMochila extends HttpServlet{
         String action = request.getParameter("action");
         try {
             switch (action) {
-            case "solucion_optima":
-            	solucion_optima(request, response);
+            case "mostrar_solucion_optima":
+            	mostrar_solucion_optima(request, response);
                 break;
             case "mostrar_solucion_manual":
             	mostrar_solucion_manual(request, response);
+                break;
+            case "solucion_optima":
+            	solucion_optima(request, response);
                 break;
             default:
                 break;
@@ -42,13 +46,18 @@ public class ServletMochila extends HttpServlet{
 
     }
 
+	private void solucion_optima(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		MochilaNRP mochila = new MochilaNRP(Integer.parseInt(request.getParameter("esfuerzo")));
+		request.setAttribute("solucion", mochila.solucionAutomatica());
+		getServletContext().getRequestDispatcher("/solucionAutomatica-sol.jsp").forward(request, response);
+	}
+
 	private void mostrar_solucion_manual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		request.setAttribute("requisitos", RequisitoDAO.listar());
 		getServletContext().getRequestDispatcher("/solucionManual.jsp").forward(request, response);
 	}
 
-	private void solucion_optima(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		RequisitoDAO.listar();
+	private void mostrar_solucion_optima(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		getServletContext().getRequestDispatcher("/solucionAutomatica.jsp").forward(request, response);
 	}
 

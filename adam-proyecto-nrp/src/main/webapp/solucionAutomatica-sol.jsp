@@ -1,5 +1,6 @@
 <!-- IMPORTANTE PARA UTF-8 -->
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 
@@ -68,34 +69,26 @@
 			<h2>
 				<b>Solución automática</b>
 			</h2>
-			<form id="solucion_optima-form"
-				action="ServletMochila?action=solucion_optima" method="post"
-				role="form">
-				<h4 style="margin-top: 2%">Escoja el esfuerzo máximo del equipo</h4>
-				<div class=row style="text-align: center">
-					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="text" name="esfuerzo" id="esfuerzo" tabindex="1"
-							class="form-control" placeholder="Esfuerzo" value=""
-							style="border-radius: 2rem">
-					</div>
+
+
+			<div class=row style="text-align: left; margin-left: 8%">
+				<div class=col-sm-8 style="margin: 0px auto">
+					<h2>
+						<b>Solución óptima: <%
+			String solucion = (String) request.getAttribute("solucion");
+					%> <%=solucion %>
+						</b>
+					</h2>
 				</div>
-				<div class=row style="text-align: center; margin-top: 2%">
-					<div class=col-sm-4 style="margin: 0px auto">
-						<div class=col-sm-4 style="margin: 0px auto">
-							<input type="submit" name="ejecutar" id="ejecutar" tabindex="4"
-								class="btn btn-dark" value="Ejecutar"
-								style="border-radius: 2rem">
-						</div>
-					</div>
-				</div>
-			</form>
-		</section>
-		<div class=row style="text-align: center; margin-top: 2%">
-			<div class=col-sm-4 style="margin: 0px auto">
-				<button class="btn btn-light" onclick="history.back()"
-					style="border-radius: 2rem">Volver</button>
 			</div>
-		</div>
+			<div class=row style="text-align: center; margin-top: 2%">
+				<div class=col-sm-4 style="margin: 0px auto">
+					<button class="btn btn-light" onclick="history.back()"
+						style="border-radius: 2rem">Volver</button>
+				</div>
+			</div>
+		</section>
+
 	</main>
 
 	<footer class="text-muted"
