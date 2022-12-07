@@ -36,6 +36,13 @@ public class MochilaNRP {
 		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
 	}
+	
+	public String solucionAutomatica() throws SQLException {
+		this.cargarListaRequisitos(crearArrayRequisitos());
+		this.introducirRequisitos();
+		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
+	}
 
 	/**
 	 * Metodo introducirRequisitos, introduce los requisitos en el listado resultado
@@ -110,10 +117,6 @@ public class MochilaNRP {
 		}
 		this.resultadoMochila = Arrays.copyOfRange(soa, 0, soa.length);
 		return soa; // devolvemos la solucion optima
-	}
-
-	@SuppressWarnings("unused")
-	private void retroceder(int nivel, int[] s, double pact, double bact) {
 	}
 
 	/**
