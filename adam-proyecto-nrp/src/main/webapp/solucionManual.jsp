@@ -1,5 +1,6 @@
 <!-- IMPORTANTE PARA UTF-8 -->
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 
@@ -76,6 +77,35 @@
 						style="border-radius: 2rem">
 				</div>
 			</div>
+			<div class="container-xl">
+				<div class="table"
+					style="max-width: 65%; margin-left: 17.5%; margin-top: 5%; justify-content: center">
+					<div class="table-wrapper">
+						<table class="table table-striped table-hover table-bordered">
+							<thead>
+								<tr>
+
+									<th>Nombre del requisito</th>
+									<th>Incluir en la solución</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${requisitos}" var="requisito">
+									<tr>
+										<td style="vertical-align: middle"><c:out
+												value="${requisito.nombre}" /></td>
+										<td><select id="incluido${requisito.id}"
+											name="incluido${requisito.id}" required>
+												<option value="true">Sí</option>
+												<option value="false">No</option>
+										</select></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 			<h2>
 				<b>Esfuerzo actual X / EsfuerzoMax</b>
 			</h2>
@@ -111,7 +141,11 @@
 	<script src="./js/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
-	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+	</script>
 	<script src="./js/popper.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/holder.min.js"></script>
