@@ -1,15 +1,23 @@
 package mochila;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map.Entry;
+import java.util.TreeMap;
+
+import controladores.ServletProyecto;
+import dao.*;
+import model.*;
+import model.RequisitoHasRequisito.tipo;
+import mochila.*;
 
 public class MochilaNRP {
 	private int esfuerzoMax;
 	private ArrayList<String> listadoResult;
-	private ArrayList<Requisito> requisitos; //Lista inicial de requisitos
-	private int[] resultadoMochila; //Lista indicaci�n de requisitos a escoger (RESULTADO METODO MOCHILA)
+	private ArrayList<Requisito> requisitos; // Lista inicial de requisitos
+	private int[] resultadoMochila; // Lista indicaci�n de requisitos a escoger (RESULTADO METODO MOCHILA)
 
 	public MochilaNRP(int esfuerzoMax) {
 		listadoResult = new ArrayList<String>();
@@ -17,21 +25,22 @@ public class MochilaNRP {
 		this.esfuerzoMax = esfuerzoMax;
 	}
 
-/**
- * Devuelve el listado resultado en forma de cadena una vez introducidos los requisitos
- *  obtenidos en el resultado de la mochila.
- * @return String correspondiente al listado resultados
- */
+	/**
+	 * Devuelve el listado resultado en forma de cadena una vez introducidos los
+	 * requisitos obtenidos en el resultado de la mochila.
+	 * 
+	 * @return String correspondiente al listado resultados
+	 */
 	public String obtenerRequisitosAIntroducir() {
 		this.introducirRequisitos();
 		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
 	}
-	
-/**
- * Metodo introducirRequisitos, introduce los requisitos en el listado resultado teniendo en cuenta el array de enteros
- * resultadoMochila.
- */
+
+	/**
+	 * Metodo introducirRequisitos, introduce los requisitos en el listado resultado
+	 * teniendo en cuenta el array de enteros resultadoMochila.
+	 */
 	private void introducirRequisitos() {
 
 		int[] requisitosEscogidos = this.mochilaBT();
@@ -66,7 +75,7 @@ public class MochilaNRP {
 
 		while (nivel > -1) { // mientras que no hayamos recorrido el arbol entero
 
-			//**********************************************************************************************************
+			// **********************************************************************************************************
 			// LLAMADA A GENERAR
 			s[nivel] = s[nivel] + 1;
 			if (nivel < this.requisitos.size() && s[nivel] == 1) { // actualizamos el estado del nodo (si se escoge o
@@ -76,8 +85,8 @@ public class MochilaNRP {
 																		// si el nodo
 				bact = bact + this.requisitos.get(nivel).getSatisfaccion(); // se escoge o no (con el valor de s[nivel])
 			}
-			//**********************************************************************************************************
-			
+			// **********************************************************************************************************
+
 			if (solucion(nivel, s, pact) && (bact > voa)) { // si encontramos una solucion mejor actualizamos las sol
 															// optimas actuales
 				voa = bact; // FUNCION A OPTIMIZAR
@@ -128,17 +137,18 @@ public class MochilaNRP {
 	 * 
 	 * @param nivel nivel actual del arbol de busqueda
 	 * @param pact  peso actual de la mochila
-	 * @param s 
+	 * @param s
 	 * @return bollean true si cumple las restricciones para ser una solucion
 	 */
 	private boolean criterio(int nivel, double pact, double bact, double voa, int[] s) {
-		if ((nivel < this.requisitos.size()) 	/*Si aun quedan requisitos por explorar*/ 
-				&& (pact <= this.esfuerzoMax)		/*Si no sobrepasamos el peso*/ 
-				&& bact >= voa) {					/*Si la solucion es mejor que la anterior*/ 
-							return true;					/*Evaluar que se cumplen requisitos de dependencias y exclusi�n*/
+		if ((nivel < this.requisitos.size()) /* Si aun quedan requisitos por explorar */
+				&& (pact <= this.esfuerzoMax) /* Si no sobrepasamos el peso */
+				&& bact >= voa) { /* Si la solucion es mejor que la anterior */
+			return true; /* Evaluar que se cumplen requisitos de dependencias y exclusi�n */
 		}
 		return false;
 	}
+
 	/**
 	 * 
 	 * @param nivel
@@ -148,24 +158,26 @@ public class MochilaNRP {
 	public boolean cumplimientoRelaciones(int nivel, int[] s) {
 		Requisito req = null;
 		int indiceRel = -1;
-		for(int i = 0; i<=nivel;i++) {
-			if(s[i]==1) {	//Si el requisito se encuentra en la solucion exploramos sus dependencias
+		for (int i = 0; i <= nivel; i++) {
+			if (s[i] == 1) { // Si el requisito se encuentra en la solucion exploramos sus dependencias
 				req = this.requisitos.get(i);
-				if(req.requisitoRelacion == null) continue;//Si no tiene relaciones continuamos iterando
-				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {//Si tiene relaciones comprobamos que se cumplan
-					indiceRel= reqRelacion.getKey().isCombinado==true? this.requisitos.indexOf(reqRelacion.getKey().padre)
-							: this.requisitos.indexOf(reqRelacion.getKey());														
-					if(reqRelacion.getValue()=="Dependencia") {	//RELACIONES DE DEPENDENCIA
-						if(s[indiceRel]!=1) {//El requisito del que depende o su 
-							return false;						//padre en caso de ser combinado deben de estar en la sol
+				if (req.requisitoRelacion == null)
+					continue;// Si no tiene relaciones continuamos iterando
+				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {// Si tiene relaciones
+																								// comprobamos que se
+																								// cumplan
+					indiceRel = reqRelacion.getKey().isCombinado == true
+							? this.requisitos.indexOf(reqRelacion.getKey().padre)
+							: this.requisitos.indexOf(reqRelacion.getKey());
+					if (reqRelacion.getValue() == "Dependencia") { // RELACIONES DE DEPENDENCIA
+						if (s[indiceRel] != 1) {// El requisito del que depende o su
+							return false; // padre en caso de ser combinado deben de estar en la sol
 						}
-					}
-					else if(reqRelacion.getValue()=="Exclusion") {//RELACIONES DE EXCLUSION
-						if(s[indiceRel]==1 && indiceRel<=nivel) {//El requisito que excluye o su 
-							return false;						//padre en caso de ser combinado NO deben de estar en la sol
+					} else if (reqRelacion.getValue() == "Exclusion") {// RELACIONES DE EXCLUSION
+						if (s[indiceRel] == 1 && indiceRel <= nivel) {// El requisito que excluye o su
+							return false; // padre en caso de ser combinado NO deben de estar en la sol
 						}
-					}
-					else //RELACIONES DE COMBINACION YA ESTAN COMPROBADAS
+					} else // RELACIONES DE COMBINACION YA ESTAN COMPROBADAS
 						continue;
 				}
 			}
@@ -184,9 +196,10 @@ public class MochilaNRP {
 	 */
 	private boolean solucion(int nivel, int[] s, double pact) {
 		if ((nivel == requisitos.size()) && (pact <= this.esfuerzoMax))
-			return true;//cumplimientoRelaciones(nivel,s);// comprobamos si cumple los requisitos para ser una solucion
+			return true;// cumplimientoRelaciones(nivel,s);// comprobamos si cumple los requisitos para
+						// ser una solucion
 		return false;
-																				
+
 	}
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -212,6 +225,49 @@ public class MochilaNRP {
 		}
 		Collections.sort(this.requisitos);
 		Collections.reverse(this.requisitos);
+	}
+
+	public ArrayList<mochila.Requisito> crearArrayRequisitos() throws SQLException {
+
+		ArrayList<mochila.Requisito> requisitosAdaptados = new ArrayList<mochila.Requisito>();
+
+		TreeMap<Cliente, Integer> cliValor = new TreeMap<Cliente, Integer>();
+
+		for (model.Requisito r : RequisitoDAO.listar()) {
+			cliValor.clear();
+			for (Cliente c : ClienteDAO.listar()) {
+				ClienteHasRequisito chr = ClienteHasRequisitoDAO.obtenerPorID(c.getId(), r.getId());
+				if (chr == null)
+					cliValor.put(c, 0);
+				else
+					cliValor.put(c, chr.getValor());
+			}
+
+			requisitosAdaptados.add(new Requisito(r.getNombre(), r.getEsfuerzo(), cliValor));
+		}
+
+		for (Requisito rAniadir : requisitosAdaptados) {
+			int idActual = RequisitoDAO.obtenerPorNombre(rAniadir.nombre).getId();
+			for (Requisito r : requisitosAdaptados) {
+				if (rAniadir.equals(r))
+					continue;
+				RequisitoHasRequisito rrel = RequisitoHasRequisitoDAO.obtenerPorID(idActual,
+						RequisitoDAO.obtenerPorNombre(r.nombre).getId());
+
+				if (rrel != null) {
+					if (rrel.getTipo() == tipo.combinacion) {
+						rAniadir.aniadirRelacion(r, "Combinacion");
+					} else if (rrel.getTipo() == tipo.exclusion) {
+						rAniadir.aniadirRelacion(r, "Exclusion");
+					} else {
+						if (rrel.getRequisito_id() == idActual)
+							rAniadir.aniadirRelacion(r, "Dependencia");
+					}
+				}
+			}
+		}
+
+		return requisitosAdaptados;
 	}
 
 	public ArrayList<Requisito> getRequisitos() {

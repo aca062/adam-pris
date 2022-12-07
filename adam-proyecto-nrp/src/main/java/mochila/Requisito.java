@@ -2,6 +2,7 @@ package mochila;
 
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import model.Cliente;
 
 public class Requisito implements Comparable<Object> {
 	protected String nombre;

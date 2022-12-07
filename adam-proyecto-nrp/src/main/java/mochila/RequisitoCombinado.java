@@ -3,6 +3,7 @@ package mochila;
 import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.Map.Entry;
+import model.Cliente;
 
 public class RequisitoCombinado extends Requisito {
 	public ArrayList<Requisito> combinados = new ArrayList<Requisito>();
