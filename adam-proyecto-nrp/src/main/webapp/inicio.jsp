@@ -71,10 +71,10 @@
 					<h4>Ejecute para obtener una solución</h4>
 				</div>
 				<div class="col-sm-12 col-xs-12" style="margin-bottom: 50px">
-					<a class="btn btn-default btn-dark" href="solucionManual.jsp"
+					<a class="btn btn-default btn-dark" href="./ServletMochila?action=mostrar_solucion_manual"
 						role="button" style="border-radius: 2rem; margin-right: 2%"">Idear
 						solución manual</a> <a class="btn btn-default btn-dark"
-						href="solucionAutomatica.jsp" role="button"
+						href="./ServletMochila?action=solucion_optima" role="button"
 						style="border-radius: 2rem; margin-right: 2%"">Idear solución
 						automática</a>
 				</div>
