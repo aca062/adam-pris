@@ -13,6 +13,7 @@ public class RequisitoCombinado extends Requisito {
 	}
 
 	public RequisitoCombinado(String nombre) {
+		this.isCombinado=true;
 		this.nombre = nombre;
 		this.esfuerzo = 0;
 		this.satisfaccion = 0;
