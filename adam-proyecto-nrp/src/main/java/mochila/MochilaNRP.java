@@ -15,12 +15,12 @@ import mochila.*;
 
 public class MochilaNRP {
 	private int esfuerzoMax;
-	private ArrayList<String> listadoResult;
+	private ArrayList<Requisito> listadoResult;
 	private ArrayList<Requisito> requisitos; // Lista inicial de requisitos
 	private int[] resultadoMochila; // Lista indicaci�n de requisitos a escoger (RESULTADO METODO MOCHILA)
 
 	public MochilaNRP(int esfuerzoMax) {
-		listadoResult = new ArrayList<String>();
+		listadoResult = new ArrayList<Requisito>();
 		requisitos = new ArrayList<Requisito>();
 		this.esfuerzoMax = esfuerzoMax;
 	}
@@ -36,12 +36,57 @@ public class MochilaNRP {
 		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
 	}
-	
+
 	public String solucionAutomatica() throws SQLException {
 		this.cargarListaRequisitos(crearArrayRequisitos());
 		this.introducirRequisitos();
 		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
-		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
+		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
+				+ "\n Las métricas del software correspondientes al sprint son : \n"
+				+ "Productividad de la solución : \n" + calculoProductividad() 
+				+ "Contribución de la solución : \n" + calculoContribucion() 
+				+ "Cobertura de la solución : \n" + calculoCobertura();
+
+	}
+
+	private String calculoCobertura() {
+		String cobClientes = "";
+		double valSol = 0;
+		double valTot = 0;
+		for (Cliente c : listadoResult.get(0).clientesValoracion.navigableKeySet()) {
+			for (Requisito r : requisitos) {
+				valTot += r.clientesValoracion.get(c);
+				
+				if(listadoResult.contains(r)) {
+					valSol+=r.clientesValoracion.get(c);
+				}
+			}
+			cobClientes += c.getNombre() + ": " + String.format("%.2f", valSol/valTot) + "\n";
+			valSol = 0;
+			valTot = 0;
+		}
+		return cobClientes;
+	}
+
+	private String calculoContribucion() {
+		String contrClientes = "";
+		double contr = 0;
+		for (Cliente c : listadoResult.get(0).clientesValoracion.navigableKeySet()) {
+			for (Requisito r : listadoResult) {
+				contr += r.calcContrib(c);
+			}
+			contrClientes += c.getNombre() + ": " + String.format("%.2f", contr) + "\n";
+			contr = 0;
+		}
+		return contrClientes;
+	}
+
+	private String calculoProductividad() {
+		double prod = 0;
+		for (Requisito r : listadoResult) {
+			prod += r.calcProduct();
+		}
+		return String.format("%.2f", prod) + "\n";
 	}
 
 	/**
@@ -55,7 +100,7 @@ public class MochilaNRP {
 		for (int i = 0; i < requisitosEscogidos.length; i++) { // recorremos la solucion optima indicada por el metodo
 																// mochila
 			if (requisitosEscogidos[i] == 1) { // anadimos los indicados al listado resultado
-				this.listadoResult.add(this.requisitos.get(i).getNombre());
+				this.listadoResult.add(this.requisitos.get(i));
 			}
 		}
 	}
