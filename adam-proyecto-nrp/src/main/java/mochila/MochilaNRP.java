@@ -41,37 +41,38 @@ public class MochilaNRP {
 		this.cargarListaRequisitos(crearArrayRequisitos());
 		this.introducirRequisitos();
 		this.tratarRequisitosResultado();
-		
-		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
-		if(listadoResult.isEmpty()) {
-			return "No se puede llevar a cabo ningún requisito en este sprint";
-		}
-		else {
-			return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
-			+ "\n Las métricas del software correspondientes al sprint son : \n"
-			+ "Productividad de la solución : \n" + calculoProductividad() 
-			+ "Contribución de la solución : \n" + calculoContribucion() 
-			+ "Cobertura de la solución : \n" + calculoCobertura();
-		}
 
+		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+
+		if (listadoResult.isEmpty()) {
+			return "No se puede llevar a cabo ningún requisito en este sprint";
+		} else {
+			return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
+					+ "\n Las métricas del software correspondientes al sprint son : \n"
+					+ "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
+					+ calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
+		}
 
 	}
+
 	/**
-	 * Método tratarRequisitosResultado, trata los requisitos para que tengan un formato
-	 * correcto al obtener las métricas del software
+	 * Método tratarRequisitosResultado, trata los requisitos para que tengan un
+	 * formato correcto al obtener las métricas del software, divide los requisitos
+	 * combinados en requisitos normales una vez obtenida la solucion
 	 */
 	private void tratarRequisitosResultado() {
-		for(Requisito r : listadoResult) {
-			if(r.isCombinado) {
-				for( Entry<Requisito,String> relacionesCombinado :
-					r.getRequisitoRelacion().entrySet()) {
-					if(relacionesCombinado.getValue() == "Combinacion") {
+		for (int i = 0; i < listadoResult.size(); i++) {
+			if (listadoResult.get(i) instanceof RequisitoCombinado) {
+				for (Entry<Requisito, String> relacionesCombinado :
+					listadoResult.get(i).getRequisitoRelacion().entrySet()) {
+					if (relacionesCombinado.getValue() == "Combinacion") {
 						listadoResult.add(relacionesCombinado.getKey());
 					}
 				}
-			listadoResult.remove(r);}
+				listadoResult.remove(i);
+			}
 		}
-		
+
 	}
 
 	private String calculoCobertura() {
@@ -81,12 +82,12 @@ public class MochilaNRP {
 		for (Cliente c : listadoResult.get(0).clientesValoracion.navigableKeySet()) {
 			for (Requisito r : requisitos) {
 				valTot += r.clientesValoracion.get(c);
-				
-				if(listadoResult.contains(r)) {
-					valSol+=r.clientesValoracion.get(c);
+
+				if (listadoResult.contains(r)) {
+					valSol += r.clientesValoracion.get(c);
 				}
 			}
-			cobClientes += c.getNombre() + ": " + String.format("%.2f", valSol/valTot) + "\n";
+			cobClientes += c.getNombre() + ": " + String.format("%.2f", valSol / valTot) + "\n";
 			valSol = 0;
 			valTot = 0;
 		}
@@ -269,8 +270,8 @@ public class MochilaNRP {
 	 */
 	private boolean solucion(int nivel, int[] s, double pact) {
 		if ((nivel == requisitos.size()) && (pact <= this.esfuerzoMax))
-			return cumplimientoRelaciones(nivel,s);// comprobamos si cumple los requisitos para
-						// ser una solucion
+			return cumplimientoRelaciones(nivel, s);// comprobamos si cumple los requisitos para
+		// ser una solucion
 		return false;
 
 	}
