@@ -16,7 +16,8 @@ import mochila.*;
 public class MochilaNRP {
 	private int esfuerzoMax;
 	private ArrayList<Requisito> listadoResult;
-	private ArrayList<Requisito> requisitos; // Lista inicial de requisitos
+	private ArrayList<Requisito> requisitos;
+	private ArrayList<Requisito> requisitosInciales = new ArrayList<Requisito>(); // Lista inicial de requisitos
 	private int[] resultadoMochila; // Lista indicaci�n de requisitos a escoger (RESULTADO METODO MOCHILA)
 
 	public MochilaNRP(int esfuerzoMax) {
@@ -72,6 +73,7 @@ public class MochilaNRP {
 				listadoResult.remove(i);
 			}
 		}
+		System.out.println(listadoResult.toString());
 
 	}
 
@@ -80,7 +82,7 @@ public class MochilaNRP {
 		double valSol = 0;
 		double valTot = 0;
 		for (Cliente c : listadoResult.get(0).clientesValoracion.navigableKeySet()) {
-			for (Requisito r : requisitos) {
+			for (Requisito r : requisitosInciales) {
 				valTot += r.clientesValoracion.get(c);
 
 				if (listadoResult.contains(r)) {
@@ -278,6 +280,7 @@ public class MochilaNRP {
 
 	// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	public void cargarListaRequisitos(ArrayList<Requisito> listaAniadir) {
+		this.requisitosInciales.addAll(listaAniadir);
 		this.requisitos.clear();
 		for (int i = 0; i < listaAniadir.size(); i++) {
 			if (listaAniadir.get(i).requisitoRelacion == null
