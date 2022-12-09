@@ -115,12 +115,31 @@ class testMochila {
 		//Arrange
 		ArrayList<Requisito> requisitos = new ArrayList<Requisito>();
 		req2.aniadirRelacion(req5, "Dependencia");
+		req2.setSatisfaccion(30);
+		req5.setSatisfaccion(31);
 		requisitos.add(req2);
 		requisitos.add(req5);
-		MochilaNRP mochila = new MochilaNRP(8);
+		MochilaNRP mochila = new MochilaNRP(2);
 		mochila.cargarListaRequisitos(requisitos);
 		
-		assertEquals("Los requisitos escogidos para el sprint son : [R2, R5]",mochila.obtenerRequisitosAIntroducir());
+		assertEquals("Los requisitos escogidos para el sprint son : []",mochila.obtenerRequisitosAIntroducir());
+	}
+	
+	@Test
+	void testRequisitosExcluyentes() {
+		//Arrange
+		ArrayList<Requisito> requisitos = new ArrayList<Requisito>();
+		req1.setEsfuerzo(20);
+		req2.setEsfuerzo(4);
+		req1.aniadirRelacion(req2, "Exclusion");
+		req2.aniadirRelacion(req1, "Exclusion");
+
+		requisitos.add(req1);
+		requisitos.add(req2);
+		MochilaNRP mochila = new MochilaNRP(25);
+		mochila.cargarListaRequisitos(requisitos);
+		
+		assertEquals("Los requisitos escogidos para el sprint son : [R1]",mochila.obtenerRequisitosAIntroducir());
 	}
 
 }

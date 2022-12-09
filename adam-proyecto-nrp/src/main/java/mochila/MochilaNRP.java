@@ -206,7 +206,7 @@ public class MochilaNRP {
 	public boolean cumplimientoRelaciones(int nivel, int[] s) {
 		Requisito req = null;
 		int indiceRel = -1;
-		for (int i = 0; i <= nivel; i++) {
+		for (int i = 0; i < nivel; i++) {
 			if (s[i] == 1) { // Si el requisito se encuentra en la solucion exploramos sus dependencias
 				req = this.requisitos.get(i);
 				if (req.requisitoRelacion == null)
@@ -244,7 +244,7 @@ public class MochilaNRP {
 	 */
 	private boolean solucion(int nivel, int[] s, double pact) {
 		if ((nivel == requisitos.size()) && (pact <= this.esfuerzoMax))
-			return true;// cumplimientoRelaciones(nivel,s);// comprobamos si cumple los requisitos para
+			return cumplimientoRelaciones(nivel,s);// comprobamos si cumple los requisitos para
 						// ser una solucion
 		return false;
 

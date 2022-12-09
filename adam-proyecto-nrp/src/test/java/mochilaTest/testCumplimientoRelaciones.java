@@ -75,8 +75,8 @@ class testCumplimientoRelaciones {
 		mochila.cargarListaRequisitos(requisitos);
 
 		// Assert
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 1 }));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0 }));
+		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1 }));
+		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 0 }));
 	}
 
 	@Test
@@ -92,9 +92,9 @@ class testCumplimientoRelaciones {
 		mochila.cargarListaRequisitos(requisitos);
 
 		// Assert
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1, 1 }));
-		assertEquals(false, mochila.cumplimientoRelaciones(1, new int[] { 0, 1 }));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 1, 1 }));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 1, 1 }));
+		assertEquals(false, mochila.cumplimientoRelaciones(2, new int[] { 0, 1 }));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 1, 1 }));
 
 	}
 	
@@ -112,12 +112,11 @@ class testCumplimientoRelaciones {
 		mochila.cargarListaRequisitos(requisitos);
 
 		// Assert
-		assertEquals(false, mochila.cumplimientoRelaciones(1, new int[] { 1, 1 }));
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 0, 1 }));
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1, 0 }));
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 0, 0 }));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 1, 1 }));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 1 }));
+		assertEquals(false, mochila.cumplimientoRelaciones(2, new int[] { 1, 1 }));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 0, 1 }));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 1, 0 }));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 0, 0 }));
+		assertEquals(false, mochila.cumplimientoRelaciones(2, new int[] { 1, 1 }));
 	}
 	
 	@Test
@@ -134,8 +133,8 @@ class testCumplimientoRelaciones {
 		mochila.cargarListaRequisitos(requisitos);
 
 		// Assert
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 1}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0}));
+		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1}));
+		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 0}));
 	}
 	
 	@Test
@@ -154,13 +153,9 @@ class testCumplimientoRelaciones {
 		mochila.cargarListaRequisitos(requisitos);
 
 		// Assert
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 0}));
-		assertEquals(false, mochila.cumplimientoRelaciones(0, new int[] { 1, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 1}));
-
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 0, 1}));
-		assertEquals(false, mochila.cumplimientoRelaciones(1, new int[] { 1, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1, 1}));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 0, 1}));
+		assertEquals(false, mochila.cumplimientoRelaciones(2, new int[] { 1, 0}));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 1, 1}));
 	}
 	
 	@Test
@@ -180,15 +175,9 @@ class testCumplimientoRelaciones {
 		mochila.cargarListaRequisitos(requisitos);
 
 		// Assert
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 1, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 1}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 1, 1}));
-
-
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 0, 1}));
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1, 0}));
-		assertEquals(false, mochila.cumplimientoRelaciones(1, new int[] { 1, 1}));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 0, 1}));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 1, 0}));
+		assertEquals(false, mochila.cumplimientoRelaciones(2, new int[] { 1, 1}));
 	}
 	
 	@Test
@@ -211,13 +200,9 @@ class testCumplimientoRelaciones {
 		mochila.cargarListaRequisitos(requisitos);
 
 		// Assert
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 1, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 1}));
-
-		assertEquals(false, mochila.cumplimientoRelaciones(1, new int[] { 0, 1}));
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1, 1}));
+		assertEquals(false, mochila.cumplimientoRelaciones(2, new int[] { 0, 1}));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 1, 0}));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 1, 1}));
 	}
 	
 	@Test
@@ -240,12 +225,8 @@ class testCumplimientoRelaciones {
 		mochila.cargarListaRequisitos(requisitos);
 
 		// Assert
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 1, 0}));
-		assertEquals(true, mochila.cumplimientoRelaciones(0, new int[] { 0, 1}));
-
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 0, 1}));
-		assertEquals(true, mochila.cumplimientoRelaciones(1, new int[] { 1, 0}));
-		assertEquals(false, mochila.cumplimientoRelaciones(1, new int[] { 1, 1}));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 0, 1}));
+		assertEquals(true, mochila.cumplimientoRelaciones(2, new int[] { 1, 0}));
+		assertEquals(false, mochila.cumplimientoRelaciones(2, new int[] { 1, 1}));
 	}
 }
