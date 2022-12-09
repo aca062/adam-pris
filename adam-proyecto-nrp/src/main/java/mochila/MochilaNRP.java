@@ -41,11 +41,17 @@ public class MochilaNRP {
 		this.cargarListaRequisitos(crearArrayRequisitos());
 		this.introducirRequisitos();
 		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
-		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
-				+ "\n Las métricas del software correspondientes al sprint son : \n"
-				+ "Productividad de la solución : \n" + calculoProductividad() 
-				+ "Contribución de la solución : \n" + calculoContribucion() 
-				+ "Cobertura de la solución : \n" + calculoCobertura();
+		if(listadoResult.isEmpty()) {
+			return "No se puede llevar a cabo ningún requisito en este sprint";
+		}
+		else {
+			return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
+			+ "\n Las métricas del software correspondientes al sprint son : \n"
+			+ "Productividad de la solución : \n" + calculoProductividad() 
+			+ "Contribución de la solución : \n" + calculoContribucion() 
+			+ "Cobertura de la solución : \n" + calculoCobertura();
+		}
+
 
 	}
 
