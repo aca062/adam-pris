@@ -39,21 +39,34 @@ public class MochilaNRP {
 	}
 
 	public String solucionAutomatica() throws SQLException {
+		ArrayList<Requisito> requisitosBorrar = new ArrayList<Requisito>();
 		this.cargarListaRequisitos(crearArrayRequisitos());
-		this.introducirRequisitos();
-		this.tratarRequisitosResultado();
-
-		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
-
-		if (listadoResult.isEmpty()) {
-			return "No se puede llevar a cabo ningún requisito en este sprint";
-		} else {
-			return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
-					+ "\n Las métricas del software correspondientes al sprint son : \n"
-					+ "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
-					+ calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
+		
+		int sprint=1;
+		String resultado = "";
+		
+		while (!requisitos.isEmpty()) {
+			this.introducirRequisitos();
+			requisitosBorrar.addAll(listadoResult);
+			
+			//Obtencion cadena resultado
+			this.tratarRequisitosResultado();
+			Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+			if (listadoResult.isEmpty()) {
+				resultado+= "\n No se puede llevar a cabo ningún requisito en el sprint "+ sprint +", los requisitos restantes son " + requisitos.toString();
+				break;
+			} else {
+				resultado+= "\n Los requisitos escogidos para el sprint "+sprint+" son : " + listadoResult.toString()
+						+ "\n Las métricas del software correspondientes al sprint son : \n"
+						+ "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
+						+ calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
+			}
+			
+			requisitos.removeAll(requisitosBorrar);
+			listadoResult.clear();
+			requisitosBorrar.clear();
 		}
-
+		return resultado;
 	}
 
 	/**
@@ -240,8 +253,10 @@ public class MochilaNRP {
 				if (req.requisitoRelacion == null)
 					continue;// Si no tiene relaciones continuamos iterando
 				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {// Si tiene relaciones
-																								// comprobamos que se
-																								// cumplan
+																								// comprobamos que se cumplan
+					//Comprobación si req ya fueron aniadidos*/
+					if(!requisitos.contains(reqRelacion.getKey()))
+						continue;
 					indiceRel = reqRelacion.getKey().isCombinado == true
 							? this.requisitos.indexOf(reqRelacion.getKey().padre)
 							: this.requisitos.indexOf(reqRelacion.getKey());
