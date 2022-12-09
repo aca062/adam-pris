@@ -40,6 +40,8 @@ public class MochilaNRP {
 	public String solucionAutomatica() throws SQLException {
 		this.cargarListaRequisitos(crearArrayRequisitos());
 		this.introducirRequisitos();
+		this.tratarRequisitosResultado();
+		
 		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 		if(listadoResult.isEmpty()) {
 			return "No se puede llevar a cabo ningún requisito en este sprint";
@@ -53,6 +55,23 @@ public class MochilaNRP {
 		}
 
 
+	}
+	/**
+	 * Método tratarRequisitosResultado, trata los requisitos para que tengan un formato
+	 * correcto al obtener las métricas del software
+	 */
+	private void tratarRequisitosResultado() {
+		for(Requisito r : listadoResult) {
+			if(r.isCombinado) {
+				for( Entry<Requisito,String> relacionesCombinado :
+					r.getRequisitoRelacion().entrySet()) {
+					if(relacionesCombinado.getValue() == "Combinacion") {
+						listadoResult.add(relacionesCombinado.getKey());
+					}
+				}
+			listadoResult.remove(r);}
+		}
+		
 	}
 
 	private String calculoCobertura() {
