@@ -39,6 +39,24 @@ public class MochilaNRP {
 	}
 
 	public String solucionAutomatica() throws SQLException {
+        this.cargarListaRequisitos(crearArrayRequisitos());
+        this.introducirRequisitos();
+        this.tratarRequisitosResultado();
+
+        Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+
+        if (listadoResult.isEmpty()) {
+            return "No se puede llevar a cabo ningún requisito en este sprint";
+        } else {
+            return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
+                    + "\n Las métricas del software correspondientes al sprint son : \n"
+                    + "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
+                    + calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
+        }
+
+    }
+	
+	public String solucionAutomaticaCiclica() throws SQLException {
 		ArrayList<Requisito> requisitosBorrar = new ArrayList<Requisito>();
 		this.cargarListaRequisitos(crearArrayRequisitos());
 		
@@ -65,6 +83,7 @@ public class MochilaNRP {
 			requisitos.removeAll(requisitosBorrar);
 			listadoResult.clear();
 			requisitosBorrar.clear();
+			sprint++;
 		}
 		return resultado;
 	}
@@ -255,8 +274,8 @@ public class MochilaNRP {
 				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {// Si tiene relaciones
 																								// comprobamos que se cumplan
 					//Comprobación si req ya fueron aniadidos*/
-					if(!requisitos.contains(reqRelacion.getKey()))
-						continue;
+					//if(!requisitos.contains(reqRelacion.getKey()))
+						//continue;
 					indiceRel = reqRelacion.getKey().isCombinado == true
 							? this.requisitos.indexOf(reqRelacion.getKey().padre)
 							: this.requisitos.indexOf(reqRelacion.getKey());
