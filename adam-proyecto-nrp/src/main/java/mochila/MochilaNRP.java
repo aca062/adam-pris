@@ -38,10 +38,13 @@ public class MochilaNRP {
 		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
 	}
 
-	public String solucionAutomatica() throws SQLException {
+	public String solucionAutomaticaIndividual() throws SQLException {
         this.cargarListaRequisitos(crearArrayRequisitos());
+        System.out.println(requisitos.toString());
         this.introducirRequisitos();
-        this.tratarRequisitosResultado();
+        System.out.println(listadoResult.toString());
+        
+        //this.tratarRequisitosResultado();
 
         Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 
@@ -56,7 +59,7 @@ public class MochilaNRP {
 
     }
 	
-	public String solucionAutomaticaCiclica() throws SQLException {
+	public String solucionAutomatica() throws SQLException {
 		ArrayList<Requisito> requisitosBorrar = new ArrayList<Requisito>();
 		this.cargarListaRequisitos(crearArrayRequisitos());
 		
@@ -251,7 +254,7 @@ public class MochilaNRP {
 	private boolean criterio(int nivel, double pact, double bact, double voa, int[] s) {
 		if ((nivel < this.requisitos.size()) /* Si aun quedan requisitos por explorar */
 				&& (pact <= this.esfuerzoMax) /* Si no sobrepasamos el peso */
-				&& bact >= voa) { /* Si la solucion es mejor que la anterior */
+				/*&& bact >= voa*/) { /* Si la solucion es mejor que la anterior */
 			return true; /* Evaluar que se cumplen requisitos de dependencias y exclusi�n */
 		}
 		return false;
@@ -274,8 +277,8 @@ public class MochilaNRP {
 				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {// Si tiene relaciones
 																								// comprobamos que se cumplan
 					//Comprobación si req ya fueron aniadidos*/
-					//if(!requisitos.contains(reqRelacion.getKey()))
-						//continue;
+					if(!requisitos.contains(reqRelacion.getKey()))
+						continue;
 					indiceRel = reqRelacion.getKey().isCombinado == true
 							? this.requisitos.indexOf(reqRelacion.getKey().padre)
 							: this.requisitos.indexOf(reqRelacion.getKey());

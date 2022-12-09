@@ -141,5 +141,18 @@ class testMochila {
 		
 		assertEquals("Los requisitos escogidos para el sprint son : [R1]",mochila.obtenerRequisitosAIntroducir());
 	}
+	
+	@Test
+	void test3req() {
+        //Arrange
+        ArrayList<Requisito> requisitos = new ArrayList<Requisito>();
+        requisitos.add(req1);
+        requisitos.add(req2);
+        requisitos.add(req3);
+        MochilaNRP mochila = new MochilaNRP(25);
+        mochila.cargarListaRequisitos(requisitos);
+
+        assertEquals("Los requisitos escogidos para el sprint son : [R1, R2, R3]",mochila.obtenerRequisitosAIntroducir());
+    }
 
 }
