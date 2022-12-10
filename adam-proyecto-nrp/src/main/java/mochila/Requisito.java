@@ -114,7 +114,7 @@ public class Requisito implements Comparable<Object> {
 		else if(req.satisfaccion<this.satisfaccion)
 			return 1;
 		else
-			return 0;
+			return this.getNombre().compareTo(req.getNombre());
 	}
 	
 	public boolean equals(Object o) {

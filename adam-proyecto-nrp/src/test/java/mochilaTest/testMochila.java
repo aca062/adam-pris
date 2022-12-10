@@ -154,5 +154,26 @@ class testMochila {
 
         assertEquals("Los requisitos escogidos para el sprint son : [R1, R2, R3]",mochila.obtenerRequisitosAIntroducir());
     }
+	
+	@Test
+	void test4reqConCombinado() {
+        //Arrange
+        ArrayList<Requisito> requisitos = new ArrayList<Requisito>();
+        req1.aniadirRelacion(req2, "Combinacion");
+        req2.aniadirRelacion(req1, "Combinacion");
+        req3.aniadirRelacion(req2, "Dependencia");
+        req4.aniadirRelacion(req1, "Exclusion");
+        req1.aniadirRelacion(req4, "Exclusion");
+        req4.setEsfuerzo(1);
+        requisitos.add(req1);
+        requisitos.add(req2);
+        requisitos.add(req3);
+        requisitos.add(req4);
+        MochilaNRP mochila = new MochilaNRP(4);
+        mochila.cargarListaRequisitos(requisitos);
+        mochila.obtenerRequisitosAIntroducir();
+        mochila.tratarRequisitosResultado();
+        assertEquals("Los requisitos escogidos para el sprint son : [R1, R2, R3, R4]",mochila.listadoResult.toString());
+    }
 
 }

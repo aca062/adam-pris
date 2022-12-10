@@ -15,7 +15,7 @@ import mochila.*;
 
 public class MochilaNRP {
 	private int esfuerzoMax;
-	private ArrayList<Requisito> listadoResult;
+	public ArrayList<Requisito> listadoResult;
 	private ArrayList<Requisito> requisitos;
 	private ArrayList<Requisito> requisitosInciales = new ArrayList<Requisito>(); // Lista inicial de requisitos
 	private int[] resultadoMochila; // Lista indicaci�n de requisitos a escoger (RESULTADO METODO MOCHILA)
@@ -40,10 +40,8 @@ public class MochilaNRP {
 
 	public String solucionAutomaticaIndividual() throws SQLException {
         this.cargarListaRequisitos(crearArrayRequisitos());
-        System.out.println(requisitos.toString());
         this.introducirRequisitos();
-        System.out.println(listadoResult.toString());
-        
+
         //this.tratarRequisitosResultado();
 
         Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
@@ -65,6 +63,10 @@ public class MochilaNRP {
 		
 		int sprint=1;
 		String resultado = "";
+		
+		if(requisitos == null){
+			return "\n Se han encontrado relaciones incompatibles (Combinacion y exlcusion simultaneas). Defina bien las relaciones e intentelo de nuevo.";
+		}
 		
 		while (!requisitos.isEmpty()) {
 			this.introducirRequisitos();
@@ -96,19 +98,19 @@ public class MochilaNRP {
 	 * formato correcto al obtener las métricas del software, divide los requisitos
 	 * combinados en requisitos normales una vez obtenida la solucion
 	 */
-	private void tratarRequisitosResultado() {
+	public void tratarRequisitosResultado() {
+		System.out.println("Listado result antes de tratar bb: " + listadoResult.toString());
 		for (int i = 0; i < listadoResult.size(); i++) {
 			if (listadoResult.get(i) instanceof RequisitoCombinado) {
-				for (Entry<Requisito, String> relacionesCombinado :
-					listadoResult.get(i).getRequisitoRelacion().entrySet()) {
-					if (relacionesCombinado.getValue() == "Combinacion") {
-						listadoResult.add(relacionesCombinado.getKey());
-					}
+				RequisitoCombinado rc = (RequisitoCombinado)listadoResult.get(i);
+				System.out.println("Req del combinado: " + rc.combinados.toString());
+				for(Requisito reqComb : rc.combinados) {
+					listadoResult.add(reqComb);
 				}
 				listadoResult.remove(i);
 			}
 		}
-		System.out.println(listadoResult.toString());
+		System.out.println("Listado result despues de tratar: " + listadoResult.toString());
 
 	}
 
@@ -277,7 +279,7 @@ public class MochilaNRP {
 				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {// Si tiene relaciones
 																								// comprobamos que se cumplan
 					//Comprobación si req ya fueron aniadidos*/
-					if(!requisitos.contains(reqRelacion.getKey()))
+					if(!requisitos.contains(reqRelacion.getKey()) && !requisitos.contains(reqRelacion.getKey().padre))
 						continue;
 					indiceRel = reqRelacion.getKey().isCombinado == true
 							? this.requisitos.indexOf(reqRelacion.getKey().padre)
@@ -331,6 +333,10 @@ public class MochilaNRP {
 																		// aniadidos al RC
 				rc.aniadirCombinados(listaAniadir.get(i));
 				for (Requisito reqCombinados : rc.combinados) {
+					if(rc.requisitoRelacion.get(reqCombinados)=="Exclusion") {
+						requisitos = null;
+						return;
+					}
 					listaAniadir.remove(reqCombinados);
 				}
 				this.requisitos.add(rc); // Aniadimos el rc
@@ -371,8 +377,10 @@ public class MochilaNRP {
 				if (rrel != null) {
 					if (rrel.getTipo() == tipo.combinacion) {
 						rAniadir.aniadirRelacion(r, "Combinacion");
+						r.aniadirRelacion(rAniadir, "Combinacion");
 					} else if (rrel.getTipo() == tipo.exclusion) {
 						rAniadir.aniadirRelacion(r, "Exclusion");
+						r.aniadirRelacion(rAniadir, "Exclusion");
 					} else {
 						if (rrel.getRequisito_id() == idActual)
 							rAniadir.aniadirRelacion(r, "Dependencia");

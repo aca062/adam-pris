@@ -22,19 +22,19 @@ public class RequisitoCombinado extends Requisito {
 
 	public void aniadirCombinados(Requisito req) {
 		req.padre = this;
-		this.combinados.add(req);
-		
-		this.esfuerzo += req.esfuerzo;
-		this.satisfaccion += req.satisfaccion;
-		this.nombre += " " + req.getNombre();
+		if(!this.combinados.contains(req)) {
+			this.combinados.add(req);
+			
+			this.esfuerzo += req.esfuerzo;
+			this.satisfaccion += req.satisfaccion;
+			this.nombre += " " + req.getNombre();
 
-		for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {
-			if (reqRelacion.getValue() == "Combinacion" && !this.combinados.contains(reqRelacion.getKey()))
-				this.aniadirCombinados(reqRelacion.getKey());
+			for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {
+				if (reqRelacion.getValue() == "Combinacion" && !this.combinados.contains(reqRelacion.getKey()))
+					this.aniadirCombinados(reqRelacion.getKey());
+			}
+			this.requisitoRelacion.putAll(req.requisitoRelacion); // OJO ANIADE LA RELACION DE COMBINACION
 		}
-		this.requisitoRelacion.putAll(req.requisitoRelacion); // OJO ANIADE LA RELACION DE COMBINACION
-
-
 	}
 
 	public ArrayList<Requisito> getCombinados() {
