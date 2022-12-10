@@ -37,6 +37,24 @@ public class MochilaNRP {
 		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
 	}
+	
+	public String solucionManual(ArrayList<String> requisitos) throws SQLException {
+        this.cargarListaRequisitos(crearArrayRequisitos()); //obtenemos todos los requisitos de la BD
+        this.introducirRequisitos(); //pasamos el array y se lo introducimos a un metodo mochila manual?
+
+        //this.tratarRequisitosResultado();
+
+        Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+
+        if (listadoResult.isEmpty()) {
+            return "No se puede llevar a cabo ningún requisito en este sprint";
+        } else {
+            return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
+                    + "\n Las métricas del software correspondientes al sprint son : \n"
+                    + "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
+                    + calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
+        }
+    }
 
 	public String solucionAutomaticaIndividual() throws SQLException {
         this.cargarListaRequisitos(crearArrayRequisitos());
