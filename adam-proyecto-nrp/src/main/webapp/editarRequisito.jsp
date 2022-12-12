@@ -135,7 +135,7 @@
 													value="${entry.key.nombre}" /></td>
 											<td style="vertical-align: middle"><c:out
 													value="${entry.key.prioridad}" /></td>
-											<td><input type="number" min="0" step="1" pattern="\d*"
+											<td><input type="number" min="1" step="1" pattern="\d*"
 												name="valor${entry.key.id}" id="valor${entry.key.id}"
 												tabindex="2" class="form-control" placeholder="Valor"
 												value="${entry.value}" style="border-radius: 2rem" required></td>

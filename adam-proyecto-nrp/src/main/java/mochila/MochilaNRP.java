@@ -97,10 +97,11 @@ public class MochilaNRP {
 				resultado+= "\n No se puede llevar a cabo ningún requisito en el sprint "+ sprint +", los requisitos restantes son " + requisitos.toString();
 				break;
 			} else {
-				resultado+= "\n Los requisitos escogidos para el sprint "+sprint+" son : " + listadoResult.toString()
-						+ "\n Las métricas del software correspondientes al sprint son : \n"
-						+ "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
-						+ calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
+				resultado+= "\n<h3>Sprint "+sprint+": " + listadoResult.toString() + "</h3><br/>"
+						+ "<h4>Las métricas del software correspondientes al sprint son: </h4><br/>"
+						+ "<b>Productividad de la solución : " + calculoProductividad() + "</b><br/>"
+								+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
+										+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>";
 			}
 			
 			requisitos.removeAll(requisitosBorrar);

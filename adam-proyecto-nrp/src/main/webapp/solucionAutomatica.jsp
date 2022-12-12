@@ -99,7 +99,7 @@
 	</main>
 
 	<footer class="text-muted"
-		style="background: black; position: fixed; bottom: 0; width: 100%">
+		style="background: black; position: relative; bottom: 0; width: 100%">
 		<div class="container">
 			<p style="text-align: center; color: white">Adrián Camacho, David
 				Silvente, Antonio Jesús Cano, Mariano Fernández</p>
@@ -107,6 +107,8 @@
 				Almería</p>
 		</div>
 	</footer>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="./js/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -119,8 +121,6 @@
 	<script src="./js/popper.min.js"></script>
 	<script src="./js/bootstrap.min.js"></script>
 	<script src="./js/holder.min.js"></script>
-
-
 	<svg xmlns="http://www.w3.org/2000/svg" width="348" height="225"
 		viewBox="0 0 348 225" preserveAspectRatio="none"
 		style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;">

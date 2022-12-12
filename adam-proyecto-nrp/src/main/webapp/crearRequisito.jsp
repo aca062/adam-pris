@@ -139,10 +139,10 @@ undefined
 													value="${cliente.nombre}" /></td>
 											<td style="vertical-align: middle"><c:out
 													value="${cliente.prioridad}" /></td>
-											<td><input type="number" min="0" step="1" pattern="\d*"
+											<td><input type="number" min="1" step="1" pattern="\d*"
 												name="valor${cliente.id}" id="valor${cliente.id}"
 												tabindex="2" class="form-control" placeholder="Valor"
-												value="0" style="border-radius: 2rem" required></td>
+												value="1" style="border-radius: 2rem" required></td>
 										</tr>
 									</c:forEach>
 								</tbody>
