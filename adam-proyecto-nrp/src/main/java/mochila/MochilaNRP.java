@@ -37,73 +37,80 @@ public class MochilaNRP {
 		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 		return "Los requisitos escogidos para el sprint son : " + listadoResult.toString();
 	}
-	
-	public String solucionManual(ArrayList<String> requisitos) throws SQLException {
-        this.cargarListaRequisitos(crearArrayRequisitos()); //obtenemos todos los requisitos de la BD
-        this.introducirRequisitos(); //pasamos el array y se lo introducimos a un metodo mochila manual?
 
-        //this.tratarRequisitosResultado();
+	public String solucionManual(ArrayList<String> requisitosManual) throws SQLException {
+		this.cargarListaRequisitos(crearArrayRequisitos()); // obtenemos todos los requisitos de la BD
+		int solucionValida = this.introducirRequisitosManual(requisitosManual);
+		if (solucionValida == -1) { // pasamos el array y se lo introducimos a un metodo mochila manual?
+			return "No se cumplen las relaciones de combinacion entre requisitos de la solucion, introduzca una solucion valida por favor.";
+		} else if (solucionValida == 0) {
+			return "Se ha excedido el peso del equipo o se incumplen relaciones de implicacion/exclusion entre requisitos, introduzca una solucion valida por favor";
+		} else {
+			this.tratarRequisitosResultado();
 
-        Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+			Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 
-        if (listadoResult.isEmpty()) {
-            return "No se puede llevar a cabo ningún requisito en este sprint";
-        } else {
-            return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
-                    + "\n Las métricas del software correspondientes al sprint son : \n"
-                    + "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
-                    + calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
-        }
-    }
+			if (listadoResult.isEmpty()) {
+				return "No se puede llevar a cabo ningún requisito en este sprint";
+			} else {
+				return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
+						+ "\n Las métricas del software correspondientes al sprint son : \n"
+						+ "Productividad de la solución : \n" + calculoProductividad()
+						+ "Contribución de la solución : \n" + calculoContribucion() + "Cobertura de la solución : \n"
+						+ calculoCobertura();
+			}
+		}
+	}
 
 	public String solucionAutomaticaIndividual() throws SQLException {
-        this.cargarListaRequisitos(crearArrayRequisitos());
-        this.introducirRequisitos();
+		this.cargarListaRequisitos(crearArrayRequisitos());
+		this.introducirRequisitos();
 
-        //this.tratarRequisitosResultado();
+		// this.tratarRequisitosResultado();
 
-        Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+		Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 
-        if (listadoResult.isEmpty()) {
-            return "No se puede llevar a cabo ningún requisito en este sprint";
-        } else {
-            return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
-                    + "\n Las métricas del software correspondientes al sprint son : \n"
-                    + "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
-                    + calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
-        }
+		if (listadoResult.isEmpty()) {
+			return "No se puede llevar a cabo ningún requisito en este sprint";
+		} else {
+			return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
+					+ "\n Las métricas del software correspondientes al sprint son : \n"
+					+ "Productividad de la solución : \n" + calculoProductividad() + "Contribución de la solución : \n"
+					+ calculoContribucion() + "Cobertura de la solución : \n" + calculoCobertura();
+		}
 
-    }
-	
+	}
+
 	public String solucionAutomatica() throws SQLException {
 		ArrayList<Requisito> requisitosBorrar = new ArrayList<Requisito>();
 		this.cargarListaRequisitos(crearArrayRequisitos());
-		
-		int sprint=1;
+
+		int sprint = 1;
 		String resultado = "";
-		
-		if(requisitos == null){
+
+		if (requisitos == null) {
 			return "\n Se han encontrado relaciones incompatibles (Combinacion y exlcusion simultaneas). Defina bien las relaciones e intentelo de nuevo.";
 		}
-		
+
 		while (!requisitos.isEmpty()) {
 			this.introducirRequisitos();
 			requisitosBorrar.addAll(listadoResult);
-			
-			//Obtencion cadena resultado
+
+			// Obtencion cadena resultado
 			this.tratarRequisitosResultado();
 			Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 			if (listadoResult.isEmpty()) {
-				resultado+= "\n No se puede llevar a cabo ningún requisito en el sprint "+ sprint +", los requisitos restantes son " + requisitos.toString();
+				resultado += "\n No se puede llevar a cabo ningún requisito en el sprint " + sprint
+						+ ", los requisitos restantes son " + requisitos.toString();
 				break;
 			} else {
-				resultado+= "\n<h3>Sprint "+sprint+": " + listadoResult.toString() + "</h3><br/>"
+				resultado += "\n<h3>Sprint " + sprint + ": " + listadoResult.toString() + "</h3><br/>"
 						+ "<h4>Las métricas del software correspondientes al sprint son: </h4><br/>"
 						+ "<b>Productividad de la solución : " + calculoProductividad() + "</b><br/>"
-								+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
-										+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>";
+						+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
+						+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>";
 			}
-			
+
 			requisitos.removeAll(requisitosBorrar);
 			listadoResult.clear();
 			requisitosBorrar.clear();
@@ -121,9 +128,9 @@ public class MochilaNRP {
 		System.out.println("Listado result antes de tratar bb: " + listadoResult.toString());
 		for (int i = 0; i < listadoResult.size(); i++) {
 			if (listadoResult.get(i) instanceof RequisitoCombinado) {
-				RequisitoCombinado rc = (RequisitoCombinado)listadoResult.get(i);
+				RequisitoCombinado rc = (RequisitoCombinado) listadoResult.get(i);
 				System.out.println("Req del combinado: " + rc.combinados.toString());
-				for(Requisito reqComb : rc.combinados) {
+				for (Requisito reqComb : rc.combinados) {
 					listadoResult.add(reqComb);
 				}
 				listadoResult.remove(i);
@@ -171,6 +178,48 @@ public class MochilaNRP {
 			prod += r.calcProduct();
 		}
 		return String.format("%.2f", prod) + "\n";
+	}
+
+	private int introducirRequisitosManual(ArrayList<String> requisitosManual) {
+		int s[] = new int[requisitos.size() + 1];
+		double esfuerzo = 0.0;
+
+		for (int i = 0; i < this.requisitos.size(); i++) {
+			Requisito req = requisitos.get(i);
+			if (req instanceof RequisitoCombinado) {
+				RequisitoCombinado reqComb = (RequisitoCombinado) req;
+				Boolean rcCompleto = true;
+				for (Requisito r : reqComb.combinados) {
+					if (!requisitosManual.contains(r.nombre)) {
+						rcCompleto = false;
+					} else {
+						esfuerzo += r.esfuerzo;
+					}
+				}
+				if (!rcCompleto) {
+					listadoResult = null;
+					return -1; // Faltan requisitos combinados
+				} else {
+					s[i] = 1;
+				}
+			} else if (requisitosManual.contains(req.nombre)) {
+				s[i] = 1;
+				esfuerzo += requisitos.get(i).esfuerzo;
+			} else
+				s[i] = 0;
+		}
+		s[requisitos.size() + 1] = 1;
+
+		if (!solucion(requisitos.size(), s, esfuerzo)) {
+			return 0; // Se incumple algun criterio para considerarlo solucion
+		}
+
+		for (int i = 0; i < s.length; i++) { // recorremos la solucion manual
+			if (s[i] == 1) { // anadimos los indicados al listado resultado
+				this.listadoResult.add(this.requisitos.get(i));
+			}
+		}
+		return 1;
 	}
 
 	/**
@@ -275,7 +324,7 @@ public class MochilaNRP {
 	private boolean criterio(int nivel, double pact, double bact, double voa, int[] s) {
 		if ((nivel < this.requisitos.size()) /* Si aun quedan requisitos por explorar */
 				&& (pact <= this.esfuerzoMax) /* Si no sobrepasamos el peso */
-				/*&& bact >= voa*/) { /* Si la solucion es mejor que la anterior */
+		/* && bact >= voa */) { /* Si la solucion es mejor que la anterior */
 			return true; /* Evaluar que se cumplen requisitos de dependencias y exclusi�n */
 		}
 		return false;
@@ -296,9 +345,10 @@ public class MochilaNRP {
 				if (req.requisitoRelacion == null)
 					continue;// Si no tiene relaciones continuamos iterando
 				for (Entry<Requisito, String> reqRelacion : req.requisitoRelacion.entrySet()) {// Si tiene relaciones
-																								// comprobamos que se cumplan
-					//Comprobación si req ya fueron aniadidos*/
-					if(!requisitos.contains(reqRelacion.getKey()) && !requisitos.contains(reqRelacion.getKey().padre))
+																								// comprobamos que se
+																								// cumplan
+					// Comprobación si req ya fueron aniadidos*/
+					if (!requisitos.contains(reqRelacion.getKey()) && !requisitos.contains(reqRelacion.getKey().padre))
 						continue;
 					indiceRel = reqRelacion.getKey().isCombinado == true
 							? this.requisitos.indexOf(reqRelacion.getKey().padre)
@@ -352,7 +402,7 @@ public class MochilaNRP {
 																		// aniadidos al RC
 				rc.aniadirCombinados(listaAniadir.get(i));
 				for (Requisito reqCombinados : rc.combinados) {
-					if(rc.requisitoRelacion.get(reqCombinados)=="Exclusion") {
+					if (rc.requisitoRelacion.get(reqCombinados) == "Exclusion") {
 						requisitos = null;
 						return;
 					}
