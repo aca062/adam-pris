@@ -53,11 +53,11 @@ public class MochilaNRP {
 			if (listadoResult.isEmpty()) {
 				return "No se puede llevar a cabo ningún requisito en este sprint";
 			} else {
-				return "Los requisitos escogidos para el sprint son : " + listadoResult.toString()
-						+ "\n Las métricas del software correspondientes al sprint son : \n"
-						+ "Productividad de la solución : \n" + calculoProductividad()
-						+ "Contribución de la solución : \n" + calculoContribucion() + "Cobertura de la solución : \n"
-						+ calculoCobertura();
+				return "\n<h3>Los requisitos introducidos son:" + listadoResult.toString() + "</h3><br/>"
+						+ "<h4>Las métricas del software correspondientes a la solucion son: </h4><br/>"
+						+ "<b>Productividad de la solución : " + calculoProductividad() + "</b><br/>"
+						+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
+						+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>";
 			}
 		}
 	}
@@ -104,7 +104,7 @@ public class MochilaNRP {
 						+ ", los requisitos restantes son " + requisitos.toString();
 				break;
 			} else {
-				resultado += "\n<h3>Sprint " + sprint + ": " + listadoResult.toString() + "</h3><br/>"
+				resultado += "\n<h3><br/>Sprint " + sprint + ": " + listadoResult.toString() + "</h3><br/>"
 						+ "<h4>Las métricas del software correspondientes al sprint son: </h4><br/>"
 						+ "<b>Productividad de la solución : " + calculoProductividad() + "</b><br/>"
 						+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
