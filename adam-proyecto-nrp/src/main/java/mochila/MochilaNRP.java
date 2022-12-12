@@ -181,6 +181,7 @@ public class MochilaNRP {
 	}
 
 	private int introducirRequisitosManual(ArrayList<String> requisitosManual) {
+		System.out.println(requisitosManual.toString());
 		int s[] = new int[requisitos.size() + 1];
 		double esfuerzo = 0.0;
 
@@ -188,19 +189,20 @@ public class MochilaNRP {
 			Requisito req = requisitos.get(i);
 			if (req instanceof RequisitoCombinado) {
 				RequisitoCombinado reqComb = (RequisitoCombinado) req;
-				Boolean rcCompleto = true;
+				int rcCompleto = reqComb.combinados.size();
 				for (Requisito r : reqComb.combinados) {
-					if (!requisitosManual.contains(r.nombre)) {
-						rcCompleto = false;
-					} else {
+					if (requisitosManual.contains(r.nombre)) {
+						rcCompleto--;
 						esfuerzo += r.esfuerzo;
 					}
 				}
-				if (!rcCompleto) {
+				if (rcCompleto == 0) {
+					s[i] = 1;
+				}else if(rcCompleto < reqComb.combinados.size()) {
 					listadoResult = null;
 					return -1; // Faltan requisitos combinados
-				} else {
-					s[i] = 1;
+				}else {
+					s[i] = 0;
 				}
 			} else if (requisitosManual.contains(req.nombre)) {
 				s[i] = 1;
@@ -208,7 +210,7 @@ public class MochilaNRP {
 			} else
 				s[i] = 0;
 		}
-		s[requisitos.size() + 1] = 1;
+		s[requisitos.size()] = 0;
 
 		if (!solucion(requisitos.size(), s, esfuerzo)) {
 			return 0; // Se incumple algun criterio para considerarlo solucion
@@ -219,6 +221,8 @@ public class MochilaNRP {
 				this.listadoResult.add(this.requisitos.get(i));
 			}
 		}
+		System.out.println(esfuerzo);
+		System.out.println(listadoResult.toString());
 		return 1;
 	}
 
