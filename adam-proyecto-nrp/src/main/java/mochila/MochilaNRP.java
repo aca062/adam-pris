@@ -51,7 +51,7 @@ public class MochilaNRP {
 			Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
 
 			if (listadoResult.isEmpty()) {
-				return "No se puede llevar a cabo ningún requisito en este sprint";
+				return "No se ha introducido ningun requisito en la solucion";
 			} else {
 				return "\n<h3>Los requisitos introducidos son:" + listadoResult.toString() + "</h3><br/>"
 						+ "<h4>Las métricas del software correspondientes a la solucion son: </h4><br/>"
