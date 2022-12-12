@@ -118,15 +118,13 @@
 							class="btn btn-dark" value="Ejecutar" style="border-radius: 2rem">
 					</div>
 				</div>
-				<div class=row
-					style="text-align: center; margin-top: 2%; margin-bottom: 4%">
-					<div class=col-sm-4 style="margin: 0px auto">
-						<button class="btn btn-light" onclick="history.back()"
-							style="border-radius: 2rem">Volver</button>
-					</div>
-				</div>
 			</form>
-
+			<div class=row style="text-align: center; margin-top: 2%; margin-bottom: 4%">
+				<div class=col-sm-4 style="margin: 0px auto">
+					<button class="btn btn-light" onclick="history.back()"
+						style="border-radius: 2rem">Volver</button>
+				</div>
+			</div>
 		</section>
 	</main>
 

@@ -52,7 +52,7 @@ public class ServletMochila extends HttpServlet{
 
     }
 
-	private void solucion_manual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void solucion_manual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		MochilaNRP mochila = new MochilaNRP(Integer.parseInt(request.getParameter("esfuerzo")));
 		
 		Enumeration<String> parametros = request.getParameterNames();
@@ -67,7 +67,7 @@ public class ServletMochila extends HttpServlet{
 			}
 		}
 		
-		//request.setAttribute("solucion", mochila.solucionManual(reqNombres));
+		request.setAttribute("solucion", mochila.solucionManual(reqNombres));
 		
 		getServletContext().getRequestDispatcher("/solucionManual-sol.jsp").forward(request, response);
 	}
