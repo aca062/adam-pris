@@ -2,6 +2,9 @@ package controladores;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +39,9 @@ public class ServletMochila extends HttpServlet{
             case "solucion_optima":
             	solucion_optima(request, response);
                 break;
+            case "solucion_manual":
+            	solucion_manual(request, response);
+                break;
             default:
                 break;
             }
@@ -45,6 +51,26 @@ public class ServletMochila extends HttpServlet{
 
 
     }
+
+	private void solucion_manual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MochilaNRP mochila = new MochilaNRP(Integer.parseInt(request.getParameter("esfuerzo")));
+		
+		Enumeration<String> parametros = request.getParameterNames();
+		ArrayList<String> reqNombres = new ArrayList<String>();
+		
+		while (parametros.hasMoreElements()) {
+			String param = parametros.nextElement();
+			if (param.contains("incluido")) {
+				if (Boolean.parseBoolean(request.getParameter(param))) {
+					reqNombres.add(param.replaceAll("incluido", ""));
+				}
+			}
+		}
+		
+		//request.setAttribute("solucion", mochila.solucionManual(reqNombres));
+		
+		getServletContext().getRequestDispatcher("/solucionManual-sol.jsp").forward(request, response);
+	}
 
 	private void solucion_optima(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		MochilaNRP mochila = new MochilaNRP(Integer.parseInt(request.getParameter("esfuerzo")));

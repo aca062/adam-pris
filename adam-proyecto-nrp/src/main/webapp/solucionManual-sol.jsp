@@ -65,69 +65,28 @@
 
 	<main role="main" style="min-height: 67vh;">
 
-		<section class="text-center" style="margin-top: 30px"">
+		<section class="text-center" style="margin-top: 30px">
 			<h2>
 				<b>Solución manual</b>
 			</h2>
-			<form id="solucion_optima-form"
-				action="ServletMochila?action=solucion_manual" method="post"
-				role="form">
-				<h4 style="margin-top: 2%">Escoja el esfuerzo máximo del equipo</h4>
-				<div class=row style="text-align: center">
-					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="text" name="esfuerzo" id="esfuerzo" tabindex="1"
-							class="form-control" placeholder="Esfuerzo" value=""
-							style="border-radius: 2rem">
-					</div>
-				</div>
-				<div class="container-xl">
-					<div class="table"
-						style="max-width: 65%; margin-left: 17.5%; margin-top: 5%; justify-content: center">
-						<div class="table-wrapper">
-							<table class="table table-striped table-hover table-bordered">
-								<thead>
-									<tr>
 
-										<th>Nombre del requisito</th>
-										<th>Esfuerzo</th>
-										<th>Incluir en la solución</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach items="${requisitos}" var="requisito">
-										<tr>
-											<td style="vertical-align: middle"><c:out
-													value="${requisito.nombre}" /></td>
-											<td style="vertical-align: middle"><c:out
-													value="${requisito.esfuerzo}" /></td>
-											<td><select id="incluido${requisito.id}"
-												name="incluido${requisito.nombre}" required>
-													<option value="true">Sí</option>
-													<option value="false">No</option>
-											</select></td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-				<div class=row style="text-align: center; margin-top: 2%">
-					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="submit" name="ejecutar" id="ejecutar" tabindex="4"
-							class="btn btn-dark" value="Ejecutar" style="border-radius: 2rem">
-					</div>
-				</div>
-				<div class=row
-					style="text-align: center; margin-top: 2%; margin-bottom: 4%">
-					<div class=col-sm-4 style="margin: 0px auto">
-						<button class="btn btn-light" onclick="history.back()"
-							style="border-radius: 2rem">Volver</button>
-					</div>
-				</div>
-			</form>
 
+			<div class=row style="text-align: left; margin-left: 8%">
+				<div class=col-sm-8 style="margin: 0px auto">
+					<%
+					String solucion = (String) request.getAttribute("solucion");
+					%>
+					<%=solucion%>
+				</div>
+			</div>
 		</section>
+		<div class=row
+			style="text-align: center; margin-top: 2%; margin-bottom: 4%">
+			<div class=col-sm-4 style="margin: 0px auto">
+				<button class="btn btn-light" onclick="history.back()"
+					style="border-radius: 2rem">Volver</button>
+			</div>
+		</div>
 	</main>
 
 	<footer class="text-muted"
