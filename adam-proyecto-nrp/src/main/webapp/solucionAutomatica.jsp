@@ -74,9 +74,9 @@
 				<h4 style="margin-top: 2%">Escoja el esfuerzo máximo del equipo</h4>
 				<div class=row style="text-align: center">
 					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="text" name="esfuerzo" id="esfuerzo" tabindex="1"
+						<input type="number" min="1" step="1" pattern="\d*" name="esfuerzo" id="esfuerzo" tabindex="1"
 							class="form-control" placeholder="Esfuerzo" value=""
-							style="border-radius: 2rem">
+							style="border-radius: 2rem" required>
 					</div>
 				</div>
 				<div class=row style="text-align: center; margin-top: 2%">

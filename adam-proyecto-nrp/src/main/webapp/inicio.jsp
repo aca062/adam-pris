@@ -99,6 +99,7 @@
 									<th>ID</th>
 									<th>Nombre</th>
 									<th>Esfuerzo</th>
+									<th>Satisfacción</th>
 									<th>Opciones</th>
 								</tr>
 							</thead>
@@ -108,6 +109,7 @@
 										<td><c:out value="${requisito.id}" /></td>
 										<td><c:out value="${requisito.nombre}" /></td>
 										<td><c:out value="${requisito.esfuerzo}" /></td>
+										<td><c:out value="${requisito.satisfaccion}" /></td>
 										<td><a
 											href="ServletRequisito?action=eliminar_requisito&id=<c:out value="${requisito.id}" />"
 											onclick="return confirm('¿Estás seguro de que quieres eliminar el cliente <c:out value="${requisito.nombre}" />?')"

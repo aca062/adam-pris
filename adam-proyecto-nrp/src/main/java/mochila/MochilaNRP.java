@@ -48,17 +48,22 @@ public class MochilaNRP {
 		} else {
 			this.tratarRequisitosResultado();
 
-			Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+			Collections.sort(listadoResult, (r1, r2) -> r2.compareTo(r1));
 
 			if (listadoResult.isEmpty()) {
 				return "No se ha introducido ningun requisito en la solucion";
 			} else {
-				return "\n<h3>Los requisitos introducidos son:" + listadoResult.toString() + "</h3><br/>"
+				String resultado = "";
+				resultado += "\n<h3>Los requisitos introducidos son:" + listadoResult.toString() + "</h3><br/>"
 						+ "<h4>Las métricas del software correspondientes a la solucion son: </h4><br/>"
 						+ "<b>Productividad de la solución : " + calculoProductividad() + "</b><br/>"
 						+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
 						+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>"
 						+"<b>Esfuerzo del sprint: " + calculoEsfuerzo() + " / "+esfuerzoMax+"</b><br/>";
+				for(Requisito r : listadoResult) {
+					resultado += "<b>Satisfacción del requisito " + r.getNombre() + ": " + r.getSatisfaccion() + "</b><br/>";
+				}
+				return resultado;
 			}
 		}
 	}
@@ -110,7 +115,10 @@ public class MochilaNRP {
 						+ "<b>Productividad de la solución : " + calculoProductividad() + "</b><br/>"
 						+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
 						+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>"
-						+"<b>Esfuerzo del sprint: " + calculoEsfuerzo() + " / "+esfuerzoMax+"</b><br/>";
+						+ "<b>Esfuerzo del sprint: " + calculoEsfuerzo() + " / " + esfuerzoMax + "</b><br/>";
+				for(Requisito r : listadoResult) {
+					resultado += "<b>Satisfacción del requisito " + r.getNombre() + ": " + r.getSatisfaccion() + "</b><br/>";
+				}
 			}
 
 			requisitos.removeAll(requisitosBorrar);

@@ -1,22 +1,29 @@
 package model;
 
+import java.sql.SQLException;
+
 import controladores.ServletProyecto;
+import dao.ClienteDAO;
+import dao.ClienteHasRequisitoDAO;
 
 public class Requisito implements Comparable<Requisito>{
     private int id;
     private int esfuerzo;
     private String nombre;
+    private int satisfaccion;
     private int proyecto_id = ServletProyecto.proyecto;
 
     public Requisito(int id, int esfuerzo, String nombre) {
         this.id = id;
         this.esfuerzo = esfuerzo;
         this.nombre = nombre;
+        calcularSatisfaccion();
     }
 
     public Requisito(int esfuerzo, String nombre) {
         this.esfuerzo = esfuerzo;
         this.nombre = nombre;
+        calcularSatisfaccion();
     }
 
     public int getProyecto_id() {
@@ -27,7 +34,15 @@ public class Requisito implements Comparable<Requisito>{
         return id;
     }
 
-    public int getEsfuerzo() {
+    public int getSatisfaccion() {
+		return satisfaccion;
+	}
+
+	public void setSatisfaccion(int satisfaccion) {
+		this.satisfaccion = satisfaccion;
+	}
+
+	public int getEsfuerzo() {
         return esfuerzo;
     }
 
@@ -41,6 +56,19 @@ public class Requisito implements Comparable<Requisito>{
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    private void calcularSatisfaccion() {
+    	int satisfaccion = 0;
+    	try {
+			for (ClienteHasRequisito chr : ClienteHasRequisitoDAO.obtenerRelacionesRequisito(id)) {
+				satisfaccion += (chr.getValor() * ClienteDAO.obtenerPorID(chr.getCliente_id()).getPrioridad());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	this.satisfaccion = satisfaccion;
     }
 
     @Override

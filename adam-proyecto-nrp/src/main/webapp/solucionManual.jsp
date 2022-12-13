@@ -75,9 +75,10 @@
 				<h4 style="margin-top: 2%">Escoja el esfuerzo máximo del equipo</h4>
 				<div class=row style="text-align: center">
 					<div class=col-sm-4 style="margin: 0px auto">
-						<input type="text" name="esfuerzo" id="esfuerzo" tabindex="1"
-							class="form-control" placeholder="Esfuerzo" value=""
-							style="border-radius: 2rem">
+						<input type="number" min="1" step="1" pattern="\d*"
+							name="esfuerzo" id="esfuerzo" tabindex="1" class="form-control"
+							placeholder="Esfuerzo" value="" style="border-radius: 2rem"
+							required>
 					</div>
 				</div>
 				<div class="container-xl">
@@ -90,6 +91,7 @@
 
 										<th>Nombre del requisito</th>
 										<th>Esfuerzo</th>
+										<th>Satisfacción</th>
 										<th>Incluir en la solución</th>
 									</tr>
 								</thead>
@@ -100,6 +102,7 @@
 													value="${requisito.nombre}" /></td>
 											<td style="vertical-align: middle"><c:out
 													value="${requisito.esfuerzo}" /></td>
+											<td><c:out value="${requisito.satisfaccion}" /></td>
 											<td><select id="incluido${requisito.id}"
 												name="incluido${requisito.nombre}" required>
 													<option value="true">Sí</option>
@@ -119,7 +122,8 @@
 					</div>
 				</div>
 			</form>
-			<div class=row style="text-align: center; margin-top: 2%; margin-bottom: 4%">
+			<div class=row
+				style="text-align: center; margin-top: 2%; margin-bottom: 4%">
 				<div class=col-sm-4 style="margin: 0px auto">
 					<button class="btn btn-light" onclick="history.back()"
 						style="border-radius: 2rem">Volver</button>
@@ -133,7 +137,7 @@
 		<div class="container">
 			<p style="text-align: center; color: white">Adrián Camacho, David
 				Silvente, Antonio Jesús Cano, Mariano Fernández</p>
-			<p style="text-align: center; color: white"">Universidad de
+			<p style="text-align: center; color: white">Universidad de
 				Almería</p>
 		</div>
 	</footer>
