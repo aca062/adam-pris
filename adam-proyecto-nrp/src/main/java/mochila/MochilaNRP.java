@@ -57,7 +57,8 @@ public class MochilaNRP {
 						+ "<h4>Las métricas del software correspondientes a la solucion son: </h4><br/>"
 						+ "<b>Productividad de la solución : " + calculoProductividad() + "</b><br/>"
 						+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
-						+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>";
+						+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>"
+						+"<b>Esfuerzo del sprint: " + calculoEsfuerzo() + " / "+esfuerzoMax+"</b><br/>";
 			}
 		}
 	}
@@ -98,7 +99,7 @@ public class MochilaNRP {
 
 			// Obtencion cadena resultado
 			this.tratarRequisitosResultado();
-			Collections.sort(listadoResult, (r1, r2) -> r1.compareTo(r2));
+			Collections.sort(listadoResult, (r1, r2) -> r2.compareTo(r1));
 			if (listadoResult.isEmpty()) {
 				resultado += "\n No se puede llevar a cabo ningún requisito en el sprint " + sprint
 						+ ", los requisitos restantes son " + requisitos.toString();
@@ -108,7 +109,8 @@ public class MochilaNRP {
 						+ "<h4>Las métricas del software correspondientes al sprint son: </h4><br/>"
 						+ "<b>Productividad de la solución : " + calculoProductividad() + "</b><br/>"
 						+ "<b>Contribución de la solución: " + calculoContribucion() + "</b><br/>"
-						+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>";
+						+ "<b>Cobertura de la solución: " + calculoCobertura() + "</b><br/>"
+						+"<b>Esfuerzo del sprint: " + calculoEsfuerzo() + " / "+esfuerzoMax+"</b><br/>";
 			}
 
 			requisitos.removeAll(requisitosBorrar);
@@ -117,6 +119,14 @@ public class MochilaNRP {
 			sprint++;
 		}
 		return resultado;
+	}
+
+	private int calculoEsfuerzo() {
+		int esfuerzo = 0;
+		for(Requisito r : listadoResult) {
+			esfuerzo += r.esfuerzo;
+		}
+		return esfuerzo;
 	}
 
 	/**
