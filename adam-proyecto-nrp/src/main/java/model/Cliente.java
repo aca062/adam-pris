@@ -64,12 +64,7 @@ public class Cliente implements Comparable<Cliente>{
 	public int compareTo(Cliente o) {
 		Cliente cli = (Cliente)o;
 		
-		if(cli.prioridad>this.prioridad)
-			return -1;
-		else if(cli.prioridad<this.prioridad)
-			return 1;
-		else
-			return 0;
+		return (this.nombre.compareTo(cli.nombre));
 	}
     
 //	@Override
